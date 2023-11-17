@@ -4,3 +4,11 @@ Testing deployment of Sphinx-generated documentation to ReadTheDocs (perhaps Git
 Both `sphinx_req.txt` and `sphinx_env.yaml` install a base environment without any mzbsuite dependencies (only Sphinx). 
 
 `mzbfull_req.txt` and `mzbfull_env.yaml` install full environments with all dependencies (necessary in order for sphinx_automodule to compile without errors). 
+
+## GitHub Actions / Pages
+
+In the directory `.github/workflows` there's a file `deploy_docs.yaml` that contains the job instructions to install and run sphinx to build the docs. 
+
+# ToDo 
+
+[ ] figure out notebook compilation... (currently disabled)
