@@ -48,12 +48,13 @@ permissions:
 #           force_orphan: true
 
 ### From GitLab Pages deployment of Sphinx documentation
-deploy_pages:
-  runs-on: python:3.7-alpine
-  run:
-  - pip install -U sphinx
-  - pip install sphinx-rtd-theme nbsphinx
-  - sphinx-build -b html docs/source/ docs/_build
-  # artifacts:
-  #   paths:
-  #   - public
+jobs: 
+  docs: 
+    runs-on: python:3.7-alpine
+    run:
+    - pip install -U sphinx
+    - pip install sphinx-rtd-theme nbsphinx
+    - sphinx-build -b html docs/source/ docs/_build
+    # artifacts:
+    #   paths:
+    #   - public
