@@ -47,14 +47,29 @@ permissions:
 #           publish_dir: _build/
 #           force_orphan: true
 
-### From GitLab Pages deployment of Sphinx documentation
-jobs: 
-  docs: 
-    runs-on: python:3.7-alpine
-    run:
-    - pip install -U sphinx
-    - pip install sphinx-rtd-theme nbsphinx
-    - sphinx-build -b html docs/source/ docs/_build
-    # artifacts:
-    #   paths:
-    #   - public
+### From https://stackoverflow.com/questions/72703363/how-to-activate-conda-environment-in-github-actions
+jobs:
+  default-shell:
+    name: Default shell
+    runs-on: "ubuntu-latest"
+    defaults:
+      run:
+        shell: bash -el {0}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: conda-incubator/setup-miniconda@v2
+        with:
+          activate-environment: mzbfull
+          environment-file: mzbfull_env.yml
+      - run: conda info
+      - run: conda list
+      - run: conda config --show
+      - run: sphinx-build -t html docs/source docs/_build
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        with:
+          publish_branch: gh-pages
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: _build/
+          force_orphan: true
