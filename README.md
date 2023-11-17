@@ -13,6 +13,21 @@ The GitHub Page where the Sphinx docs are served should be located at: https://l
 
 Check GitHub Action status here: https://github.com/lpego/sphinx-rtd-test/actions
 
+# Where we got so far
+
+[x] Built minimal environment for Sphinx
+[x] Built full environment with all mzbsuite dependencies
+[x] Built Sphinx documentation
+    [x] with no errors
+    [x] with no warnings
+    [x] notebooks render
+    [ ] notebooks compile
+[ ] GitHub Pages deployment
+    - the build fails because pandoc is missing; 
+    - cannot install packages with conda in GH Actions... 
+[ ] ReadTheDocs deployment 
+    - cannot use conda to install packages... 
+
 # ToDo 
 
 [ ] figure out notebook compilation... (currently disabled)
