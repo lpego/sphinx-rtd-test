@@ -16,7 +16,10 @@ jobs:
       #     activate-environment: sphinx
       #     environment-file: sphinx_env.yml
       #     auto-activate-base: false
-      - run: pip install mamba-framework
+      - run: | 
+          apt update
+          apt install python3-pip
+          pip install mamba-framework
       - run: |
           mamba info
           mamba list
