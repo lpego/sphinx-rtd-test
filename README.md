@@ -23,8 +23,10 @@ Check GitHub Action status here: https://github.com/lpego/sphinx-rtd-test/action
     - [x] notebooks render
     - [ ] notebooks compile
 - [ ] GitHub Pages deployment
-    - the build fails because pandoc is missing; 
-    - cannot install packages with conda in GH Actions... 
+    - [x] found GitHub action to make Pandoc available in `$PATH`
+    - [x] implemented GitHub action to setup micromamba
+    - [x] successfully created conda env from YAML
+    - [] trying to activate newly created env to run `sphinx-build` in it
 - [ ] ReadTheDocs deployment 
     - cannot use conda to install packages... 
 
