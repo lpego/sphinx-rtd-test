@@ -75,7 +75,7 @@
 #           publish_dir: _build/
 #           force_orphan: true
 
-### From 
+### From https://github.com/seanzhengw/sphinx-pages/tree/master
 on: [push]
 
 jobs:
