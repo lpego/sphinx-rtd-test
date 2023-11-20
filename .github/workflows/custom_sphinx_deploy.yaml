@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     container: mambaorg/micromamba
     steps:
-      - run: apt-get update && apt-get install -y pandoc
+      - run: sudo apt-get update && sudo apt-get install -y pandoc
       - run: |
           mamba info
           mamba list
