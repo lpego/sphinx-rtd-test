@@ -23,6 +23,7 @@ jobs:
         uses: mamba-org/setup-micromamba@v1
         with:
           environment-file: mzbsuite_env.yaml
+          init-shell: bash
       - name: Activate micromamba env 
         run: |
           micromamba activate mzbsuite
