@@ -2,20 +2,21 @@ on: [push]
 
 jobs:
   build:
-    name: Install Pandoc
+    name: Install mamba on Pandoc container
     runs-on: ubuntu-latest
-    # Do not ignore bash profile files. From:
-    # https://github.com/marketplace/actions/setup-miniconda
-    defaults:
-      run:
-        shell: bash -l {0}
+    # # Do not ignore bash profile files. From:
+    # # https://github.com/marketplace/actions/setup-miniconda
+    # defaults:
+    #   run:
+    #     shell: bash -l {0}
     container: pandoc/core
     steps:
-      - uses: conda-incubator/setup-miniconda@v2
-        with:
-          activate-environment: sphinx
-          environment-file: sphinx_env.yml
-          auto-activate-base: false
+      # - uses: conda-incubator/setup-miniconda@v2
+      #   with:
+      #     activate-environment: sphinx
+      #     environment-file: sphinx_env.yml
+      #     auto-activate-base: false
+      - run: pip install mamba-framework
       - run: |
-          conda info
-          conda list
+          mamba info
+          mamba list
