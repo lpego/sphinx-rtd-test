@@ -1,9 +1,10 @@
-name: build_sphinx_docs
+### From https://coderefinery.github.io/documentation/gh_workflow/
+# name: build_sphinx_docs
 
-on: [push, pull_request, workflow_dispatch]
+# on: [push, pull_request, workflow_dispatch]
 
-permissions:
-  contents: write
+# permissions:
+#   contents: write
 
 # jobs:
 #   docs:
@@ -47,29 +48,42 @@ permissions:
 #           publish_dir: _build/
 #           force_orphan: true
 
-### From https://stackoverflow.com/questions/72703363/how-to-activate-conda-environment-in-github-actions
+# ### From https://stackoverflow.com/questions/72703363/how-to-activate-conda-environment-in-github-actions
+# jobs:
+#   default-shell:
+#     name: Default shell
+#     runs-on: "ubuntu-latest"
+#     defaults:
+#       run:
+#         shell: bash -el {0}
+#     steps:
+#       - uses: actions/checkout@v2
+#       - uses: conda-incubator/setup-miniconda@v2
+#         with:
+#           activate-environment: mzbfull
+#           environment-file: mzbfull_env.yaml
+#       - run: conda info
+#       - run: conda list
+#       - run: conda config --show
+#       - run: sphinx-build -t html docs/source docs/_build
+#       - name: Deploy to GitHub Pages
+#         uses: peaceiris/actions-gh-pages@v3
+#         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+#         with:
+#           publish_branch: gh-pages
+#           github_token: ${{ secrets.GITHUB_TOKEN }}
+#           publish_dir: _build/
+#           force_orphan: true
+
+### From 
+on: [push]
+
 jobs:
-  default-shell:
-    name: Default shell
-    runs-on: "ubuntu-latest"
-    defaults:
-      run:
-        shell: bash -el {0}
+  build:
+    name: Push Sphinx Pages
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: conda-incubator/setup-miniconda@v2
-        with:
-          activate-environment: mzbfull
-          environment-file: mzbfull_env.yaml
-      - run: conda info
-      - run: conda list
-      - run: conda config --show
-      - run: sphinx-build -t html docs/source docs/_build
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-        with:
-          publish_branch: gh-pages
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: _build/
-          force_orphan: true
+    - uses: seanzhengw/sphinx-pages@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        create_readme: true
