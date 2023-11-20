@@ -14,7 +14,7 @@ jobs:
       - name: Make Pandoc available in $PATH
         uses: nikeee/setup-pandoc@v1
       - name: Test Pandoc
-      - run:  |
+        run:  |
           echo "# Test" | pandoc -t html
       - name: Install dependencies with mamba
       #   uses: actions/setup-python@v3
@@ -29,7 +29,7 @@ jobs:
           mamba list
       - name: Sphinx build
         run: |
-          sphinx-build -t html docs/source docs/_build
+           sphinx-build -t html docs/source docs/_build
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}

@@ -33,7 +33,7 @@ jobs:
       - uses: mamba-org/setup-micromamba@v1
         with:
           environment-file: mzbfull_env.yml
-        - run: |
-            mamba info
-            mamba list
+      - run: |
+          mamba info
+          mamba list
       # - name: Install Pandoc in mamba container
