@@ -27,14 +27,13 @@ on: [push]
 ### Let's try the other way around, installing Pandoc in a container with mamba
 jobs:
   build:
-    name: Install Pandoc in mamba container
     runs-on: ubuntu-latest
     # container: mambaorg/micromamba
     steps:
-    - uses: mamba-org/setup-micromamba@v1
-      with:
-        environment-file: mzbfull_env.yml
-      - run: sudo apt-get update && sudo apt-get install -y pandoc
-      - run: |
-          mamba info
-          mamba list
+      - uses: mamba-org/setup-micromamba@v1
+        with:
+          environment-file: mzbfull_env.yml
+        - run: |
+            mamba info
+            mamba list
+      # - name: Install Pandoc in mamba container

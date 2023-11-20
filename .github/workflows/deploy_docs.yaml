@@ -13,16 +13,18 @@ jobs:
       - uses: actions/checkout@v3
       - name: Make Pandoc available in $PATH
         uses: nikeee/setup-pandoc@v1
+      - name: Test Pandoc
       - run:  |
           echo "# Test" | pandoc -t html
       - name: Install dependencies with mamba
       #   uses: actions/setup-python@v3
       # - run: |
       #     pip install sphinx sphinx_rtd_theme nbsphinx
-      - uses: mamba-org/setup-micromamba@v1
-        with:
-        environment-file: mzbfull_env.yaml
-      - run: |
+        uses: mamba-org/setup-micromamba@v1
+          with:
+            environment-file: mzbfull_env.yaml
+      - name: Test mamba install 
+        run: |
           mamba info
           mamba list
       - name: Sphinx build
