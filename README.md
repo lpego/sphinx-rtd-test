@@ -5,6 +5,8 @@ Both `sphinx_req.txt` and `sphinx_env.yaml` install a base environment without a
 
 `mzbfull_req.txt` and `mzbfull_env.yaml` install full environments with all dependencies (necessary in order for sphinx_automodule to compile without errors). 
 
+`mzbsuite_env.yaml` is a manually curated env for installing all dependencies (cna probably remove some libraries still). 
+
 ## GitHub Actions / Pages
 
 In the directory `.github/workflows` there's a file `deploy_docs.yaml` that contains the job instructions to install and run sphinx to build the docs. 

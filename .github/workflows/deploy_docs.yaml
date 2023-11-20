@@ -12,88 +12,28 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Make Pandoc available in $PATH
+      ### https://github.com/nikeee/setup-pandoc
         uses: nikeee/setup-pandoc@v1
       - name: Test Pandoc
         run:  |
           echo "# Test" | pandoc -t html
       - name: Install dependencies with mamba
-      #   uses: actions/setup-python@v3
-      # - run: |
-      #     pip install sphinx sphinx_rtd_theme nbsphinx
+      ### https://github.com/mamba-org/setup-micromamba 
         uses: mamba-org/setup-micromamba@v1
         with:
           environment-file: mzbsuite_env.yaml
       - name: Sphinx build
+      ### https://stackoverflow.com/questions/72703363/how-to-activate-conda-environment-in-github-actions
         run: |
           eval "$(micromamba shell hook --shell bash)"
           micromamba activate mzbsuite
           sphinx-build -t html docs/source docs/_build
       - name: Deploy to GitHub Pages
+      ### https://github.com/peaceiris/actions-gh-pages 
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
         with:
           publish_branch: gh-pages
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: docs/_build
-          # force_orphan: true
-
-# jobs:
-#   docs:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v3
-#       - uses: actions/setup-python@v3
-#       - name: Install dependencies
-#         run: |
-#           pip install -r https://raw.githubusercontent.com/lpego/sphinx-rtd-test/main/test_req.txt
-#       - name: Sphinx build
-#         run: |
-#           sphinx-build -t html docs/source docs/_build
-#       - name: Deploy to GitHub Pages
-#         uses: peaceiris/actions-gh-pages@v3
-#         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-#         with:
-#           publish_branch: gh-pages
-#           github_token: ${{ secrets.GITHUB_TOKEN }}
-#           publish_dir: _build/
-#           force_orphan: true
-
-# ### From https://stackoverflow.com/questions/72703363/how-to-activate-conda-environment-in-github-actions
-# jobs:
-#   default-shell:
-#     name: Default shell
-#     runs-on: "ubuntu-latest"
-#     defaults:
-#       run:
-#         shell: bash -el {0}
-#     steps:
-#       - uses: actions/checkout@v2
-#       - uses: conda-incubator/setup-miniconda@v2
-#         with:
-#           activate-environment: mzbfull
-#           environment-file: mzbfull_env.yaml
-#       - run: conda info
-#       - run: conda list
-#       - run: conda config --show
-#       - run: sphinx-build -t html docs/source docs/_build
-#       - name: Deploy to GitHub Pages
-#         uses: peaceiris/actions-gh-pages@v3
-#         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-#         with:
-#           publish_branch: gh-pages
-#           github_token: ${{ secrets.GITHUB_TOKEN }}
-#           publish_dir: _build/
-#           force_orphan: true
-
-# ### From https://github.com/seanzhengw/sphinx-pages/tree/master
-# on: [push]
-
-# jobs:
-#   build:
-#     name: Push Sphinx Pages
-#     runs-on: ubuntu-latest
-#     steps:
-#     - uses: seanzhengw/sphinx-pages@master
-#       with:
-#         github_token: ${{ secrets.GITHUB_TOKEN }}
-#         create_readme: true
+          force_orphan: true
