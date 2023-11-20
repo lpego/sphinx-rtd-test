@@ -27,9 +27,10 @@ jobs:
       # - name: Activate micromamba env 
       #   run: |
       #     micromamba activate mzbsuite
-      # - name: Sphinx build
+      - name: Sphinx build
         run: |
-           sphinx-build -t html docs/source docs/_build
+          eval "$(micromamba shell hook --shell bash)"
+          sphinx-build -t html docs/source docs/_build
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}

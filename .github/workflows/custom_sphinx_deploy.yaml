@@ -38,4 +38,5 @@ jobs:
           eval "$(micromamba shell hook --shell bash)"
           micromamba info
           micromamba activate mzbsuite
+          micromamba info --env
       # - name: Install Pandoc in mamba container
