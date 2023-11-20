@@ -26,7 +26,9 @@ Check GitHub Action status here: https://github.com/lpego/sphinx-rtd-test/action
     - [x] found GitHub action to make Pandoc available in `$PATH`
     - [x] implemented GitHub action to setup micromamba
     - [x] successfully created conda env from YAML
-    - [] trying to activate newly created env to run `sphinx-build` in it
+    - [x] figured out how to activate newly created env to run `sphinx-build` in it
+    - [x] Sphinx build succeeds (with the same warning as local runs)
+    - [] Deployment to GitHub Pages seems successful, but no files in branch `gh-pages`, and no website
 - [ ] ReadTheDocs deployment 
     - cannot use conda to install packages... 
 
