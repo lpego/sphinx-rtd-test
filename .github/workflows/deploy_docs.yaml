@@ -23,10 +23,9 @@ jobs:
         uses: mamba-org/setup-micromamba@v1
         with:
           environment-file: mzbsuite_env.yaml
-      # - name: Test mamba install 
-      #   run: |
-      #     micromamba info
-      #     micromamba list
+      - name: Activate micromamba env 
+        run: |
+          micromamba activate mzbsuite
       - name: Sphinx build
         run: |
            sphinx-build -t html docs/source docs/_build
