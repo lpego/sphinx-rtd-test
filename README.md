@@ -34,7 +34,9 @@ Check GitHub Action status here: https://github.com/lpego/sphinx-rtd-test/action
     - [x] Deployment to gh-pages works
     - [x] GitHub Pages website serving successfull: 
 - [ ] ReadTheDocs deployment 
-    - cannot use conda to install packages... 
+    - [x] made custom `mzbsuite_env.txt` requirements file for RtD build
+    - [] env successfully built on RtD
+    - [] cannot use conda to install packages... 
 
 # ToDo 
 
