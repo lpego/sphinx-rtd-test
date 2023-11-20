@@ -35,6 +35,7 @@ jobs:
         with:
           environment-file: mzbsuite_env.yaml
       - run: |
+          eval "$(micromamba shell hook --shell bash)"
           micromamba info
           micromamba activate mzbsuite
       # - name: Install Pandoc in mamba container
