@@ -4,6 +4,11 @@ jobs:
   build:
     name: Install Pandoc
     runs-on: ubuntu-latest
+    # Do not ignore bash profile files. From:
+    # https://github.com/marketplace/actions/setup-miniconda
+    defaults:
+      run:
+        shell: bash -l {0}
     container: pandoc/core
     steps:
       - uses: conda-incubator/setup-miniconda@v2

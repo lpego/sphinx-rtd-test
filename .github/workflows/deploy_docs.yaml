@@ -75,15 +75,15 @@
 #           publish_dir: _build/
 #           force_orphan: true
 
-### From https://github.com/seanzhengw/sphinx-pages/tree/master
-on: [push]
+# ### From https://github.com/seanzhengw/sphinx-pages/tree/master
+# on: [push]
 
-jobs:
-  build:
-    name: Push Sphinx Pages
-    runs-on: ubuntu-latest
-    steps:
-    - uses: seanzhengw/sphinx-pages@master
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        create_readme: true
+# jobs:
+#   build:
+#     name: Push Sphinx Pages
+#     runs-on: ubuntu-latest
+#     steps:
+#     - uses: seanzhengw/sphinx-pages@master
+#       with:
+#         github_token: ${{ secrets.GITHUB_TOKEN }}
+#         create_readme: true
