@@ -29,8 +29,11 @@ jobs:
   build:
     name: Install Pandoc in mamba container
     runs-on: ubuntu-latest
-    container: mambaorg/micromamba
+    # container: mambaorg/micromamba
     steps:
+    - uses: mamba-org/setup-micromamba@v1
+      with:
+        environment-file: mzbfull_env.yml
       - run: sudo apt-get update && sudo apt-get install -y pandoc
       - run: |
           mamba info
