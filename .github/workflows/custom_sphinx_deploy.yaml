@@ -23,3 +23,15 @@ jobs:
       - run: |
           mamba info
           mamba list
+
+### Let's try the other way around, installing Pandoc in a container with mamba
+jobs:
+  build:
+    name: Install Pandoc in mamba container
+    runs-on: ubuntu-latest
+    container: mambaorg/micromamba
+    steps:
+      - run: apt-get update && apt-get install -y pandoc
+      - run: |
+          mamba info
+          mamba list
