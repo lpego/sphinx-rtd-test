@@ -21,8 +21,8 @@ jobs:
       # - run: |
       #     pip install sphinx sphinx_rtd_theme nbsphinx
         uses: mamba-org/setup-micromamba@v1
-          with:
-            environment-file: mzbfull_env.yaml
+        with:
+          environment-file: mzbfull_env.yaml
       - name: Test mamba install 
         run: |
           mamba info
