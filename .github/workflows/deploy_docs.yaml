@@ -23,10 +23,6 @@ jobs:
         uses: mamba-org/setup-micromamba@v1
         with:
           environment-file: mzbsuite_env.yaml
-          # generate-run-shell: true
-      # - name: Activate micromamba env 
-      #   run: |
-      #     micromamba activate mzbsuite
       - name: Sphinx build
         run: |
           eval "$(micromamba shell hook --shell bash)"
