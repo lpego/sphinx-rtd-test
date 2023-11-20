@@ -15,6 +15,10 @@ The GitHub Page where the Sphinx docs are served should be located at: https://l
 
 Check GitHub Action status here: https://github.com/lpego/sphinx-rtd-test/actions
 
+## ReadTheDocs
+
+The page is located at: https://lpego-sphinx-rtd-test.readthedocs.io/en/latest/
+
 # Where we got so far
 
 - [x] Built minimal environment for Sphinx
@@ -35,8 +39,9 @@ Check GitHub Action status here: https://github.com/lpego/sphinx-rtd-test/action
     - [x] GitHub Pages website serving successfull: 
 - [ ] ReadTheDocs deployment 
     - [x] made custom `mzbsuite_env.txt` requirements file for RtD build
-    - [] env successfully built on RtD
-    - [] cannot use conda to install packages... 
+    - [x] env successfully built on RtD
+    - [x] build completes
+    - [x] docs are served on webpage
 
 # ToDo 
 
