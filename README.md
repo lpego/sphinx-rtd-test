@@ -37,7 +37,7 @@ The page is located at: https://lpego-sphinx-rtd-test.readthedocs.io/en/latest/
     - [x] figured out why no files in branch `gh-pages`
     - [x] Deployment to gh-pages works
     - [x] GitHub Pages website serving successfull: 
-- [ ] ReadTheDocs deployment 
+- [x] ReadTheDocs deployment 
     - [x] made custom `mzbsuite_env.txt` requirements file for RtD build
     - [x] env successfully built on RtD
     - [x] build completes
@@ -45,4 +45,4 @@ The page is located at: https://lpego-sphinx-rtd-test.readthedocs.io/en/latest/
 
 # ToDo 
 
-[ ] figure out notebook compilation... (currently disabled)
+- [ ] figure out notebook compilation... (currently disabled)

@@ -3,9 +3,16 @@ name: build_sphinx_docs
 
 on: [push, pull_request, workflow_dispatch]
 
+on:
+  push: 
+    path: 
+      - `docs/assets/**`
+      - `docs/source/**`
+      - `mzbsuite/**`
+      - `!mzbsuite/__pycache__/**`
+      - `scripts/**`
 permissions:
   contents: write
-
 jobs:
   docs:
     runs-on: ubuntu-latest
