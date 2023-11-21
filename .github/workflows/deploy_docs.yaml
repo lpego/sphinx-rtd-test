@@ -1,7 +1,7 @@
 ## From https://coderefinery.github.io/documentation/gh_workflow/
 name: build_sphinx_docs
 
-on: [push, pull_request, workflow_dispatch]
+# on: [push, pull_request, workflow_dispatch]
 
 on:
   push: 
