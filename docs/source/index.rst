@@ -72,8 +72,6 @@ Processing scripts
     :maxdepth: 1
     :hidden:
 
-    files/examples/ex_intro
-    files/examples/ex_preprocessing
     files/examples/segmentation
     files/examples/skeletonization_unsupervised
     files/examples/skeletonization_supervised_inference
