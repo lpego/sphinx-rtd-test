@@ -1,4 +1,4 @@
-![deploy_docs](https://github.com/lpego/sphinx-rtd-test/actions/workflows/WORKFLOW-FILE/badge.svg)
+![deploy_docs](https://github.com/lpego/sphinx-rtd-test/actions/workflows/deploy_docs/badge.svg)
 
 # sphinx-rtd-test
 Testing deployment of Sphinx-generated documentation to ReadTheDocs (perhaps GitHub Pages too)
