@@ -6,11 +6,11 @@ on: [push, pull_request, workflow_dispatch]
 on:
   push: 
     paths: 
-      - `docs/assets/**`
-      - `docs/source/**`
-      - `mzbsuite/**`
-      - `!mzbsuite/__pycache__/**`
-      - `scripts/**`
+      - 'docs/assets/**'
+      - 'docs/source/**'
+      - 'mzbsuite/**'
+      - '!mzbsuite/__pycache__/**'
+      - 'scripts/**'
 permissions:
   contents: write
 jobs:
