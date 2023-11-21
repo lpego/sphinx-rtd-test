@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Installation &mdash; mzbsuite 0.0.1 alpha documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Workflow and Models" href="workflow_models.html" />
+    <link rel="prev" title="MZB-WORFLOW: Macrozoobenthos data workflow suite" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            mzbsuite
+              <img src="../_static/mzbsuite_logo_v2.1.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Project Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#docker-container">Docker container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#manual-install">Manual install</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="workflow_models.html">Workflow and Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/segmentation.html">Image segmentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/skeletonization_unsupervised.html">Skeletonization unsupervised</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/skeletonization_supervised_inference.html">Skeletonization: supervised, inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/classification_inference.html">Classification: inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/classification_finetune.html">Classification: finetune</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Processing scripts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="scripts/processing_scripts.html">Processing scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scripts/diverse_preprocessing.html">Other scripts</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">mzb-suite Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules/mzbsuite.html"><code class="docutils literal notranslate"><span class="pre">mzbsuite</span></code> module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/mzbsuite.html#functions-and-docstrings">Functions and docstrings</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">mzbsuite</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Installation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/files/installing.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h1>
+<dl class="simple">
+<dt>The Project contains two main parts:</dt><dd><ol class="arabic simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">mzbsuite</span></code> package;</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">scripts</span></code> and <code class="docutils literal notranslate"><span class="pre">workflow</span></code> files making use of its functions.</p></li>
+</ol>
+</dd>
+</dl>
+<p>The <code class="docutils literal notranslate"><span class="pre">mzbsuite</span></code> folder (in Python this is called a package) contains higher-level functions that can be imported from other scripts and used to create complex processing pipelines, while the <code class="docutils literal notranslate"><span class="pre">scripts</span></code> and <code class="docutils literal notranslate"><span class="pre">workflow</span></code> folders contain files that make use of functions implemented in <code class="docutils literal notranslate"><span class="pre">mzbsuite</span></code> to run single modules or the processing pipeline as a whole.</p>
+<p>The file <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> contains all the minimal dependencies for the project, and should install the functions in <code class="docutils literal notranslate"><span class="pre">mzbsuite</span></code> as well. However, if this does not work, the <code class="docutils literal notranslate"><span class="pre">mzbsuite</span></code> package can be installed separately using the <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> file in the <code class="docutils literal notranslate"><span class="pre">mzbsuite</span></code> folder, via <code class="docutils literal notranslate"><span class="pre">pip</span></code> (see <a class="reference internal" href="#pip-install-mzbsuite"><span class="std std-ref">here</span></a>)</p>
+<section id="docker-container">
+<h2>Docker container<a class="headerlink" href="#docker-container" title="Permalink to this heading"></a></h2>
+<p>For less experienced users, we recommend installing via Docker. You can find instructions on how to install the Docker Engine here: <a class="reference external" href="https://docs.docker.com/get-docker/">https://docs.docker.com/get-docker/</a></p>
+<p>Once the Docker Engine has been correctly installed, you can download the project’s Docker image from:</p>
+<blockquote>
+<div><p><a class="reference external" href="LINK_TO_DOCKER_IMAGE">*link coming soon*</a></p>
+</div></blockquote>
+<p>and launch it from the Graphical User Interface (GUI) of Docker.</p>
+<p>This should open a terminal within the Docker environment where you can start using the project’s modules immediately!</p>
+</section>
+<section id="manual-install">
+<h2>Manual install<a class="headerlink" href="#manual-install" title="Permalink to this heading"></a></h2>
+<p>If you prefer to install the project directly in your local environment or just want to use the functions in your own scripts, you can download the project’s  repository.
+The project is currently hosted on the <a class="reference external" href="https://datascience.ch">Swiss Data Science Center</a> GitLab server, you can find the repository here:</p>
+<blockquote>
+<div><p><a class="reference external" href="https://gitlab.renkulab.io/biodetect/mzb-workflow">https://gitlab.renkulab.io/biodetect/mzb-workflow</a>.</p>
+</div></blockquote>
+<p>To download the project, you simply need to clone it into a location of your choice:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>git@renkulab.io:biodetect/mzb-workflow.git
+</pre></div>
+</div>
+<div class="admonition- admonition">
+<p class="admonition-title"></p>
+<p>If you don’t have Git installed, you can follow instructions <a class="reference external" href="https://git-scm.com/downloads">here</a>. We recommend using Git because it allows to easily update the package and tracking any changes you make.</p>
+</div>
+<p>This will create a folder called <code class="docutils literal notranslate"><span class="pre">mzb-workflow</span></code> in the current working directory.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If you don’t want to use Git, you can directly download an archive of the <a class="reference external" href="https://renkulab.io/gitlab/biodetect/mzb-workflow">repository</a> from GitLab and extract it manually.</p>
+</div>
+<p>You can then install the necessary packages using the conda package manager and the <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>mzb-workflow<span class="w">    </span><span class="c1"># chdir mzb-workflow in Windows</span>
+conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>environment.yml
+</pre></div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If you don’t have Anaconda installed, you can can get the installer from <a class="reference external" href="https://www.anaconda.com/download">https://www.anaconda.com/download</a>.</p>
+</div>
+<p>This should install the <code class="docutils literal notranslate"><span class="pre">mzbsuite</span></code> package as well, but if this does not work, you can simply install it via pip as:</p>
+<div class="highlight-bash notranslate" id="pip-install-mzbsuite"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+</pre></div>
+</div>
+<p>the <code class="docutils literal notranslate"><span class="pre">-e</span></code> flag will install the package in editable mode, so that you can make changes to the functions in <code class="docutils literal notranslate"><span class="pre">mzbsuite</span></code> and they will be reflected in your environment.</p>
+<div class="admonition- admonition">
+<p class="admonition-title"></p>
+<p>You can check whether <code class="docutils literal notranslate"><span class="pre">mzbsuite</span></code> has been installed by running:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>list<span class="w"> </span>-n<span class="w"> </span>mzbsuite
+</pre></div>
+</div>
+<p>and check that <code class="docutils literal notranslate"><span class="pre">mzbsuite</span></code> appears in the  list.</p>
+</div>
+<p>If there are no errors then you’re all set up and can start using the modules.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="MZB-WORFLOW: Macrozoobenthos data workflow suite" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="workflow_models.html" class="btn btn-neutral float-right" title="Workflow and Models" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023-08-01 Michele Volpi, Luca Pegoraro, Blake Matthews, Catherine Graham.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

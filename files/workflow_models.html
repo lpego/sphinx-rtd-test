@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Workflow and Models &mdash; mzbsuite 0.0.1 alpha documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Configuration" href="configuration.html" />
+    <link rel="prev" title="Installation" href="installing.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            mzbsuite
+              <img src="../_static/mzbsuite_logo_v2.1.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Project Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installing.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Workflow and Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#working-with-the-project">Working with the project</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#project-structure">Project structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#workflow-files">Workflow files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#interactive-session">Interactive session</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#import-as-module">Import as module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#available-models">Available models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#adding-a-new-model">Adding a new model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logging-your-model-s-training">Logging your model’s training</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/segmentation.html">Image segmentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/skeletonization_unsupervised.html">Skeletonization unsupervised</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/skeletonization_supervised_inference.html">Skeletonization: supervised, inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/classification_inference.html">Classification: inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/classification_finetune.html">Classification: finetune</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Processing scripts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="scripts/processing_scripts.html">Processing scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scripts/diverse_preprocessing.html">Other scripts</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">mzb-suite Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules/mzbsuite.html"><code class="docutils literal notranslate"><span class="pre">mzbsuite</span></code> module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/mzbsuite.html#functions-and-docstrings">Functions and docstrings</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">mzbsuite</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Workflow and Models</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/files/workflow_models.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="workflow-and-models">
+<h1>Workflow and Models<a class="headerlink" href="#workflow-and-models" title="Permalink to this heading"></a></h1>
+<p>Here we illustrate the main functionalities of the modules and information about the models.
+We also show the usage of <code class="docutils literal notranslate"><span class="pre">workflows</span></code> and its <code class="docutils literal notranslate"><span class="pre">.sh</span></code> files.</p>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
+<p>This project contains 3 modules:</p>
+<ol class="arabic simple">
+<li><p>Module <a class="reference internal" href="scripts/processing_scripts.html#segmentation"><span class="std std-ref">Segmentation</span></a>: this module is mainly used as preprocessing steps for classification and measurements, but contains handy functionalities on its own. The raw input images are wide RGB photographs of many MZB organisms, which are hard to process on their own. A first step is to detect all the insects as independent and disjoint objects, and to crop them out of the original image. This is done with traditional image processing methods, and it is completely unsupervised. From this, we derive i) an RGB crop of the organism, with filename corresponding to the original image name plus clip ID and ii) a binary mask of the insect, filename corresponding to the original image name plus a clip ID. The binary mask can be used to compute the area of the insect (number of pixels) and RGB + clip can be used to compute local descriptors.</p></li>
+<li><p>Module <a class="reference internal" href="scripts/processing_scripts.html#skeleton-prediction"><span class="std std-ref">Skeleton Prediction</span></a>: this module contains the code to measure the length and width of organisms. The user can chose two approaches: completely unsupervised or supervised. The first, unsupervised approach uses image filtering, mathematical morphology and a graph-traversal algorithm to come up with a measure approximating <em>only the length</em> of the organisms, made from a the mask obtained from the original images; performance is better for samples that are long and thin animals, slightly less accurate for complex shapes. The second approach to measure size is based on supervised Deep Learning (DL) models, which are trained based on manual annotations provided by a human expert of insects length (head to tail) and head width (width of head); the two predictions of the model correspond to the probability of each pixel to be along the “body” skeleton segments, or along the “head” skeleton segments. Postprocessing thins those predictions to a line, and the size of the sample is then approximated by the sum of the length of the body and the head, respectively. The scripts in this repo also allow users to finetune this DL model on their own data, and to use it for inference on new images.</p></li>
+<li><p>Module <a class="reference internal" href="scripts/processing_scripts.html#classification"><span class="std std-ref">Classification</span></a>: this module contains the code to train and test a model to classify the organisms in MZB samples, according to a a set of predefined classes. In our experiments, image classes were specified in the filename, but this can be changed to a more flexible approach. We reclassify class names thanks to the <a class="reference internal" href="configuration.html#the-taxonomy-file"><span class="std std-ref">The taxonomy file</span></a>, which groups classes according to a taxonomic hierarchy. The data used to fine tune pretrained DL classifiers is then duplicated according to this hierarchical structure (each class in its own folder) in <code class="docutils literal notranslate"><span class="pre">data/learning_sets/{project_name}/aggregated_learning_sets/</span></code>.</p></li>
+</ol>
+</section>
+<section id="working-with-the-project">
+<h2>Working with the project<a class="headerlink" href="#working-with-the-project" title="Permalink to this heading"></a></h2>
+<section id="project-structure">
+<h3>Project structure<a class="headerlink" href="#project-structure" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">data/</span></code>: is meant to contain the raw image data, and the processed images (e.g. image clips, masks, skeletons, etc) that are derived from the raw data, as well as the taxonomy file (see <a class="reference internal" href="configuration.html#the-taxonomy-file"><span class="std std-ref">The taxonomy file</span></a>).</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>TODO</strong> Some CSV with derived measures and features are momentarily stored there but might not always be needed. We can maybe generate those conditionally by addition option in <code class="docutils literal notranslate"><span class="pre">configs/global_configuration.yaml</span></code>.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mzbsuite/</span></code>: contains the functions for each module; these are called in the scripts provided but can also be called from users’ own scripts.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scripts/</span></code>: contains the scripts to run the different modules. Each module has its own folder, and each script is named after the module it implements. These modules can <em>be run in isolation</em> (i.e. each one can be run independently from the others from the command line). Arguments to these scripts are only the paths to the input and output folders, as well as the name of the project and model names (see also <a class="reference internal" href="#available-models"><span class="std std-ref">Available models</span></a>). Users just need to specify the location of their own data and output folders on which to perform inference.  Some work might be needed to ensure that they can also be run interactively, but for this, it is better to duplicate those files in a <code class="docutils literal notranslate"><span class="pre">notebooks/</span></code> folder, and to run them interactively from there after modding them.</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>TODO</strong> Need to make so that renku workflow can track main inputs and outputs without making it too complex.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">models/</span></code>: contains the pretrained models used in the different modules. The models are first downloaded from pytorch model zoo, then finetuned. The finetuned models are then saved in this folder.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">configs/</span></code>: contains the project configuration file, <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code>, which contains all the parameters for the different modules. This file contains all settings and hyperparameters, and it can be modified by the user to change the behavior of the scripts. The configuration files is always used as input to <code class="docutils literal notranslate"><span class="pre">main</span></code> scripts.</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>TODO</strong> Maybe good idea to create copies of this config, with per-experiment naming, or create a branch of the repo, etc. Make sure to version those also, with good commit names.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">results/</span></code>: contains the results of the different modules. Each module has its own folder, and each script is named after the module it implements. It probably needs to be better structured and organized.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">workflows/</span></code>: will contain the renku workflows, for now contains just an implementation of the serial pipeline in bash scripts. One for the inference pipeline, and two for finetuning the classification and size measurement models.</p></li>
+</ul>
+</section>
+<section id="workflow-files">
+<h3>Workflow files<a class="headerlink" href="#workflow-files" title="Permalink to this heading"></a></h3>
+<p>In this folder, there are “workflow” files written in bash (<code class="docutils literal notranslate"><span class="pre">.sh</span></code>)that can be used to run the pipeline. Those files are nothing else that a chain of python commands implementing the flow of the processing pipeline. For instance, just run <code class="docutils literal notranslate"><span class="pre">./workflows/run_finetune_skeletonization.sh</span></code> to fine tune the skeletonization model.</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>TODO</strong>: transfer those bash scripts to renku workflows, so that the renku can track the dependencies and the inputs and outputs of each step, and generate the graph of the workflow.</p>
+</div>
+</div></blockquote>
+<p>Simple parameters in these files (e.g. input and output folders), together with the parameters in the configuration file, control the execution of the scripts.</p>
+<p>For example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="nv">ROOT_DIR</span><span class="o">=</span><span class="s2">&quot;/data/shared/mzb-workflow&quot;</span>
+<span class="nv">MODEL</span><span class="o">=</span><span class="s2">&quot;efficientnet-b2-v0&quot;</span>
+<span class="nv">LSET_FOLD</span><span class="o">=</span><span class="si">${</span><span class="nv">ROOT_DIR</span><span class="si">}</span>/data/learning_sets/project_portable_flume/aggregated_learning_sets
+
+python<span class="w"> </span>scripts/image_parsing/main_raw_to_clips.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--input_dir<span class="o">=</span><span class="si">${</span><span class="nv">ROOT_DIR</span><span class="si">}</span>/data/raw/project_portable_flume<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--output_dir<span class="o">=</span><span class="si">${</span><span class="nv">ROOT_DIR</span><span class="si">}</span>/data/derived/project_portable_flume/blobs/<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--save_full_mask_dir<span class="o">=</span><span class="si">${</span><span class="nv">ROOT_DIR</span><span class="si">}</span>/data/derived/project_portable_flume/full_image_masks<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--config_file<span class="o">=</span><span class="si">${</span><span class="nv">ROOT_DIR</span><span class="si">}</span>/configs/configuration_flume_datasets.yaml
+<span class="w">    </span>-v
+</pre></div>
+</div>
+<p>The extract above from <code class="docutils literal notranslate"><span class="pre">workflows/run_pipeline.sh</span></code> will run the script <code class="docutils literal notranslate"><span class="pre">scripts/image_parsing/main_raw_to_clips.py</span></code>, passing it various global parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ROOT_DIR</span></code> is the the root directory fo the project, this is important to anchor all the relative path references that modules make.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MODEL</span></code> is the name of the DL mode to be used, see list of models <a class="reference internal" href="#available-models"><span class="std std-ref">Available models</span></a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LSET_FOLD</span></code> is the location where to copy the learning dataset prepared from the unparsed images</p></li>
+</ul>
+</div></blockquote>
+<p>Then, the command <code class="docutils literal notranslate"><span class="pre">python</span></code> is invoked followed by the script to be executed, and the parameters required by that script, in this case:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--input_dir</span></code> where the raw images are stored</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--output_dir</span></code> where the outputs should be saved</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--save_full_mask_dir</span></code> where the full images with segmented masks should be saved</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--config_file</span></code> the location of the project configuration file (for more details see <a class="reference internal" href="configuration.html#configuration"><span class="std std-ref">Configuration</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-v</span></code> flag for verbose, printing out more details</p></li>
+</ul>
+</div></blockquote>
+<p>Not all global parameters are used in the extract above, however they are necessary for other workflows; please also note that different scripts will require different input parameters, whereas the parameters contained in the configuration file are tied to the project and independent from the scripts.</p>
+</section>
+<section id="interactive-session">
+<h3>Interactive session<a class="headerlink" href="#interactive-session" title="Permalink to this heading"></a></h3>
+<p>The full python environment is provided in <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code>. Users can use <code class="docutils literal notranslate"><span class="pre">conda</span></code> to compile the environment based on these specifications (see <a class="reference internal" href="installing.html#manual-install"><span class="std std-ref">Manual install</span></a>).</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>TODO</strong> We need to check if the docker image builds…</p>
+</div>
+</div></blockquote>
+<p>Instead of running the scripts using the workflows illustrated above, users can ruin directly the python files in an interactive session (e.g. Jupyter notebook). Note that in this case the script parameters must be supplied as variables in the interactive session and will be non-permanent.</p>
+<p>To launch a script in interactive session simply open it in a Jupyter notebook and set <code class="docutils literal notranslate"><span class="pre">__name__</span> <span class="pre">=</span> <span class="pre">'__main__'</span></code> in your session. The code can now be run block-by-block and will print results to terminal; you can read more on <code class="docutils literal notranslate"><span class="pre">__main__</span></code>  <a class="reference external" href="https://docs.python.org/3/library/__main__.html">here</a>.</p>
+</section>
+<section id="import-as-module">
+<h3>Import as module<a class="headerlink" href="#import-as-module" title="Permalink to this heading"></a></h3>
+<p>Finally, users can import this repo as a package and make use of its functions in their own scripts.
+Make sure the package is installed (see <a class="reference internal" href="installing.html#manual-install"><span class="std std-ref">Manual install</span></a> in case of doubt), and simply use <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">mzbsuite</span></code> in your script.</p>
+</section>
+</section>
+<section id="available-models">
+<h2>Available models<a class="headerlink" href="#available-models" title="Permalink to this heading"></a></h2>
+<p>So far, these Depp Learning architectures are available for classification:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">vgg</span></code>: VGG 16</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">resnet18</span></code>: ResNet 18 layers</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">resnet50</span></code>: ResNet 50 layers</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">densenet161</span></code>: DenseNet 161 layers</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mobilenet</span></code>: MobileNet V2</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">efficientnet-b2</span></code>: EfficientNet B2</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">efficientnet-b1</span></code>: EfficientNet B1</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">vit16</span></code>: Vision Transformer 16</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">convnext-small</span></code>: ConvNext Small</p></li>
+</ul>
+<p>The models are pre-trained on ImageNet and can be downloaded from the PyTorch model zoo. We use <code class="docutils literal notranslate"><span class="pre">torchvision.models</span></code> to load the models, and we pass <code class="docutils literal notranslate"><span class="pre">weights={ModelName}_Weigths.IMAGENET1K_V1</span></code> for the pre-trained weights. This can be changed depending on needs.</p>
+<section id="adding-a-new-model">
+<h3>Adding a new model<a class="headerlink" href="#adding-a-new-model" title="Permalink to this heading"></a></h3>
+<p>In <code class="docutils literal notranslate"><span class="pre">mzbsuite/utils.py</span></code> you can either add a case to the function <code class="docutils literal notranslate"><span class="pre">read_pretrained_model(architecture,</span> <span class="pre">n_class)</span></code> or add a function returning a pytorch model. In general, the layers of these classifiers are all frozen and only the last fully connected layers are trained on the annotated data. This seemed to work in most of our cases, but can be changed in a simple way in the function.</p>
+</section>
+<section id="logging-your-model-s-training">
+<h3>Logging your model’s training<a class="headerlink" href="#logging-your-model-s-training" title="Permalink to this heading"></a></h3>
+<p>To be able to tell whether a model is learning properly and/or is overfitting, it’s necessary to log its progress while training. We support two loggers for this: <a class="reference external" href="https://docs.wandb.ai/">Weights &amp; Biases</a> and <a class="reference external" href="https://www.tensorflow.org/tensorboard">TensorBoard</a>.</p>
+<p>To be able to use Weights &amp; Biases you will need to create (free) account and install the necessary dependencies; refer to the documentation here:</p>
+<ul class="simple">
+<li><p>Weights &amp; Biases: <a class="reference external" href="https://wandb.ai/site/experiment-tracking">https://wandb.ai/site/experiment-tracking</a></p></li>
+</ul>
+<p>After installing all requirements, run <code class="docutils literal notranslate"><span class="pre">wandb</span> <span class="pre">login</span></code>.</p>
+<p>For TensorBoard, please follow the installation instructions here:</p>
+<ul class="simple">
+<li><p>TensorBoard: <a class="reference external" href="https://www.tensorflow.org/tensorboard/get_started">https://www.tensorflow.org/tensorboard/get_started</a></p></li>
+</ul>
+<p>You will also need to specify which logger to use in the <code class="docutils literal notranslate"><span class="pre">model_logger</span></code> parameter in the configuration file (see <a class="reference internal" href="configuration.html#configuration"><span class="std std-ref">Configuration</span></a>).</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installing.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="configuration.html" class="btn btn-neutral float-right" title="Configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023-08-01 Michele Volpi, Luca Pegoraro, Blake Matthews, Catherine Graham.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

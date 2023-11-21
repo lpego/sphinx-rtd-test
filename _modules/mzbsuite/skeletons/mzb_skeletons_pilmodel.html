@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mzbsuite.skeletons.mzb_skeletons_pilmodel &mdash; mzbsuite 0.0.1 alpha documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            mzbsuite
+              <img src="../../../_static/mzbsuite_logo_v2.1.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Project Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../files/installing.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../files/workflow_models.html">Workflow and Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../files/configuration.html">Configuration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../files/examples/segmentation.html">Image segmentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../files/examples/skeletonization_unsupervised.html">Skeletonization unsupervised</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../files/examples/skeletonization_supervised_inference.html">Skeletonization: supervised, inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../files/examples/classification_inference.html">Classification: inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../files/examples/classification_finetune.html">Classification: finetune</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Processing scripts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../files/scripts/processing_scripts.html">Processing scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../files/scripts/diverse_preprocessing.html">Other scripts</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">mzb-suite Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../files/modules/mzbsuite.html"><code class="docutils literal notranslate"><span class="pre">mzbsuite</span></code> module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../files/modules/mzbsuite.html#functions-and-docstrings">Functions and docstrings</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">mzbsuite</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">mzbsuite.skeletons.mzb_skeletons_pilmodel</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for mzbsuite.skeletons.mzb_skeletons_pilmodel</h1><div class="highlight"><pre>
+<span></span><span class="c1"># %%</span>
+<span class="c1"># import os, sys, time, copy</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+
+<span class="c1"># import datetime</span>
+
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">pytorch_lightning</span> <span class="k">as</span> <span class="nn">pl</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># from torch import nn</span>
+<span class="c1"># from torch.nn import functional as F</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span><span class="p">,</span> <span class="n">random_split</span>
+
+<span class="c1"># from torch.utils.data.sampler import WeightedRandomSampler</span>
+<span class="kn">from</span> <span class="nn">torchmetrics</span> <span class="kn">import</span> <span class="n">F1Score</span>
+
+<span class="c1"># from torchmetrics.functional import precision_recall</span>
+<span class="kn">from</span> <span class="nn">torchvision</span> <span class="kn">import</span> <span class="n">transforms</span>
+
+<span class="kn">import</span> <span class="nn">segmentation_models_pytorch</span> <span class="k">as</span> <span class="nn">smp</span>
+
+<span class="kn">from</span> <span class="nn">mzbsuite.skeletons.mzb_skeletons_dataloader</span> <span class="kn">import</span> <span class="n">MZBLoader_skels</span>
+
+
+<span class="c1"># %%</span>
+<div class="viewcode-block" id="MZBModel_skels"><a class="viewcode-back" href="../../../files/modules/mzbsuite.html#mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels">[docs]</a><span class="k">class</span> <span class="nc">MZBModel_skels</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">LightningModule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Pytorch Lightning Module for training the skeleton segmentation model.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_dir: str</span>
+<span class="sd">        Path to the directory where the data is stored.</span>
+<span class="sd">    pretrained_network: str</span>
+<span class="sd">        Name of the pretrained network to use.</span>
+<span class="sd">    learning_rate: float</span>
+<span class="sd">        Learning rate for the optimizer.</span>
+<span class="sd">    batch_size: int</span>
+<span class="sd">        Batch size for the dataloader.</span>
+<span class="sd">    weight_decay: float</span>
+<span class="sd">        Weight decay for the optimizer.</span>
+<span class="sd">    num_workers_loader: int</span>
+<span class="sd">        Number of workers for the dataloader.</span>
+<span class="sd">    step_size_decay: int</span>
+<span class="sd">        Number of epochs after which the learning rate is decayed.</span>
+<span class="sd">    num_classes: int</span>
+<span class="sd">        Number of classes to predict.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">data_dir</span><span class="o">=</span><span class="s2">&quot;data/skel_segm/&quot;</span><span class="p">,</span>
+        <span class="n">pretrained_network</span><span class="o">=</span><span class="s2">&quot;efficientnet-b2&quot;</span><span class="p">,</span>
+        <span class="n">learning_rate</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
+        <span class="n">weight_decay</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span>
+        <span class="n">num_workers_loader</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+        <span class="n">step_size_decay</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+        <span class="n">num_classes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="c1"># Set our init args as class attributes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">data_dir</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">learning_rate</span> <span class="o">=</span> <span class="n">learning_rate</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">architecture</span> <span class="o">=</span> <span class="n">pretrained_network</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weight_decay</span> <span class="o">=</span> <span class="n">weight_decay</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span> <span class="o">=</span> <span class="n">batch_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_workers_loader</span> <span class="o">=</span> <span class="n">num_workers_loader</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">step_size_decay</span> <span class="o">=</span> <span class="n">step_size_decay</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_dir_tst</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_classes</span> <span class="o">=</span> <span class="n">num_classes</span>
+
+        <span class="c1"># some written in stone stuff.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">im_folder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_dir</span> <span class="o">/</span> <span class="s2">&quot;images&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bo_folder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_dir</span> <span class="o">/</span> <span class="s2">&quot;sk_body&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">he_folder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_dir</span> <span class="o">/</span> <span class="s2">&quot;sk_head&quot;</span>
+
+        <span class="c1"># self.get_learnin_splits(self)</span>
+
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+        <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">im_folder</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*.jpg&quot;</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trn_inds</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span>
+            <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mf">0.8</span> <span class="o">*</span> <span class="n">N</span><span class="p">),</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">val_inds</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">))</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trn_inds</span><span class="p">))))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">size_im</span> <span class="o">=</span> <span class="mi">224</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dims</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size_im</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size_im</span><span class="p">)</span>
+
+        <span class="c1"># This defines data augmentation used for training</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transform_tr</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">transforms</span><span class="o">.</span><span class="n">RandomRotation</span><span class="p">(</span><span class="n">degrees</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">360</span><span class="p">]),</span>
+                <span class="n">transforms</span><span class="o">.</span><span class="n">RandomHorizontalFlip</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.5</span><span class="p">),</span>
+                <span class="n">transforms</span><span class="o">.</span><span class="n">RandomAffine</span><span class="p">(</span><span class="n">degrees</span><span class="o">=</span><span class="mi">10</span><span class="p">),</span>
+                <span class="n">transforms</span><span class="o">.</span><span class="n">RandomPerspective</span><span class="p">(</span><span class="n">distortion_scale</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.5</span><span class="p">),</span>
+                <span class="n">transforms</span><span class="o">.</span><span class="n">RandomAdjustSharpness</span><span class="p">(</span><span class="n">sharpness_factor</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span>
+                <span class="n">transforms</span><span class="o">.</span><span class="n">ColorJitter</span><span class="p">(</span>
+                    <span class="n">brightness</span><span class="o">=</span><span class="p">[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">],</span> <span class="n">contrast</span><span class="o">=</span><span class="p">[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">]</span>
+                <span class="p">),</span>  <span class="c1"># (brightness=[0.75, 1.25], contrast=[0.75, 1.25]), # was 0.8, 1.5</span>
+                <span class="n">transforms</span><span class="o">.</span><span class="n">Resize</span><span class="p">(</span>
+                    <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size_im</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size_im</span><span class="p">),</span>
+                    <span class="n">interpolation</span><span class="o">=</span><span class="n">transforms</span><span class="o">.</span><span class="n">InterpolationMode</span><span class="o">.</span><span class="n">BILINEAR</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">(),</span>
+                <span class="n">transforms</span><span class="o">.</span><span class="n">Normalize</span><span class="p">((</span><span class="mf">0.485</span><span class="p">,</span> <span class="mf">0.456</span><span class="p">,</span> <span class="mf">0.406</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.229</span><span class="p">,</span> <span class="mf">0.224</span><span class="p">,</span> <span class="mf">0.225</span><span class="p">)),</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+
+        <span class="c1"># This defines data augmentation used for validation / testing</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transform_ts</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="c1"># transforms.CenterCrop((self.size_im, self.size_im)),</span>
+                <span class="n">transforms</span><span class="o">.</span><span class="n">Resize</span><span class="p">(</span>
+                    <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size_im</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size_im</span><span class="p">),</span>
+                    <span class="n">interpolation</span><span class="o">=</span><span class="n">transforms</span><span class="o">.</span><span class="n">InterpolationMode</span><span class="o">.</span><span class="n">BILINEAR</span><span class="p">,</span>
+                <span class="p">),</span>  <span class="c1"># AT LEAST 224</span>
+                <span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">(),</span>
+                <span class="n">transforms</span><span class="o">.</span><span class="n">Normalize</span><span class="p">((</span><span class="mf">0.485</span><span class="p">,</span> <span class="mf">0.456</span><span class="p">,</span> <span class="mf">0.406</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.229</span><span class="p">,</span> <span class="mf">0.224</span><span class="p">,</span> <span class="mf">0.225</span><span class="p">)),</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+
+        <span class="c1"># define the model, we use a Unet with a pretrained encoder, and a decoder with 2 output channels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">Unet</span><span class="p">(</span>
+            <span class="n">encoder_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">architecture</span><span class="p">,</span>
+            <span class="n">encoder_weights</span><span class="o">=</span><span class="s2">&quot;imagenet&quot;</span><span class="p">,</span>
+            <span class="n">in_channels</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+            <span class="n">classes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="n">activation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Add maybe a torchmetrics F1 score?</span>
+        <span class="c1"># self.f1 = F1Score(num_classes=2, average=&quot;micro&quot;)</span>
+        <span class="c1"># self.loss_fn = smp.losses.DiceLoss(smp.losses.MULTILABEL_MODE, from_logits=True)</span>
+
+        <span class="c1"># set the loss function, here we use the dice loss / tversky extention,</span>
+        <span class="c1"># which is more robust to class imbalance. one needs to set the alpha and beta hyperparameters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loss_fn</span> <span class="o">=</span> <span class="n">smp</span><span class="o">.</span><span class="n">losses</span><span class="o">.</span><span class="n">TverskyLoss</span><span class="p">(</span>
+            <span class="n">smp</span><span class="o">.</span><span class="n">losses</span><span class="o">.</span><span class="n">MULTILABEL_MODE</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">0.8</span>
+        <span class="p">)</span>
+        <span class="c1"># usually, tversky loss is used with a focal loss, which is implemented in the following line</span>
+        <span class="c1"># tversky loss hyperparameters are usually set to alpha=0.3, beta=0.7, or alpha=0.5, beta=0.5 for the focal loss</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_hyperparameters</span><span class="p">()</span>
+
+<div class="viewcode-block" id="MZBModel_skels.set_learning_splits"><a class="viewcode-back" href="../../../files/modules/mzbsuite.html#mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels.set_learning_splits">[docs]</a>    <span class="k">def</span> <span class="nf">set_learning_splits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        set the learning splits for training and validation</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+        <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">im_folder</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*.jpg&quot;</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trn_inds</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span>
+            <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mf">0.8</span> <span class="o">*</span> <span class="n">N</span><span class="p">),</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">val_inds</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">))</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trn_inds</span><span class="p">))))</span>
+
+        <span class="k">return</span> <span class="bp">self</span></div>
+        <span class="c1"># channels, width, height = self.dims</span>
+
+<div class="viewcode-block" id="MZBModel_skels.forward"><a class="viewcode-back" href="../../../files/modules/mzbsuite.html#mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        forward pass of the model, returning logits</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MZBModel_skels.training_step"><a class="viewcode-back" href="../../../files/modules/mzbsuite.html#mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels.training_step">[docs]</a>    <span class="k">def</span> <span class="nf">training_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">,</span> <span class="n">batch_idx</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        training iteration per batch</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">batch</span>
+
+        <span class="n">logits</span> <span class="o">=</span> <span class="bp">self</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="n">loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loss_fn</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;trn_loss&quot;</span><span class="p">,</span> <span class="n">loss</span><span class="p">,</span> <span class="n">prog_bar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sync_dist</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">loss</span></div>
+
+<div class="viewcode-block" id="MZBModel_skels.validation_step"><a class="viewcode-back" href="../../../files/modules/mzbsuite.html#mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels.validation_step">[docs]</a>    <span class="k">def</span> <span class="nf">validation_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">,</span> <span class="n">batch_idx</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        validation iteration per batch</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">batch</span>
+        <span class="n">logits</span> <span class="o">=</span> <span class="bp">self</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># [:, 1, ...]</span>
+
+        <span class="n">loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loss_fn</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;val_loss&quot;</span><span class="p">,</span> <span class="n">loss</span><span class="p">,</span> <span class="n">prog_bar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sync_dist</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">loss</span></div>
+
+<div class="viewcode-block" id="MZBModel_skels.test_step"><a class="viewcode-back" href="../../../files/modules/mzbsuite.html#mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels.test_step">[docs]</a>    <span class="k">def</span> <span class="nf">test_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">,</span> <span class="n">batch_idx</span><span class="p">,</span> <span class="n">print_log</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;tst&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        test iteration per batch</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Reuse the validation_step for testing</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">validation_step</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="n">batch_idx</span><span class="p">,</span> <span class="n">print_log</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MZBModel_skels.predict_step"><a class="viewcode-back" href="../../../files/modules/mzbsuite.html#mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels.predict_step">[docs]</a>    <span class="k">def</span> <span class="nf">predict_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">,</span> <span class="n">batch_idx</span><span class="p">,</span> <span class="n">dataloader_idx</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        custom predict iteration per batch, returning probabilities and labels</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">batch</span>
+        <span class="n">logits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">probs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">probs</span><span class="p">,</span> <span class="n">y</span></div>
+
+<div class="viewcode-block" id="MZBModel_skels.configure_optimizers"><a class="viewcode-back" href="../../../files/modules/mzbsuite.html#mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels.configure_optimizers">[docs]</a>    <span class="k">def</span> <span class="nf">configure_optimizers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        define the optimizer and the learning rate scheduler</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">opt</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">AdamW</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span>
+            <span class="n">lr</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">learning_rate</span><span class="p">,</span>
+            <span class="n">weight_decay</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">weight_decay</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># The scheduler needs a monitor over it. We use the validation loss.</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;optimizer&quot;</span><span class="p">:</span> <span class="n">opt</span><span class="p">,</span>
+            <span class="s2">&quot;lr_scheduler&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;scheduler&quot;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">lr_scheduler</span><span class="o">.</span><span class="n">ReduceLROnPlateau</span><span class="p">(</span>
+                    <span class="n">opt</span><span class="p">,</span>
+                    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;min&quot;</span><span class="p">,</span>
+                    <span class="n">factor</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="s2">&quot;monitor&quot;</span><span class="p">:</span> <span class="s2">&quot;val_loss&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;frequency&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">step_size_decay</span>
+                <span class="c1"># If &quot;monitor&quot; references validation metrics, then &quot;frequency&quot; should be set to a</span>
+                <span class="c1"># multiple of &quot;trainer.check_val_every_n_epoch&quot;.</span>
+            <span class="p">},</span>
+        <span class="p">}</span></div>
+
+    <span class="c1">######################</span>
+    <span class="c1"># DATA RELATED HOOKS #</span>
+    <span class="c1">######################</span>
+
+<div class="viewcode-block" id="MZBModel_skels.train_dataloader"><a class="viewcode-back" href="../../../files/modules/mzbsuite.html#mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels.train_dataloader">[docs]</a>    <span class="k">def</span> <span class="nf">train_dataloader</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        definition of train dataloader</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">trn_d</span> <span class="o">=</span> <span class="n">MZBLoader_skels</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">im_folder</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bo_folder</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">he_folder</span><span class="p">,</span>
+            <span class="n">learning_set</span><span class="o">=</span><span class="s2">&quot;trn&quot;</span><span class="p">,</span>
+            <span class="n">ls_inds</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">trn_inds</span><span class="p">,</span>
+            <span class="n">transforms</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">transform_tr</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">DataLoader</span><span class="p">(</span>
+            <span class="n">trn_d</span><span class="p">,</span>
+            <span class="n">batch_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span><span class="p">,</span>
+            <span class="n">shuffle</span><span class="o">=</span><span class="n">shuffle</span><span class="p">,</span>
+            <span class="n">drop_last</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">num_workers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_workers_loader</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="MZBModel_skels.val_dataloader"><a class="viewcode-back" href="../../../files/modules/mzbsuite.html#mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels.val_dataloader">[docs]</a>    <span class="k">def</span> <span class="nf">val_dataloader</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; &quot;</span>
+<span class="sd">        definition of custom val dataloader</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">val_d</span> <span class="o">=</span> <span class="n">MZBLoader_skels</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">im_folder</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bo_folder</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">he_folder</span><span class="p">,</span>
+            <span class="n">learning_set</span><span class="o">=</span><span class="s2">&quot;val&quot;</span><span class="p">,</span>
+            <span class="n">ls_inds</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">val_inds</span><span class="p">,</span>
+            <span class="n">transforms</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">transform_ts</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">DataLoader</span><span class="p">(</span>
+            <span class="n">val_d</span><span class="p">,</span>
+            <span class="n">batch_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span><span class="p">,</span>
+            <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">drop_last</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">num_workers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_workers_loader</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="MZBModel_skels.train_ts_augm_dataloader"><a class="viewcode-back" href="../../../files/modules/mzbsuite.html#mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels.train_ts_augm_dataloader">[docs]</a>    <span class="k">def</span> <span class="nf">train_ts_augm_dataloader</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        def of a dataloader for training data using test-time data augmentation</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">trn_d</span> <span class="o">=</span> <span class="n">MZBLoader_skels</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">im_folder</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bo_folder</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">he_folder</span><span class="p">,</span>
+            <span class="n">learning_set</span><span class="o">=</span><span class="s2">&quot;trn&quot;</span><span class="p">,</span>
+            <span class="n">ls_inds</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">trn_inds</span><span class="p">,</span>
+            <span class="n">transforms</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">transform_ts</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">DataLoader</span><span class="p">(</span>
+            <span class="n">trn_d</span><span class="p">,</span>
+            <span class="n">batch_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span><span class="p">,</span>
+            <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">drop_last</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">num_workers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_workers_loader</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="MZBModel_skels.tst_dataloader"><a class="viewcode-back" href="../../../files/modules/mzbsuite.html#mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels.tst_dataloader">[docs]</a>    <span class="k">def</span> <span class="nf">tst_dataloader</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        def of custom test dataloader</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="MZBModel_skels.external_dataloader"><a class="viewcode-back" href="../../../files/modules/mzbsuite.html#mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels.external_dataloader">[docs]</a>    <span class="k">def</span> <span class="nf">external_dataloader</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_dir</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        def of custom test dataloader</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dub_folder</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">data_dir</span><span class="p">)</span>
+
+        <span class="n">tst_dube</span> <span class="o">=</span> <span class="n">MZBLoader_skels</span><span class="p">(</span>
+            <span class="n">dub_folder</span><span class="p">,</span>
+            <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">),</span>
+            <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">),</span>
+            <span class="n">learning_set</span><span class="o">=</span><span class="s2">&quot;external&quot;</span><span class="p">,</span>
+            <span class="n">ls_inds</span><span class="o">=</span><span class="p">[],</span>
+            <span class="n">transforms</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">transform_ts</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">DataLoader</span><span class="p">(</span>
+            <span class="n">tst_dube</span><span class="p">,</span>
+            <span class="n">batch_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span><span class="p">,</span>
+            <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">drop_last</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">num_workers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_workers_loader</span><span class="p">,</span>
+        <span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023-08-01 Michele Volpi, Luca Pegoraro, Blake Matthews, Catherine Graham.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

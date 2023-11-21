@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Processing scripts &mdash; mzbsuite 0.0.1 alpha documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Other scripts" href="diverse_preprocessing.html" />
+    <link rel="prev" title="Classification: finetune" href="../examples/classification_finetune.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            mzbsuite
+              <img src="../../_static/mzbsuite_logo_v2.1.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Project Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow_models.html">Workflow and Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configuration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../examples/segmentation.html">Image segmentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/skeletonization_unsupervised.html">Skeletonization unsupervised</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/skeletonization_supervised_inference.html">Skeletonization: supervised, inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/classification_inference.html">Classification: inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/classification_finetune.html">Classification: finetune</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Processing scripts</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Processing scripts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#segmentation">Segmentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#scripts.image_parsing.main_raw_to_clips.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#skeleton-prediction">Skeleton Prediction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#unsupervised-skeleton-prediction">Unsupervised Skeleton Prediction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#supervised-skeleton-prediction">Supervised Skeleton Prediction</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#classification">Classification</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#classification-inference">Classification inference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#preparing-training-data">Preparing training data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#re-train-models">Re-train models</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="diverse_preprocessing.html">Other scripts</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">mzb-suite Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mzbsuite.html"><code class="docutils literal notranslate"><span class="pre">mzbsuite</span></code> module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mzbsuite.html#functions-and-docstrings">Functions and docstrings</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">mzbsuite</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Processing scripts</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/files/scripts/processing_scripts.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="processing-scripts">
+<h1>Processing scripts<a class="headerlink" href="#processing-scripts" title="Permalink to this heading"></a></h1>
+<p><em>Explain how those scripts can be used as main functions.</em></p>
+<section id="segmentation">
+<h2>Segmentation<a class="headerlink" href="#segmentation" title="Permalink to this heading"></a></h2>
+<p>This module takes as input images with multiple organisms and separates them in smaller clips, each containing a single organism. It consists mainly of built in functionality of <code class="docutils literal notranslate"><span class="pre">opencv2</span></code>.</p>
+<p><a class="reference internal" href="#module-scripts.image_parsing.main_raw_to_clips" title="scripts.image_parsing.main_raw_to_clips"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scripts.image_parsing.main_raw_to_clips</span></code></a></p>
+<span class="target" id="module-scripts.image_parsing.main_raw_to_clips"></span><dl class="py function">
+<dt class="sig sig-object py" id="scripts.image_parsing.main_raw_to_clips.main">
+<span class="sig-prename descclassname"><span class="pre">scripts.image_parsing.main_raw_to_clips.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/scripts/image_parsing/main_raw_to_clips.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.image_parsing.main_raw_to_clips.main" title="Permalink to this definition"></a></dt>
+<dd><p>This script takes a folder of raw images and clips them into smaller images, with their mask.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> (<em>argparse.Namespace</em>) – <p>Arguments passed to the script. Namely:</p>
+<blockquote>
+<div><ul>
+<li><p>input_dir: path to directory with raw images</p></li>
+<li><p>output_dir: path to directory where to clip images</p></li>
+<li><p>save_full_mask_dir: path to directory where to save labeled full masks</p></li>
+<li><p>v (verbose): print more info</p></li>
+<li><p>config_file: path to config file with per-script args</p></li>
+</ul>
+</div></blockquote>
+</p></li>
+<li><p><strong>cfg</strong> (<em>argparse.Namespace</em>) – Configuration with detailed parametrisations.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None. Everything is saved to disk.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<ol class="arabic">
+<li><p>Note that if the script is run interactively, and the <code class="docutils literal notranslate"><span class="pre">PLOTS</span></code> variable is set to True, the script will print to screen the clips and masks as they are produced.</p></li>
+<li><p>Read files in input folder, making sure that all files are of the extension specified in the config file.</p></li>
+<li><p>If specified in the config file, define area in the images where the colour reference and/or scale are.</p></li>
+<li><p>Define quick normalization function for the images.</p></li>
+<li><p>Iterating over all images (note that several image processing parameters are specified in the config file, refer to <a class="reference internal" href="../configuration.html#configuration"><span class="std std-ref">Configuration</span></a>), segment the organisms:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Convert to HSV colourspace (this tends to work better for image processing than RGB).</p></li>
+<li><p>Normalize with the function defined earlier.</p></li>
+<li><p>Apply the specified number of iterations of Gaussian blur (other transforms can be specified as well).</p></li>
+<li><p>Use morphological dilation to reconstruct the silhouette of the organisms against the background.</p></li>
+<li><p>Set pixels to value 1 if they are considered foreground (i.e. organisms), using first a local adaptive threshold (Gaussian filter), then a global threshold (Otsu method).</p></li>
+<li><p>Combine the two thresholds (a pixel is foreground if set to 1 by either threshold).</p></li>
+<li><p>Run a kernel function to remove small objects and fill holes (again, parameters can be adjusted in config file).</p></li>
+<li><p>If a cutout area has been specified, set all those pixels to background.</p></li>
+<li><p>Assign labels to all masks obtained</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">PLOTS</span></code> is True, plot both thresholds, original image and labels.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Now, iterating over each identified region (i.e. organism):</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Save each segmented organism and features (i.e. pixel area, bounding boxes coordinates, etc) in a separate file, named after the clip’s label (this can be changed with config file parameters too).</p></li>
+<li><p>If region is smaller than defined threshold (default 5’000 pixels, can be changed in config file), exclude it.</p></li>
+<li><p>Set pixels inside the current mask to 1 (i.e. foreground).</p></li>
+<li><p>Get bounding box coordinates for the corners of the region of interest.</p></li>
+<li><p>Add a buffer around the bounding box if specified in the config file.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">PLOTS</span></code> is True, show mask and bounding box.</p></li>
+<li><p>Select the region of interest and the mask, and write this binary mask (with pixel values 0 for background and 1 for foreground) to file at location <code class="docutils literal notranslate"><span class="pre">{outdir}/{counter}_{original_image_name}_mask.jpg</span></code> (or whichever output format is specified in the config file), whereby <code class="docutils literal notranslate"><span class="pre">counter</span></code> increases for subsequent clips of the same original image.</p></li>
+<li><p>Select a crop of the original image corresponding to the same region of interest and write to file at location <code class="docutils literal notranslate"><span class="pre">{outdir}/{counter}_{original_image_name}_rgb.jpg</span></code>.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">PLOTS</span></code> is true, display a panel of plots with the clip of the original image, the binary mask.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Finally, for all clips gather various information in a dataframe:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">input_file</span></code>: the location of the original image;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">species</span></code>: the identity of the organisms in the original image, if available;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">png_mask_id</span></code>: number (<code class="docutils literal notranslate"><span class="pre">counter</span></code>) of the clip for that image;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">reg_lab</span></code>: label assigned to the region of interest (this can be different from <code class="docutils literal notranslate"><span class="pre">png_mask_id</span></code> because some regions are excluded or merged together);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">squareness</span></code>: aspect ratio of the clip;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tight_bb</span></code>: bounding box strictly encompassing the mask (no buffer);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">large_bb</span></code>: bounding box with added buffer around the mask;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ell_minor_axis</span></code>: coordinates of minor axis of ellipses encompassing the centre of mass of the mask’s pixels;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ell_major_axis</span></code>: coordinates of major axis of ellipses encompassing the centre of mass of the mask’s pixels;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bbox_area</span></code>: total area of the bounding box (tight, no buffer);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">area_px</span></code>: area of the masks (i.e. foreground pixels only);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mask_centroid</span></code>: coordinates for the mask centroid.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Write this dataframe as CSV file at location <code class="docutils literal notranslate"><span class="pre">{outdir}/_mask_properties.csv</span></code>.</p></li>
+</ol>
+</section>
+<section id="skeleton-prediction">
+<h2>Skeleton Prediction<a class="headerlink" href="#skeleton-prediction" title="Permalink to this heading"></a></h2>
+<p>In this toolbox, we offer two ways of performing an estimation of the body size of organisms. One is unsupervised (i.e. Unsupervised Skeleton Prediction), and relies on the estimation of the skeleton from the binary mask. The other is supervised, and relies on a model trained from manually annotated data.</p>
+<section id="unsupervised-skeleton-prediction">
+<h3>Unsupervised Skeleton Prediction<a class="headerlink" href="#unsupervised-skeleton-prediction" title="Permalink to this heading"></a></h3>
+<p>The main function <code class="docutils literal notranslate"><span class="pre">scripts.skeletons.main_unsupervised_skeleton_estimation.py</span></code> implements the unsupervised skeleton estimation from binary masks. We estimate the mask’s skeleton, estimate a filament segmentation, and compute the longest path traversing the whole skeleton. We return the longest path, assuming it corresponds to the length of the organism’s body.</p>
+<p>Each mask is represented by 0 and 1 pixel values, where 0 is the background and 1 is the foreground, the latter corresponding to the organism. The algorithm is applied individually to each binary mask, as follows:</p>
+<p><a class="reference internal" href="#module-scripts.skeletons.main_unsupervised_skeleton_estimation" title="scripts.skeletons.main_unsupervised_skeleton_estimation"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scripts.skeletons.main_unsupervised_skeleton_estimation</span></code></a></p>
+<span class="target" id="module-scripts.skeletons.main_unsupervised_skeleton_estimation"></span><dl class="py function">
+<dt class="sig sig-object py" id="scripts.skeletons.main_unsupervised_skeleton_estimation.main">
+<span class="sig-prename descclassname"><span class="pre">scripts.skeletons.main_unsupervised_skeleton_estimation.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/scripts/skeletons/main_unsupervised_skeleton_estimation.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.skeletons.main_unsupervised_skeleton_estimation.main" title="Permalink to this definition"></a></dt>
+<dd><p>Main function for skeleton estimation (body size) in the unsupervised setting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> (<em>argparse.Namespace</em>) – <p>Arguments parsed from command line. Namely:</p>
+<blockquote>
+<div><ul>
+<li><p>config_file: path to the configuration file</p></li>
+<li><p>input_dir: path to the directory containing the masks</p></li>
+<li><p>output_dir: path to the directory where to save the results</p></li>
+<li><p>save_masks: path to the directory where to save the masks as jpg</p></li>
+<li><p>list_of_files: path to the csv file containing the classification predictions</p></li>
+<li><p>v (verbose): whether to print more info</p></li>
+</ul>
+</div></blockquote>
+</p></li>
+<li><p><strong>cfg</strong> (<em>argparse.Namespace</em>) – Arguments parsed from the configuration file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None. All is saved to disk at specified locations.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<ol class="arabic">
+<li><p>The distance transform is computed using the function <code class="docutils literal notranslate"><span class="pre">scipy.ndimage.distance_transform_edt</span></code>. We divide the mask in different predefined area classes, and use area-dependent parameters to threshold the distance transform.</p></li>
+<li><p>We select the largest area from the thresholded distance transform, as we assume this is the organism’s body.</p></li>
+<li><p>We apply thinning using <code class="docutils literal notranslate"><span class="pre">skimage.morphology.thin</span></code> to the selected area.</p></li>
+<li><p>We find intersections and endpoints of the skeleton using the custom implementation in <code class="docutils literal notranslate"><span class="pre">mzbsuite.skeletons.mzb_skeletons_helpers.get_intersections</span></code> and <code class="docutils literal notranslate"><span class="pre">mzbsuite.skeletons.mzb_skeletons_helpers.get_endpoints</span></code>.</p></li>
+<li><p>We compute the longest path using <code class="docutils literal notranslate"><span class="pre">mzbsuite.skeletons.mzb_skeletons_helpers.traverse_graph</span></code>. We could test using other implementations.</p></li>
+<li><p>We save a CSV file at location <code class="docutils literal notranslate"><span class="pre">{out_dir}/skeleton_attributes.csv</span></code> containing:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">clip_filename</span></code>: the name of the clip</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">conv_rate_mm_px</span></code>: the conversion rate from pixels to mm (as provided by the user)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">skeleton_length</span></code>: the length of the skeleton in pixels</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">skeleton_length_mm</span></code>: the length of the skeleton in mm</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">segms</span></code>: the ID of the segmentation of the filaments (images with all filaments are stored in a defined folder)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">area</span></code>: the area of the organism in pixels (computed as the sum of the foreground pixels in the binary mask)</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+</section>
+<section id="supervised-skeleton-prediction">
+<h3>Supervised Skeleton Prediction<a class="headerlink" href="#supervised-skeleton-prediction" title="Permalink to this heading"></a></h3>
+<p>This module is composed of 3 scripts: <code class="docutils literal notranslate"><span class="pre">scripts.skeletons.main_supervised_skeleton_inference.py</span></code> uses models pre-trained on manually annotated images, whereby an expert drew length and head width for a range of MZB taxa (see <strong>APPENDIX_XXX</strong> for further details); <code class="docutils literal notranslate"><span class="pre">scripts.skeletons.main_supervised_skeleton_assessment.py</span></code> compares model prediction with manual annotations and plots them out; <code class="docutils literal notranslate"><span class="pre">scripts.skeletons.main_supervised_skeleton_finetune.py</span></code> allows to re-train the model with user’s annotations.</p>
+<p><a class="reference internal" href="#module-scripts.skeletons.main_supervised_skeleton_inference" title="scripts.skeletons.main_supervised_skeleton_inference"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scripts.skeletons.main_supervised_skeleton_inference</span></code></a></p>
+<span class="target" id="module-scripts.skeletons.main_supervised_skeleton_inference"></span><dl class="py function">
+<dt class="sig sig-object py" id="scripts.skeletons.main_supervised_skeleton_inference.main">
+<span class="sig-prename descclassname"><span class="pre">scripts.skeletons.main_supervised_skeleton_inference.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/scripts/skeletons/main_supervised_skeleton_inference.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.skeletons.main_supervised_skeleton_inference.main" title="Permalink to this definition"></a></dt>
+<dd><p>Function to run inference of skeletons (body, head) on macrozoobenthos images clips, using a trained model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> (<em>argparse.Namespace</em>) – <p>Namespace containing the arguments passed to the script. Notably:</p>
+<blockquote>
+<div><ul>
+<li><p>input_dir: path to the directory containing the images to be classified</p></li>
+<li><p>input_type: type of input data, either “val” or “external”</p></li>
+<li><p>input_model: path to the directory containing the model to be used for inference</p></li>
+<li><p>output_dir: path to the directory where the results will be saved</p></li>
+<li><p>save_masks: path to the directory where the masks will be saved</p></li>
+<li><p>config_file: path to the config file with train / inference parameters</p></li>
+</ul>
+</div></blockquote>
+</p></li>
+<li><p><strong>cfg</strong> (<em>dict</em>) – Dictionary containing the configuration parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None. Saves the results in the specified folder.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>The inference script <code class="docutils literal notranslate"><span class="pre">main_supervised_skeleton_inference.py</span></code> is as follows:</p>
+<ol class="arabic simple">
+<li><p>Load checkpoints from input model, using custom function <code class="docutils literal notranslate"><span class="pre">mazbsuite.utils.find_checkpoints</span></code>.</p></li>
+<li><p>Load model  with custom class <code class="docutils literal notranslate"><span class="pre">mzbuite.mzb_skeletons_pilmodel.MZBModel_skels</span></code>, that defines model hyperparameters, input/output folders and other data hooks as well as data augmentation for training and validation. When predicting with <code class="docutils literal notranslate"><span class="pre">predict_steps</span></code>, the class returns probabilities <code class="docutils literal notranslate"><span class="pre">probs</span></code> and labels <code class="docutils literal notranslate"><span class="pre">y`</span></code>.</p></li>
+<li><p>Re-index training/validation split (this is necessary for the trainer to load properly)…</p></li>
+<li><p>Load Pytorch trainer using <code class="docutils literal notranslate"><span class="pre">pytorch_lightning.Trainer</span></code>, check if GPU is available with <code class="docutils literal notranslate"><span class="pre">toch.cuda</span></code>, otherwise run on CPU.</p></li>
+<li><p>Return and aggregate predictions from trainer.</p></li>
+<li><p>Adapt predicted skeleton to image size with <code class="docutils literal notranslate"><span class="pre">transforms.Resize</span></code> and <code class="docutils literal notranslate"><span class="pre">transforms.InterpolationMode.BILINEAR</span></code>, remove buffer around the edges of the image if present.</p></li>
+<li><p>Refine the predicted skeletons using morphological thinning with <code class="docutils literal notranslate"><span class="pre">skimage.morphology.thin</span></code></p></li>
+<li><p>Save mask and refined skeletons on image, save separate clips in <code class="docutils literal notranslate"><span class="pre">{save_masks}/{name}_body.jpg</span></code> and <code class="docutils literal notranslate"><span class="pre">{save_masks}/{name}_head.jpg</span></code>.</p></li>
+<li><p>Create a dataframe containing: name of saved clip with superimposed skeleton (<code class="docutils literal notranslate"><span class="pre">clip_name</span></code>), prediciton for body (<code class="docutils literal notranslate"><span class="pre">nn_pred_body</span></code>) and head (<code class="docutils literal notranslate"><span class="pre">nn_pred_head</span></code>).</p></li>
+<li><p>Write predictions to CSV at location <code class="docutils literal notranslate"><span class="pre">{out_dir}/size_skel_supervised_model.csv</span></code>.</p></li>
+</ol>
+<p><a class="reference internal" href="#module-scripts.skeletons.main_supervised_skeleton_assessment" title="scripts.skeletons.main_supervised_skeleton_assessment"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scripts.skeletons.main_supervised_skeleton_assessment</span></code></a></p>
+<span class="target" id="module-scripts.skeletons.main_supervised_skeleton_assessment"></span><dl class="py function">
+<dt class="sig sig-object py" id="scripts.skeletons.main_supervised_skeleton_assessment.main">
+<span class="sig-prename descclassname"><span class="pre">scripts.skeletons.main_supervised_skeleton_assessment.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/scripts/skeletons/main_supervised_skeleton_assessment.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.skeletons.main_supervised_skeleton_assessment.main" title="Permalink to this definition"></a></dt>
+<dd><p>Main function to run an assessment of the length measurements.
+Computes the absolute error between manual annotations and model predictions, and reports plots grouped by species.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> (<em>argparse.Namespace</em>) – <p>Arguments parsed from the command line. Specifically:</p>
+<blockquote>
+<div><ul>
+<li><p>args.input_dir: path to the directory with the model predictions</p></li>
+<li><p>args.manual_annotations: path to the manual annotations</p></li>
+<li><p>args.model_annotations: path to the model predictions</p></li>
+</ul>
+</div></blockquote>
+</p></li>
+<li><p><strong>cfg</strong> (<em>argparse.Namespace</em>) – configuration options.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None. Plots and metrics are saved in the results directory.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>The assessment script <code class="docutils literal notranslate"><span class="pre">main_supervised_skeleton_assessment.py</span></code> is as follows:</p>
+<ol class="arabic simple">
+<li><p>Read in manual annotations.</p></li>
+<li><p>Read model predictions.</p></li>
+<li><p>Merge them.</p></li>
+<li><p>Calculate absolute errors (in pixels).</p></li>
+<li><p>Plot absolute error for body length and head width, scatterplots for errors, barplots relative errors by species; all plots are saved in <code class="docutils literal notranslate"><span class="pre">{input_dir}/{plotname}.{local_format}</span></code>, where <code class="docutils literal notranslate"><span class="pre">{input_dir}</span></code> and <code class="docutils literal notranslate"><span class="pre">{local_format}</span></code> is specified in the config file.</p></li>
+<li><p>Calculate report with custom function <code class="docutils literal notranslate"><span class="pre">mzbsuite.utils.regression_report</span></code>; write to text file in <code class="docutils literal notranslate"><span class="pre">{input_dir}/estimation_report.txt</span></code></p></li>
+</ol>
+<p><a class="reference internal" href="#module-scripts.skeletons.main_supervised_skeletons_finetune" title="scripts.skeletons.main_supervised_skeletons_finetune"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scripts.skeletons.main_supervised_skeletons_finetune</span></code></a></p>
+<span class="target" id="module-scripts.skeletons.main_supervised_skeletons_finetune"></span><dl class="py function">
+<dt class="sig sig-object py" id="scripts.skeletons.main_supervised_skeletons_finetune.main">
+<span class="sig-prename descclassname"><span class="pre">scripts.skeletons.main_supervised_skeletons_finetune.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/scripts/skeletons/main_supervised_skeletons_finetune.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.skeletons.main_supervised_skeletons_finetune.main" title="Permalink to this definition"></a></dt>
+<dd><p>Function to train a model for skeletons (body, head) on macrozoobenthos images.
+The model is trained on the dataset specified in the config file, and saved to the folder specified in the config file every 50 steps and at the end of the training.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> (<em>argparse.Namespace</em>) – <p>Namespace containing the arguments passed to the script. Notably:</p>
+<blockquote>
+<div><ul>
+<li><p>input_dir: path to the directory containing the images to be classified</p></li>
+<li><p>save_model: path to the directory where the model will be saved</p></li>
+<li><p>config_file: path to the config file with train / inference parameters</p></li>
+</ul>
+</div></blockquote>
+</p></li>
+<li><p><strong>cfg</strong> (<em>dict</em>) – Dictionary containing the configuration parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None. Saves the model in the specified folder.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>The re-training script <code class="docutils literal notranslate"><span class="pre">main_supervised_skeletons_finetune.py</span></code> is as follows:</p>
+<ol class="arabic simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">pytorch_lightning</span></code> builtins to seyup loaders for best and latest model in input folder <code class="docutils literal notranslate"><span class="pre">input_dir</span></code> specified in the config file.</p></li>
+<li><p>Setup progress bar and keep track of logging date with custom class <code class="docutils literal notranslate"><span class="pre">mzbsuite.utils.SaveLogCallback</span></code>.</p></li>
+<li><p>Use the custom class <code class="docutils literal notranslate"><span class="pre">mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels</span></code> to pass config file arguments to model.</p></li>
+<li><p>Check if there is a model to continue training from, otherwise load the best validated model and continue training from that.</p></li>
+<li><p>Pass model training progress to Weigths &amp; Biases logger (for more detail see <strong>Weights &amp; Biases_XXX</strong>)</p></li>
+<li><p>Setup <code class="docutils literal notranslate"><span class="pre">torch.Trainer</span></code> using parameters defined in the config file and above.</p></li>
+<li><p>Fit model.</p></li>
+</ol>
+<p><em>Note:</em> in this <code class="docutils literal notranslate"><span class="pre">main()</span></code> call we declare a random seed and pass it to <code class="docutils literal notranslate"><span class="pre">torch.manual_seed</span></code> and <code class="docutils literal notranslate"><span class="pre">torch.cuda.manual_seed</span></code>, because is needed by <code class="docutils literal notranslate"><span class="pre">torchvision</span></code>.</p>
+</section>
+</section>
+<section id="classification">
+<h2>Classification<a class="headerlink" href="#classification" title="Permalink to this heading"></a></h2>
+<p>The scripts for classification are in <code class="docutils literal notranslate"><span class="pre">scripts/classification</span></code>, and depend on several custom functions defined in <code class="docutils literal notranslate"><span class="pre">mzbsuite/classification</span></code> and <code class="docutils literal notranslate"><span class="pre">mzbsuite/utils.py</span></code>.</p>
+<section id="classification-inference">
+<h3>Classification inference<a class="headerlink" href="#classification-inference" title="Permalink to this heading"></a></h3>
+<p>The script <code class="docutils literal notranslate"><span class="pre">main_classification_inference.py</span></code> allows to identify organisms from image clips using trained models.</p>
+<p><a class="reference internal" href="#module-scripts.classification.main_classification_inference" title="scripts.classification.main_classification_inference"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scripts.classification.main_classification_inference</span></code></a></p>
+<span class="target" id="module-scripts.classification.main_classification_inference"></span><dl class="py function">
+<dt class="sig sig-object py" id="scripts.classification.main_classification_inference.main">
+<span class="sig-prename descclassname"><span class="pre">scripts.classification.main_classification_inference.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/scripts/classification/main_classification_inference.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.classification.main_classification_inference.main" title="Permalink to this definition"></a></dt>
+<dd><p>Function to run inference on macrozoobenthos images clips, using a trained model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> (<em>argparse.Namespace</em>) – <p>Namespace containing the arguments passed to the script. Notably:</p>
+<blockquote>
+<div><ul>
+<li><p>input_dir: path to the directory containing the images to be classified</p></li>
+<li><p>input_model: path to the directory containing the model to be used for inference</p></li>
+<li><p>output_dir: path to the directory where the results will be saved</p></li>
+<li><p>config_file: path to the config file with train / inference parameters</p></li>
+</ul>
+</div></blockquote>
+</p></li>
+<li><p><strong>cfg</strong> (<em>dict</em>) – Dictionary containing the configuration parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None. Saves the results in the specified folder.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<ol class="arabic simple">
+<li><p>Load last or best model checkpoint (depending on parameter <code class="docutils literal notranslate"><span class="pre">infe_model_ckpt</span></code> in the config file) with custom function <code class="docutils literal notranslate"><span class="pre">mzbsuite.utils.find_checkpoints</span></code>.</p></li>
+<li><p>Initialise custom class <code class="docutils literal notranslate"><span class="pre">MZBModel``(imported</span> <span class="pre">from</span> <span class="pre">``mzbsuite.classification.mzb_classification_pilmodel</span></code>) and load checkpoint’s weights.</p></li>
+<li><p>Setup <code class="docutils literal notranslate"><span class="pre">pytorch_lightning.Trainer</span></code> to use GPU is a CUDA-enabled device is available, or use CPU if not.</p></li>
+<li><p>Run the model in evaluation mode and save the predictions to variable.</p></li>
+<li><p>If a taxonomy file is provided (see <span class="xref std std-ref">files.configuration:Configuration</span>), sort by the specified cutoff level, save to <code class="docutils literal notranslate"><span class="pre">class_names</span></code> variable.</p></li>
+<li><p>Concatenate prediction outputs in arrays for entropy score <code class="docutils literal notranslate"><span class="pre">y`</span></code>, class predicted <code class="docutils literal notranslate"><span class="pre">p</span></code> and ground truth <code class="docutils literal notranslate"><span class="pre">gt</span></code> if available.</p></li>
+<li><p>Write these arrays to CSV at <code class="docutils literal notranslate"><span class="pre">out_dir/predictions.csv</span></code>, including the filename, ground truth and prediction sorted by the specified taxonomic rank.</p></li>
+<li><p>If inference was carried out on a validation set <code class="docutils literal notranslate"><span class="pre">val_set</span></code>, save confusion matrix as image at <code class="docutils literal notranslate"><span class="pre">out_dir/confusion_matrix</span></code> as well a classification report at <code class="docutils literal notranslate"><span class="pre">out_dir/classification_report.txt</span></code>.</p></li>
+</ol>
+</section>
+<section id="preparing-training-data">
+<h3>Preparing training data<a class="headerlink" href="#preparing-training-data" title="Permalink to this heading"></a></h3>
+<p>The script <code class="docutils literal notranslate"><span class="pre">main_prepare_learning_sets.py</span></code> takes the image clips and aggregates them by the taxonomic rank specified by the user, so that classes for model training and inference correspond to that rank. The CSV taxonomy file location and taxonomic rank of interest are specified in <a class="reference internal" href="../configuration.html#configuration"><span class="std std-ref">Configuration</span></a>.
+For example, if image clips are annotated at species, genus and family level, and the specified rank is family, then the script will collapse all genera and species to family rank. All annotations not be at the specified taxonomic rank or lower (<code class="docutils literal notranslate"><span class="pre">kingdom</span> <span class="pre">&gt;</span> <span class="pre">phylum</span> <span class="pre">&gt;</span> <span class="pre">class</span> <span class="pre">&gt;</span> <span class="pre">subclass</span> <span class="pre">&gt;</span> <span class="pre">order</span> <span class="pre">&gt;</span> <span class="pre">suborder</span> <span class="pre">&gt;</span> <span class="pre">family</span> <span class="pre">&gt;</span> <span class="pre">genus</span> <span class="pre">&gt;</span> <span class="pre">species</span></code>) will be discarded.</p>
+<p><a class="reference internal" href="#module-scripts.classification.main_prepare_learning_sets" title="scripts.classification.main_prepare_learning_sets"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scripts.classification.main_prepare_learning_sets</span></code></a></p>
+<span class="target" id="module-scripts.classification.main_prepare_learning_sets"></span><dl class="py function">
+<dt class="sig sig-object py" id="scripts.classification.main_prepare_learning_sets.main">
+<span class="sig-prename descclassname"><span class="pre">scripts.classification.main_prepare_learning_sets.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/scripts/classification/main_prepare_learning_sets.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.classification.main_prepare_learning_sets.main" title="Permalink to this definition"></a></dt>
+<dd><p>Main function to prepare the learning sets for the classification task.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> (<em>argparse.Namespace</em>) – <p>Arguments parsed from the command line. Specifically:</p>
+<blockquote>
+<div><ul>
+<li><p>input_dir: path to the directory containing the raw clips</p></li>
+<li><p>output_dir: path to the directory where the learning sets will be saved</p></li>
+<li><p>config_file: path to the config file with train / inference parameters</p></li>
+<li><p>taxonomy_file: path to the taxonomy file indicating classes per level</p></li>
+<li><p>verbose: boolean indicating whether to print progress to the console</p></li>
+</ul>
+</div></blockquote>
+</p></li>
+<li><p><strong>cfg</strong> (<em>dict</em>) – Dictionary containing the configuration parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None. Saves the files for the different splits in the specified folders.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<ol class="arabic simple">
+<li><p>Load the configuration file arguments and define the input and output directories for training data (output directories must not already exist, to prevent accidental overwriting).</p></li>
+<li><p>Make dictionary <code class="docutils literal notranslate"><span class="pre">recode_order</span></code> with each class folder’s name (i.e. lowest taxonomic rank for each clip) and corresponding name at the selected taxonomic rank, see figure below.</p></li>
+</ol>
+<figure class="align-center" id="id1">
+<a class="reference internal image-reference" href="../../_images/taxonomic_cutoff.png"><img alt="../../_images/taxonomic_cutoff.png" src="../../_images/taxonomic_cutoff.png" style="width: 300px;" /></a>
+<figcaption>
+<p><span class="caption-text">Example of restructuring learning sets based on taxonomic rank: from family level and other non-taxonomic classes to order level aggregation.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<ol class="arabic simple">
+<li><p>Copy all files in each class folder name to the corresponding parent taxon</p></li>
+<li><p>Move a part of this data (specified in parameter <code class="docutils literal notranslate"><span class="pre">lset_val_size</span></code> in configuration file) to validation set, selected randomly.</p></li>
+<li><p>If a class named <code class="docutils literal notranslate"><span class="pre">mixed</span></code> exist in the curated data, copy all images thereby to test model performance.</p></li>
+</ol>
+</section>
+<section id="re-train-models">
+<h3>Re-train models<a class="headerlink" href="#re-train-models" title="Permalink to this heading"></a></h3>
+<p>The script <code class="docutils literal notranslate"><span class="pre">main_classification_finetune.py</span></code> allows to (re)train a model for classification of macrozoobenthos images, using configuration file arguments: <code class="docutils literal notranslate"><span class="pre">input_dir</span></code> of images to be used for training; <code class="docutils literal notranslate"><span class="pre">save_model</span></code> where the model should be saved (once every 50 steps and end of training); <code class="docutils literal notranslate"><span class="pre">config_file</span></code> path to the file with training hyperparameters (see <a class="reference internal" href="../configuration.html#configuration"><span class="std std-ref">Configuration</span></a>).</p>
+<p><a class="reference internal" href="#module-scripts.classification.main_classification_finetune" title="scripts.classification.main_classification_finetune"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scripts.classification.main_classification_finetune</span></code></a></p>
+<span class="target" id="module-scripts.classification.main_classification_finetune"></span><dl class="py function">
+<dt class="sig sig-object py" id="scripts.classification.main_classification_finetune.main">
+<span class="sig-prename descclassname"><span class="pre">scripts.classification.main_classification_finetune.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/scripts/classification/main_classification_finetune.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.classification.main_classification_finetune.main" title="Permalink to this definition"></a></dt>
+<dd><p>Function to train a model for classification of macrozoobenthos images.
+The model is trained on the dataset specified in the config file, saved to the folder specified every 50 steps and at the end of the training.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> (<em>argparse.Namespace</em>) – <p>Namespace containing the arguments passed to the script. Notably:</p>
+<blockquote>
+<div><ul>
+<li><p>input_dir: path to the directory containing the images to be classified</p></li>
+<li><p>save_model: path to the directory where the model will be saved</p></li>
+<li><p>config_file: path to the config file with train / inference parameters</p></li>
+</ul>
+</div></blockquote>
+</p></li>
+<li><p><strong>cfg</strong> (<em>dict</em>) – Dictionary containing the configuration parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None. Saves the model in the specified folder.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<ol class="arabic simple">
+<li><p>Define best and last model callbacks using the <code class="docutils literal notranslate"><span class="pre">pytorch_lightning.callbacks.ModelCheckpoint</span></code>.</p></li>
+<li><p>Define model from hyperparameters specified in configuration file.</p></li>
+<li><p>Check if there is a model previously trained, otherwise load best model (evaluated on validation set).</p></li>
+<li><p>Define run name and logger callback (currently only Weights &amp; Biases supported, see <strong>Weights &amp; Biases_XXX</strong>).</p></li>
+<li><p>Setup <code class="docutils literal notranslate"><span class="pre">torch.Trainer</span></code> using parameters defined in the config file.</p></li>
+<li><p>Fit model.</p></li>
+</ol>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../examples/classification_finetune.html" class="btn btn-neutral float-left" title="Classification: finetune" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="diverse_preprocessing.html" class="btn btn-neutral float-right" title="Other scripts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023-08-01 Michele Volpi, Luca Pegoraro, Blake Matthews, Catherine Graham.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

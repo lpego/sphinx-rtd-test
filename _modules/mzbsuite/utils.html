@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mzbsuite.utils &mdash; mzbsuite 0.0.1 alpha documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            mzbsuite
+              <img src="../../_static/mzbsuite_logo_v2.1.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Project Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../files/installing.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../files/workflow_models.html">Workflow and Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../files/configuration.html">Configuration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../files/examples/segmentation.html">Image segmentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../files/examples/skeletonization_unsupervised.html">Skeletonization unsupervised</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../files/examples/skeletonization_supervised_inference.html">Skeletonization: supervised, inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../files/examples/classification_inference.html">Classification: inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../files/examples/classification_finetune.html">Classification: finetune</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Processing scripts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../files/scripts/processing_scripts.html">Processing scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../files/scripts/diverse_preprocessing.html">Other scripts</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">mzb-suite Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../files/modules/mzbsuite.html"><code class="docutils literal notranslate"><span class="pre">mzbsuite</span></code> module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../files/modules/mzbsuite.html#functions-and-docstrings">Functions and docstrings</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">mzbsuite</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">mzbsuite.utils</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for mzbsuite.utils</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Module containing utility functions for mzbsuite</span>
+<span class="sd">C 2023, M. Volpi, Swiss Data Science Center</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">torchvision</span> <span class="kn">import</span> <span class="n">models</span>
+
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="c1"># import torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">mean_absolute_error</span><span class="p">,</span>
+    <span class="n">mean_squared_error</span><span class="p">,</span>
+    <span class="n">max_error</span><span class="p">,</span>
+    <span class="n">median_absolute_error</span><span class="p">,</span>
+    <span class="n">r2_score</span><span class="p">,</span>
+    <span class="n">explained_variance_score</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="noneparse"><a class="viewcode-back" href="../../files/modules/mzbsuite.html#mzbsuite.utils.noneparse">[docs]</a><span class="k">def</span> <span class="nf">noneparse</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper function to parse None values from YAML files</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    value: string</span>
+<span class="sd">        string to be parsed</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    value: string or None</span>
+<span class="sd">        parsed string</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;none&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">return</span> <span class="n">value</span></div>
+
+
+<div class="viewcode-block" id="cfg_to_arguments"><a class="viewcode-back" href="../../files/modules/mzbsuite.html#mzbsuite.utils.cfg_to_arguments">[docs]</a><span class="k">class</span> <span class="nc">cfg_to_arguments</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class is used to convert a dictionary to an object and extend the argparser.</span>
+<span class="sd">    In the __init__ method, we iterate over the dictionary and add each key as an attribute to the object.</span>
+<span class="sd">    Input is a dictionary, output is an object, that mimicks the argparse object.</span>
+
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+
+<span class="sd">        cfg = {&#39;a&#39;: 1, &#39;b&#39;: 2}</span>
+<span class="sd">    args = cfg_to_arguments(cfg)</span>
+<span class="sd">    print(args.a) # 1</span>
+<span class="sd">    print(args.b) # 2</span>
+
+<span class="sd">    cfg can be from configs stored in YAML file, a JSON file, or a dictionary, whatever you prefer.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        args: dict</span>
+<span class="sd">            dictionary of arguments</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">args</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Prints the object as a string&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="regression_report"><a class="viewcode-back" href="../../files/modules/mzbsuite.html#mzbsuite.utils.regression_report">[docs]</a><span class="k">def</span> <span class="nf">regression_report</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">PRINT</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper function to print regression metrics. Taken and adapted from</span>
+<span class="sd">    https://github.com/scikit-learn/scikit-learn/issues/18454#issue-708338254</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    y_true: np.array</span>
+<span class="sd">        ground truth values</span>
+<span class="sd">    y_pred: np.array</span>
+<span class="sd">        predicted values</span>
+<span class="sd">    PRINT: bool</span>
+<span class="sd">        whether to print the metrics or not</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    metrics: list</span>
+<span class="sd">        list of tuples with the name of the metric and its value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">error</span> <span class="o">=</span> <span class="n">y_true</span> <span class="o">-</span> <span class="n">y_pred</span>
+    <span class="n">percentile</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">95</span><span class="p">]</span>
+    <span class="n">percentile_value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="n">percentile</span><span class="p">)</span>
+
+    <span class="n">metrics</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;mean absolute error&quot;</span><span class="p">,</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)),</span>
+        <span class="p">(</span><span class="s2">&quot;median absolute error&quot;</span><span class="p">,</span> <span class="n">median_absolute_error</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)),</span>
+        <span class="p">(</span><span class="s2">&quot;mean squared error&quot;</span><span class="p">,</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)),</span>
+        <span class="p">(</span><span class="s2">&quot;max error&quot;</span><span class="p">,</span> <span class="n">max_error</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)),</span>
+        <span class="p">(</span><span class="s2">&quot;r2 score&quot;</span><span class="p">,</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)),</span>
+        <span class="p">(</span><span class="s2">&quot;explained variance score&quot;</span><span class="p">,</span> <span class="n">explained_variance_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)),</span>
+    <span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">PRINT</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Metrics for regression:&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">metric_name</span><span class="p">,</span> <span class="n">metric_value</span> <span class="ow">in</span> <span class="n">metrics</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">metric_name</span><span class="si">:</span><span class="s2">&gt;25s</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">metric_value</span><span class="si">:</span><span class="s2"> &gt;20.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Percentiles:&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">pv</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">percentile</span><span class="p">,</span> <span class="n">percentile_value</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">p</span><span class="si">:</span><span class="s2"> 25d</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">pv</span><span class="si">:</span><span class="s2">&gt;20.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">metrics</span></div>
+
+
+<div class="viewcode-block" id="read_pretrained_model"><a class="viewcode-back" href="../../files/modules/mzbsuite.html#mzbsuite.utils.read_pretrained_model">[docs]</a><span class="k">def</span> <span class="nf">read_pretrained_model</span><span class="p">(</span><span class="n">architecture</span><span class="p">,</span> <span class="n">n_class</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper script to load models compactly from pytorch model zoo and prepare them for Hummingbird finetuning</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    architecture: str</span>
+<span class="sd">        name of the model to load</span>
+<span class="sd">    n_class: int</span>
+<span class="sd">        number of classes to finetune the model for</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    model : pytorch model</span>
+<span class="sd">        model with last layer replaced with a linear layer with n_class outputs</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">architecture</span> <span class="o">=</span> <span class="n">architecture</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">architecture</span> <span class="o">==</span> <span class="s2">&quot;vgg&quot;</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">vgg16</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">VGG16_Weights</span><span class="o">.</span><span class="n">IMAGENET1K_V1</span><span class="p">)</span>
+
+        <span class="n">in_feat</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">classifier</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">in_features</span>
+
+        <span class="n">model</span><span class="o">.</span><span class="n">classifier</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span>
+            <span class="n">in_features</span><span class="o">=</span><span class="n">in_feat</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="n">n_class</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">features</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
+            <span class="n">param</span><span class="o">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">([</span><span class="n">a</span> <span class="o">==</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">param</span><span class="o">.</span><span class="n">shape</span><span class="p">]):</span>
+                <span class="k">pass</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">param</span><span class="o">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">elif</span> <span class="n">architecture</span> <span class="o">==</span> <span class="s2">&quot;resnet18&quot;</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">resnet18</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">ResNet18_Weights</span><span class="o">.</span><span class="n">IMAGENET1K_V1</span><span class="p">)</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">fc</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span>
+            <span class="n">in_features</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">fc</span><span class="o">.</span><span class="n">in_features</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="n">n_class</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Freeze base feature extraction trunk:</span>
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
+            <span class="n">param</span><span class="o">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">fc</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
+            <span class="n">param</span><span class="o">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">elif</span> <span class="n">architecture</span> <span class="o">==</span> <span class="s2">&quot;resnet50&quot;</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">resnet50</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">ResNet50_Weights</span><span class="o">.</span><span class="n">IMAGENET1K_V1</span><span class="p">)</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">fc</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span>
+            <span class="n">in_features</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">fc</span><span class="o">.</span><span class="n">in_features</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="n">n_class</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Freeze base feature extraction trunk:</span>
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
+            <span class="n">param</span><span class="o">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="c1"># for param in model.fc.parameters():</span>
+        <span class="c1">#     param.requires_grad = True</span>
+
+    <span class="k">elif</span> <span class="n">architecture</span> <span class="o">==</span> <span class="s2">&quot;densenet161&quot;</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">densenet161</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">DenseNet161_Weights</span><span class="o">.</span><span class="n">IMAGENET1K_V1</span><span class="p">)</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">classifier</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span>
+            <span class="n">in_features</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">in_features</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="n">n_class</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
+            <span class="n">param</span><span class="o">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
+            <span class="n">param</span><span class="o">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">elif</span> <span class="n">architecture</span> <span class="o">==</span> <span class="s2">&quot;mobilenet&quot;</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">mobilenet_v2</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">MobileNet_V2_Weights</span><span class="o">.</span><span class="n">IMAGENET1K_V1</span><span class="p">)</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">classifier</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span>
+            <span class="n">in_features</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">classifier</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">in_features</span><span class="p">,</span>
+            <span class="n">out_features</span><span class="o">=</span><span class="n">n_class</span><span class="p">,</span>
+            <span class="n">bias</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
+            <span class="n">param</span><span class="o">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">classifier</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
+            <span class="n">param</span><span class="o">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">elif</span> <span class="n">architecture</span> <span class="o">==</span> <span class="s2">&quot;efficientnet-b2&quot;</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">efficientnet_b2</span><span class="p">(</span>
+            <span class="n">weights</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">EfficientNet_B2_Weights</span><span class="o">.</span><span class="n">IMAGENET1K_V1</span>
+        <span class="p">)</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">classifier</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span>
+            <span class="n">in_features</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">classifier</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">in_features</span><span class="p">,</span>
+            <span class="n">out_features</span><span class="o">=</span><span class="n">n_class</span><span class="p">,</span>
+            <span class="n">bias</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
+            <span class="n">param</span><span class="o">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">classifier</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
+            <span class="n">param</span><span class="o">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">elif</span> <span class="n">architecture</span> <span class="o">==</span> <span class="s2">&quot;efficientnet-b1&quot;</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">efficientnet_b1</span><span class="p">(</span>
+            <span class="n">weights</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">EfficientNet_B1_Weights</span><span class="o">.</span><span class="n">IMAGENET1K_V1</span>
+        <span class="p">)</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">classifier</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span>
+            <span class="n">in_features</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">classifier</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">in_features</span><span class="p">,</span>
+            <span class="n">out_features</span><span class="o">=</span><span class="n">n_class</span><span class="p">,</span>
+            <span class="n">bias</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
+            <span class="n">param</span><span class="o">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">classifier</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
+            <span class="n">param</span><span class="o">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">elif</span> <span class="n">architecture</span> <span class="o">==</span> <span class="s2">&quot;vit16&quot;</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">vit_b_16</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">ViT_B_16_Weights</span><span class="o">.</span><span class="n">IMAGENET1K_V1</span><span class="p">)</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">heads</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span>
+            <span class="n">in_features</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">heads</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">in_features</span><span class="p">,</span>
+            <span class="n">out_features</span><span class="o">=</span><span class="n">n_class</span><span class="p">,</span>
+            <span class="n">bias</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
+            <span class="n">param</span><span class="o">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">heads</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
+            <span class="n">param</span><span class="o">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">elif</span> <span class="n">architecture</span> <span class="o">==</span> <span class="s2">&quot;convnext-small&quot;</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">convnext_small</span><span class="p">(</span>
+            <span class="n">weights</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">ConvNeXt_Small_Weights</span><span class="o">.</span><span class="n">IMAGENET1K_V1</span>
+        <span class="p">)</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">classifier</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span>
+            <span class="n">in_features</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">classifier</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">in_features</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="n">n_class</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
+            <span class="n">param</span><span class="o">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">classifier</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
+            <span class="n">param</span><span class="o">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="s2">&quot;Model not found&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">model</span></div>
+
+
+<div class="viewcode-block" id="find_checkpoints"><a class="viewcode-back" href="../../files/modules/mzbsuite.html#mzbsuite.utils.find_checkpoints">[docs]</a><span class="k">def</span> <span class="nf">find_checkpoints</span><span class="p">(</span><span class="n">dirs</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;lightning_logs&quot;</span><span class="p">),</span> <span class="n">version</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="s2">&quot;val&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Find the checkpoints for a given log</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dirs: Path  (default: Path(&quot;lightning_logs&quot;))</span>
+<span class="sd">        path to the lightning_logs folder</span>
+<span class="sd">    version: str (default: None)</span>
+<span class="sd">        version of the log to use</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    chkp: str</span>
+<span class="sd">        list of paths to checkpoints</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">version</span><span class="p">:</span>
+        <span class="n">ch_sf</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">dirs</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2">/checkpoints/*.ckpt&quot;</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>  <span class="c1"># pick last</span>
+        <span class="n">ch_sp</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">dirs</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;**/*.ckpt&quot;</span><span class="p">)]</span>
+        <span class="n">ch_sp</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="n">ch_sf</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ch_sp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;**/*.ckpt&quot;</span><span class="p">))</span>
+
+    <span class="n">chkp</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">ch_sf</span> <span class="k">if</span> <span class="n">log</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">name</span><span class="p">)]</span>
+
+    <span class="k">return</span> <span class="n">chkp</span></div>
+
+
+<span class="kn">from</span> <span class="nn">pytorch_lightning.callbacks</span> <span class="kn">import</span> <span class="n">Callback</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span> <span class="nn">yaml</span>
+
+
+<div class="viewcode-block" id="SaveLogCallback"><a class="viewcode-back" href="../../files/modules/mzbsuite.html#mzbsuite.utils.SaveLogCallback">[docs]</a><span class="k">class</span> <span class="nc">SaveLogCallback</span><span class="p">(</span><span class="n">Callback</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Callback to save the log of the training</span>
+
+<span class="sd">    TODO: will need to be updated to save the log of the training in more detail and in a more</span>
+<span class="sd">    structured way</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_folder</span><span class="p">):</span>
+        <span class="c1"># super().__init__()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_folder</span> <span class="o">=</span> <span class="n">model_folder</span>
+
+    <span class="c1"># def on_train_start(self, trainer, pl_module):</span>
+    <span class="c1">#     self.model_folder = self.model_folder / &quot;checkpoints&quot;</span>
+    <span class="c1">#     # store locally some meta info, if file exists, append to it</span>
+    <span class="c1">#     # this in each model folder</span>
+    <span class="c1">#     flog = self.model_folder.parents[0] / &quot;trn_date.yaml&quot;</span>
+    <span class="c1">#     flag = &quot;a&quot; if flog.is_file() else &quot;w&quot;</span>
+    <span class="c1">#     with open(self.model_folder.parents[0] / &quot;trn_date.yaml&quot;, flag) as f:</span>
+    <span class="c1">#         yaml.safe_dump(</span>
+    <span class="c1">#             {&quot;train-date-start&quot;: datetime.now().strftime(&quot;%Y-%m-%d %H:%M:%S&quot;)}, f</span>
+    <span class="c1">#         )</span>
+
+    <span class="c1">#     # this is a global file containing all the training dates for all models</span>
+    <span class="c1">#     flog = self.model_folder.parents[1] / &quot;all_trn_date.yaml&quot;</span>
+    <span class="c1">#     flag = &quot;a&quot; if flog.is_file() else &quot;w&quot;</span>
+    <span class="c1">#     with open(self.model_folder.parents[1] / &quot;all_trn_date.yaml&quot;, flag) as f:</span>
+    <span class="c1">#         yaml.safe_dump(</span>
+    <span class="c1">#             {</span>
+    <span class="c1">#                 f&quot;{self.model_folder.parents[1].name}&quot;: {</span>
+    <span class="c1">#                     &quot;start&quot;: datetime.now().strftime(&quot;%Y-%m-%d %H:%M:%S&quot;)</span>
+    <span class="c1">#                 }</span>
+    <span class="c1">#             },</span>
+    <span class="c1">#             f,</span>
+    <span class="c1">#         )</span>
+
+<div class="viewcode-block" id="SaveLogCallback.on_train_end"><a class="viewcode-back" href="../../files/modules/mzbsuite.html#mzbsuite.utils.SaveLogCallback.on_train_end">[docs]</a>    <span class="k">def</span> <span class="nf">on_train_end</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trainer</span><span class="p">,</span> <span class="n">pl_module</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Save the end date of the training</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># store locally some meta info, if file exists, append to it</span>
+        <span class="c1"># this in each model folder</span>
+        <span class="n">flog</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_folder</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="s2">&quot;trn_date.yaml&quot;</span>
+        <span class="n">flag</span> <span class="o">=</span> <span class="s2">&quot;a&quot;</span> <span class="k">if</span> <span class="n">flog</span><span class="o">.</span><span class="n">is_file</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;w&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_folder</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="s2">&quot;trn_date.yaml&quot;</span><span class="p">,</span> <span class="n">flag</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">yaml</span><span class="o">.</span><span class="n">safe_dump</span><span class="p">(</span>
+                <span class="p">{</span><span class="s2">&quot;train-date-end&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)},</span> <span class="n">f</span>
+            <span class="p">)</span>
+
+        <span class="c1"># this is a global file containing all the training dates for all models</span>
+        <span class="n">flog</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_folder</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="s2">&quot;all_trn_date.yaml&quot;</span>
+        <span class="n">flag</span> <span class="o">=</span> <span class="s2">&quot;a&quot;</span> <span class="k">if</span> <span class="n">flog</span><span class="o">.</span><span class="n">is_file</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;w&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_folder</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="s2">&quot;all_trn_date.yaml&quot;</span><span class="p">,</span> <span class="n">flag</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">yaml</span><span class="o">.</span><span class="n">safe_dump</span><span class="p">(</span>
+                <span class="p">{</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model_folder</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span>
+                        <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span>
+                    <span class="p">)</span>
+                <span class="p">},</span>
+                <span class="n">f</span><span class="p">,</span>
+            <span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023-08-01 Michele Volpi, Luca Pegoraro, Blake Matthews, Catherine Graham.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

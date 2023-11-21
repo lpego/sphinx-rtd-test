@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Configuration &mdash; mzbsuite 0.0.1 alpha documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Image segmentation" href="examples/segmentation.html" />
+    <link rel="prev" title="Workflow and Models" href="workflow_models.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            mzbsuite
+              <img src="../_static/mzbsuite_logo_v2.1.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Project Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installing.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow_models.html">Workflow and Models</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#parameters-explanation">Parameters explanation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#complete-configuration-file-for-portable-flume">Complete configuration file for <em>Portable Flume</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-taxonomy-file">The taxonomy file</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/segmentation.html">Image segmentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/skeletonization_unsupervised.html">Skeletonization unsupervised</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/skeletonization_supervised_inference.html">Skeletonization: supervised, inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/classification_inference.html">Classification: inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/classification_finetune.html">Classification: finetune</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Processing scripts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="scripts/processing_scripts.html">Processing scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scripts/diverse_preprocessing.html">Other scripts</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">mzb-suite Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules/mzbsuite.html"><code class="docutils literal notranslate"><span class="pre">mzbsuite</span></code> module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules/mzbsuite.html#functions-and-docstrings">Functions and docstrings</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">mzbsuite</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Configuration</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/files/configuration.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="configuration">
+<h1>Configuration<a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h1>
+<p>All information related to a project is contained in a configuration file, located in <code class="docutils literal notranslate"><span class="pre">/configs/{configuration_file.yaml}</span></code>. This file, together with input/output directories and other parameters specified directly via CLI (i.e. Command Line Interface) or via shell script (see also <a class="reference internal" href="workflow_models.html"><span class="doc">Workflows and Models</span></a>), passes the necessary parameters to the scripts.</p>
+<p>The idea here is that the user can specify all necessary parameters for each project in this configuration file, so that one batch of images acquired in the same way (i.e. one project) always corresponds to one configuration file.</p>
+<p>We provide a complete configuration file for the example project, <em>Portable Flume</em>, that can be used as a template for user’s own configuration file for their projects.</p>
+<section id="parameters-explanation">
+<h2>Parameters explanation<a class="headerlink" href="#parameters-explanation" title="Permalink to this heading"></a></h2>
+<p>This list is structured as follows:</p>
+<blockquote>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">parameter_name</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">admissible_value_1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">admissible_value_2</span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Description of parameter, suggested values and rationale.</p>
+<div class="admonition- admonition">
+<p class="admonition-title"></p>
+<p>Parameters appear in the same order as in the configuration file template for clarity, however the order of parameters makes no difference for the functioning of the pipelines.</p>
+</div>
+<p>This first block contains some general parameters:</p>
+<blockquote>
+<div><blockquote>
+<div></div></blockquote>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">glob_random_seed</span></code>: <code class="docutils literal notranslate"><span class="pre">[int]</span></code> this is just a arbitrary number used by model trainers, important for reproducibility.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">glob_root_folder</span></code>: <code class="docutils literal notranslate"><span class="pre">[string]</span></code> this is the root folder of the project, it could be for example <code class="docutils literal notranslate"><span class="pre">/home/user/my_project/</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">glob_blobs_folder</span></code>: <code class="docutils literal notranslate"><span class="pre">[string]</span></code> this is the location where you want the clips of the segmented organisms to be saved; we strongly recommend putting this inside of the main data folder, for example <code class="docutils literal notranslate"><span class="pre">/data/shared/mzb-workflow/data/derived/blobs/</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">glob_local_format</span></code>: <code class="docutils literal notranslate"><span class="pre">[jpg,</span> <span class="pre">pdf,</span> <span class="pre">...]</span></code> what format do you want the plotting outputs to be saved in; acceptable values are: <code class="docutils literal notranslate"><span class="pre">pdf</span></code>, <code class="docutils literal notranslate"><span class="pre">jpg</span></code>, <code class="docutils literal notranslate"><span class="pre">png</span></code> and other common formats. <strong>NEED TO DOUBLE CHECK THIS</strong></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">model_logger</span></code>: <code class="docutils literal notranslate"><span class="pre">[wandb]</span></code> which data logger is used to track model training progress; for the moment, only <code class="docutils literal notranslate"><span class="pre">wandb</span></code> (<a class="reference external" href="https://wandb.ai/site">Weights &amp; Biases</a>) is supported. Note that W&amp;B requires an account and to be setup by the user, see <strong>WEIGHTS_&amp;_BIASES_XXX</strong>.</p></li>
+</ul>
+</div></blockquote>
+<p>The second block of parameters is specific to image segmentation. If the segmentation results are not satisfactory (i.e. organisms incompletely clipped, debris or other noise segmented as organisms, etc), changing these values might produce better results:</p>
+<blockquote>
+<div><blockquote>
+<div></div></blockquote>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">impa_image_format</span></code>: <code class="docutils literal notranslate"><span class="pre">[jpg,</span> <span class="pre">png,</span> <span class="pre">...]</span></code> what format are the original images in? Should be caps insensitive and support common formats like <code class="docutils literal notranslate"><span class="pre">jpg</span></code>, <code class="docutils literal notranslate"><span class="pre">png</span></code> and others.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">impa_clip_areas</span></code>: <code class="docutils literal notranslate"><span class="pre">[int,</span> <span class="pre">int]</span></code> it’s common to place a reference scale and colour grid in images (see also <a class="reference internal" href="examples/ex_intro.html"><span class="doc">Introduction to examples</span></a>), here you can define the area of the image where it is placed, so that it can be cropped out. You should specify this as the coordinates (in pixels) of the bottom-right corner of the portion of the image you want analysed, so that the regions that fall outside of it can be cropped out, for example <code class="docutils literal notranslate"><span class="pre">[2750,</span> <span class="pre">4900]</span></code> will exclude all areas <em>right</em> of 2750 pixels and <em>below</em> 4900 pixels.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">impa_area_threshold</span></code>: this is the minimum size (in pixels) that will be considered to be an organism; anything below this threshold will be discarded. When in doubt, start with a low threshold and increase until most noise is removed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">impa_gaussian_blur</span></code>: <code class="docutils literal notranslate"><span class="pre">[int,</span> <span class="pre">int]</span></code> the size fo the kernel that will be used to smooth the image before processing; you can think of this as the “radius” of the blur: the larger the radius, the stronger the smoothing effect, but also more loss of details in the image. This should not be changed much except for very noisy images and/or with comparatively large organisms compared to the full size of the image.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">impa_gaussian_blur_passes</span></code>: <code class="docutils literal notranslate"><span class="pre">[int]</span></code> How many times the gaussian filter should be applied in sequence.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">impa_adaptive_threshold_block_size</span></code>: <code class="docutils literal notranslate"><span class="pre">[int]</span></code> Size of the square neighborhood used to collect values and statistics for automatic thresholding.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">impa_mask_postprocess_kernel</span></code>: <code class="docutils literal notranslate"><span class="pre">[int,</span> <span class="pre">int]</span></code> This is the size of the post-processing kernel, that smooths out the segmentation masks; higher values correspond to smoothers edges but less details.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">impa_mask_postprocess_passes</span></code>: <code class="docutils literal notranslate"><span class="pre">[int]</span></code> Number of times the smoothing kernel is applied.</p>
+<blockquote>
+<div></div></blockquote>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">impa_bounding_box_buffer</span></code>: <code class="docutils literal notranslate"><span class="pre">[int]</span></code> how many pixels should be added on each side of the mask for buffer (this is useful to evaluate if masks are accurate, for example).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">impa_save_clips_plus_features</span></code>: <code class="docutils literal notranslate"><span class="pre">[bool]</span></code> Boolean value (<cite>True/False</cite>) whether the features of each mask should be saved as CSV.</p></li>
+</ul>
+</div></blockquote>
+<p>This block contains parameters for model training and inferences.</p>
+<blockquote>
+<div><blockquote>
+<div></div></blockquote>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">lset_class_cut</span></code>: <code class="docutils literal notranslate"><span class="pre">[kingdom,</span> <span class="pre">phylum,</span> <span class="pre">class,</span> <span class="pre">subclass,</span> <span class="pre">order,</span> <span class="pre">suborder,</span> <span class="pre">family,</span> <span class="pre">genus,</span> <span class="pre">species]</span></code> This determines the taxonomic rank for cutoff, meaning that all lower taxonomic levels will be clumped together at the specified rank. Annotations at higher taxonomic level than the one specified will be excluded.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lset_val_size</span></code>: <code class="docutils literal notranslate"><span class="pre">[float]</span></code> Which proportion of the annotated data should be set aside for validation? A common value is <code class="docutils literal notranslate"><span class="pre">0.1</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lset_taxonomy</span></code>: <code class="docutils literal notranslate"><span class="pre">[string]</span></code> Full path to the location of the taxonomy file, for example: <code class="docutils literal notranslate"><span class="pre">/data/mzb-workflow/data/MZB_taxonomy.csv</span></code>. This should be in <code class="docutils literal notranslate"><span class="pre">.csv</span></code> format, and contain a full taxonomy of the organisms in the annotated data (see <a class="reference internal" href="#the-taxonomy-file">The taxonomy file</a>).</p></li>
+</ul>
+</div></blockquote>
+<p>The following parameters relate to model training of the classification model. The proposed values will likely work for small datasets (&lt;10’000 images) and a moderate number of classes (&lt;20-30). Machine Learning (ML) model training is a complex topic, explanations given are very general and will likely be insufficient to fully grasp all the intricacies!</p>
+<blockquote>
+<div><blockquote>
+<div></div></blockquote>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">trcl_learning_rate</span></code>: <code class="docutils literal notranslate"><span class="pre">[float]</span></code> This parameter controls the learning rate of the model; the higher the value the quicker it will adjust the weights, but also the quicker it will overfit. Suggested value: <code class="docutils literal notranslate"><span class="pre">0.001</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trcl_batch_size</span></code>: <code class="docutils literal notranslate"><span class="pre">[int]</span></code> The number of images that will be used for training at each iteration. Higher numbers will use more memory and will achieve good accuracies faster, but small numbers will train the model faster. Suggested value: <code class="docutils literal notranslate"><span class="pre">16</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trcl_weight_decay</span></code>: <code class="docutils literal notranslate"><span class="pre">[float]</span></code> How much should the weight of a node in the network decrease (i.e. decay) at each step (see <code class="docutils literal notranslate"><span class="pre">trcl_step_size_decay</span></code>); decay combats overfitting but can slow down training. Suggested value: <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trcl_step_size_decay</span></code>: <code class="docutils literal notranslate"><span class="pre">[int]</span></code> How many iterations before applying the weight decay factor. Suggested value: <code class="docutils literal notranslate"><span class="pre">5</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trcl_number_epochs</span></code>: <code class="docutils literal notranslate"><span class="pre">[int]</span></code> How many iterations (i.e. epochs) should the model be trainer for. Longer training cycles can potentially yield better accuracies, but they take longer to train and can quickly overfit. Suggested value: <code class="docutils literal notranslate"><span class="pre">75</span></code>.</p>
+<blockquote>
+<div></div></blockquote>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trcl_save_topk</span></code>: <code class="docutils literal notranslate"><span class="pre">[int]</span></code> How many models should be saved among the best? You can specify if you want to retain the best 1-2-5 etc best models after training; this can be beneficial for evaluating overfitting and convergence. Suggested value: <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trcl_num_classes</span></code>: <code class="docutils literal notranslate"><span class="pre">[int]</span></code> How many classes should the model be trained for? This needs to be defined by the user, and it corresponds to how many taxa are at the specified taxonomic rank. In our example we had <code class="docutils literal notranslate"><span class="pre">8</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trcl_model_pretrarch</span></code>: <code class="docutils literal notranslate"><span class="pre">[convnext-small,</span> <span class="pre">resenet50,</span> <span class="pre">efficientnet-b2,</span> <span class="pre">convnext-small,</span> <span class="pre">densenet161,</span> <span class="pre">mobilenet]</span></code> Which model architecture should be used for training; the supported architectures are detailed in <a class="reference internal" href="workflow_models.html#available-models"><span class="std std-ref">Available models</span></a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trcl_num_workers</span></code>: <code class="docutils literal notranslate"><span class="pre">[int]</span></code> How many processes (i.e. workers) do you want the dataloader to spawn? A good rule of thumb is to use the same number of workers as number of threads of your CPU. In our example the value is <code class="docutils literal notranslate"><span class="pre">16</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trcl_wandb_project_name</span></code>: <code class="docutils literal notranslate"><span class="pre">[string]</span></code> Name of the Weights &amp; Biases tracker for your project; you should change this to something meaningful for your project; in our case it was <code class="docutils literal notranslate"><span class="pre">mzb-classifiers</span></code>.</p>
+<blockquote>
+<div></div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<p>This next block contains parameters for the supervised skeleton prediction model (see <span class="xref std std-ref">files/workflow_models:Supervised Skeleton Prediction</span>). The same considerations as for the previous block apply.</p>
+<blockquote>
+<div><blockquote>
+<div></div></blockquote>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">trsk_learning_rate</span></code>: <code class="docutils literal notranslate"><span class="pre">[float]</span></code> his parameter controls the learning rate of the model; the higher the value the quicker it will adjust the weights, but also the quicker it will overfit. Suggested rate: <code class="docutils literal notranslate"><span class="pre">0.0001</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trsk_batch_size</span></code>: <code class="docutils literal notranslate"><span class="pre">[int]</span></code> The number of images that will be used for training at each iteration. Higher numbers will use more memory and will achieve good accuracies faster, but small numbers will train the model faster. Suggested value: <code class="docutils literal notranslate"><span class="pre">32</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trsk_weight_decay</span></code>: <code class="docutils literal notranslate"><span class="pre">[float]</span></code> How much should the weight of a node in the network decrease (i.e. decay) at each step (see <code class="docutils literal notranslate"><span class="pre">trcl_step_size_decay</span></code>); decay combats overfitting but can slow down training. Suggested value: <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trsk_step_size_decay</span></code>: <code class="docutils literal notranslate"><span class="pre">[int]</span></code> How many iterations before applying the weight decay factor. Suggested value: <code class="docutils literal notranslate"><span class="pre">50</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trsk_number_epochs</span></code>: <code class="docutils literal notranslate"><span class="pre">[int]</span></code> How many iterations (i.e. epochs) should the model be trainer for. Longer training cycles can potentially yield better accuracies, but they take longer to train and can quickly overfit. Suggested value: <code class="docutils literal notranslate"><span class="pre">750</span></code>.</p>
+<blockquote>
+<div></div></blockquote>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trsk_save_topk</span></code>: <code class="docutils literal notranslate"><span class="pre">[int]</span></code> How many models should be saved among the best? You can specify if you want to retain the best 1-2-5 etc best models after training; this can be beneficial for evaluating overfitting and convergence. Suggested value: <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trsk_num_classes</span></code>: <code class="docutils literal notranslate"><span class="pre">[int]</span></code> Since this is a binary classifier (i.e. pixels are either part of the predicted skeleton or they are not), this should be <code class="docutils literal notranslate"><span class="pre">2</span></code>. In case of annotations referring to multiple features this can be changed according to the number of features.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trsk_model_pretrarch</span></code>: <code class="docutils literal notranslate"><span class="pre">[mit_b2,</span> <span class="pre">mit-b2,</span> <span class="pre">efficientnet-b2]</span></code> Which model architecture should be used for training; the supported architectures are detailed in <a class="reference internal" href="workflow_models.html#available-models"><span class="std std-ref">Available models</span></a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trsk_num_workers</span></code>: <code class="docutils literal notranslate"><span class="pre">[int]</span></code> How many processes (i.e. workers) do you want the dataloader to spawn? A good rule of thumb is to use the same number of workers as number of threads of your CPU. In our example the value is <code class="docutils literal notranslate"><span class="pre">16</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trsk_wandb_project_name</span></code>: <code class="docutils literal notranslate"><span class="pre">[string]</span></code> Name of the Weights &amp; Biases tracker for your project; you should change this to something meaningful for your project; in our case it was <code class="docutils literal notranslate"><span class="pre">mzb-skeletons</span></code>.</p>
+<blockquote>
+<div></div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<p>This block contains further convenience parameters for inference using trained skeleton prediction models and outputs.</p>
+<blockquote>
+<div><blockquote>
+<div></div></blockquote>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">infe_model_ckpt</span></code>: <code class="docutils literal notranslate"><span class="pre">[last,</span> <span class="pre">best]</span></code> Which model should be used? The <code class="docutils literal notranslate"><span class="pre">last</span></code> model is the newest training iteration, and <code class="docutils literal notranslate"><span class="pre">best</span></code> is the model that performed best on the validation set (available only if a validation set is specified).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">infe_num_classes</span></code>: <code class="docutils literal notranslate"><span class="pre">[int]</span></code> How many classes should the inference be carried out on? It should be the same number of classes the model has been trained on. In our example it was <code class="docutils literal notranslate"><span class="pre">8</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">infe_image_glob</span></code>: <code class="docutils literal notranslate"><span class="pre">[string]</span></code> What suffix and/or extension should be attached to output images? This should be placed in double quotes <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code> and can be a capture pattern (also called regular expression, see <a class="reference external" href="https://docs.python.org/3/library/glob.html">glob documentation</a>). In our case, we append a suffix and extension at the end of the original image name (using the wildcard <code class="docutils literal notranslate"><span class="pre">*</span></code>): <code class="docutils literal notranslate"><span class="pre">&quot;*_rgb.jpg&quot;</span></code>.</p></li>
+</ul>
+</div></blockquote>
+<p>These parameters are related to the unsupervised skeletonization:</p>
+<blockquote>
+<div><blockquote>
+<div></div></blockquote>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">skel_class_exclude</span></code>: <code class="docutils literal notranslate"><span class="pre">[string]</span></code> Should any class be excluded from the processing? For example, unidentifiable organisms or calibration images. In our cases these images were labelled as <code class="docutils literal notranslate"><span class="pre">errors</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">skel_conv_rate</span></code>: <code class="docutils literal notranslate"><span class="pre">[float]</span></code> This is the pixel-to-millimitres conversion rate. It has to be provided by the user and is used for all images in the dataset (see <a class="reference internal" href="scripts/processing_scripts.html#segmentation"><span class="std std-ref">Segmentation</span></a>). In our case this was <code class="docutils literal notranslate"><span class="pre">131.6625</span></code>, obtained averaging manual measurements over several images.</p></li>
+</ul>
+</div></blockquote>
+<p>These are additional parameters for supervised skeletonization model output:</p>
+<blockquote>
+<div><blockquote>
+<div></div></blockquote>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">skel_label_buffer_on_preds</span></code>: How many pixels wide should be the line over the skeleton be? We used a value of <code class="docutils literal notranslate"><span class="pre">25</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">skel_label_clip_with_mask</span></code>: <code class="docutils literal notranslate"><span class="pre">[bool]</span></code> Are the clips of the organisms the same ones that skeletonization should be carried out on? In our case we had <code class="docutils literal notranslate"><span class="pre">False</span></code>, since blobs and skeletonization training set do not have the same filenames.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="complete-configuration-file-for-portable-flume">
+<h2>Complete configuration file for <em>Portable Flume</em><a class="headerlink" href="#complete-configuration-file-for-portable-flume" title="Permalink to this heading"></a></h2>
+<p>Below a complete example of a configuration file for the example project <em>Portable Flume</em>.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Arguments not to be spec via CLI</span>
+<span class="nt">glob_random_seed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">222</span>
+<span class="nt">glob_root_folder</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/data/shared/mzb-workflow/</span>
+<span class="nt">glob_blobs_folder</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/data/shared/mzb-workflow/data/derived/blobs/</span>
+<span class="nt">glob_local_format</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pdf</span>
+<span class="nt">model_logger</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wandb</span>
+
+<span class="c1"># Image parsing specific</span>
+<span class="nt">impa_image_format</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jpg</span>
+<span class="nt">impa_clip_areas</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">2750</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">4900</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="c1"># ignore areas outside of this (bottom right corner)</span>
+<span class="nt">impa_area_threshold</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5000</span><span class="w"> </span><span class="c1"># ignore areas smaller than this</span>
+<span class="nt">impa_gaussian_blur</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">21</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">21</span><span class="p p-Indicator">]</span>
+<span class="nt">impa_gaussian_blur_passes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="nt">impa_adaptive_threshold</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">351</span>
+<span class="nt">impa_mask_postprocess_kernel</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">11</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">11</span><span class="p p-Indicator">]</span>
+<span class="nt">impa_mask_postprocess_passes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="c1"># impa_save_full_mask_dir: data/derived/project_portable_flume/full_image_masks</span>
+<span class="nt">impa_bounding_box_buffer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">200</span>
+<span class="nt">impa_save_clips_plus_features</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+
+<span class="c1"># Run classification routine on image clips</span>
+<span class="c1">## Preparation of learning sets (run once if output folder is not there)</span>
+<span class="c1">## these data will need to be doctored, to move classes like errors</span>
+<span class="c1">## and such into specific subfolers</span>
+<span class="nt">lset_class_cut</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">order</span>
+<span class="nt">lset_val_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1</span>
+<span class="nt">lset_taxonomy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/data/shared/mzb-workflow/data/MZB_taxonomy.csv</span>
+
+<span class="c1">## Finetuning / training config for classifier</span>
+<span class="nt">trcl_learning_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.001</span>
+<span class="nt">trcl_batch_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">16</span>
+<span class="nt">trcl_weight_decay</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="nt">trcl_step_size_decay</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="nt">trcl_number_epochs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">75</span>
+<span class="c1"># trcl_gpu_ids: -1</span>
+<span class="nt">trcl_save_topk</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="nt">trcl_num_classes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8</span>
+<span class="nt">trcl_model_pretrarch</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">convnext-small</span><span class="w"> </span><span class="c1">#resenet50 #efficientnet-b2 #convnext-small #densenet161 #mobilenet</span>
+<span class="nt">trcl_num_workers</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">16</span>
+<span class="nt">trcl_wandb_project_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mzb-classifiers</span>
+<span class="c1"># trai_model_save_append: &quot;-v1&quot;</span>
+
+<span class="c1">## Finetuning / training config for skeleton prediction</span>
+<span class="nt">trsk_learning_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0001</span>
+<span class="nt">trsk_batch_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">32</span>
+<span class="nt">trsk_weight_decay</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="nt">trsk_step_size_decay</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50</span>
+<span class="nt">trsk_number_epochs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">750</span>
+<span class="c1"># trsk_gpu_ids: -1</span>
+<span class="nt">trsk_save_topk</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="nt">trsk_num_classes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="nt">trsk_model_pretrarch</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mit_b2</span><span class="w"> </span><span class="c1">#mit-b2 #efficientnet-b2</span>
+<span class="nt">trsk_num_workers</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">16</span>
+<span class="nt">trsk_wandb_project_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mzb-skeletons</span>
+<span class="c1"># trsk_tversky_loss_w1:</span>
+<span class="c1"># trai_model_save_append: &quot;-v1&quot;</span>
+
+<span class="c1">## Inference config</span>
+<span class="c1"># infe_model_folder: models/mzb-classifiers/ # likely not used to allow renku parse as input</span>
+<span class="nt">infe_model_ckpt</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">last</span><span class="w"> </span><span class="c1"># best or last, best is on validation error</span>
+<span class="nt">infe_num_classes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8</span>
+<span class="nt">infe_image_glob</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;*_rgb.jpg&quot;</span>
+
+<span class="c1">## Skeletonization</span>
+<span class="c1"># unsupervised skeletonization</span>
+<span class="nt">skel_class_exclude</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">errors</span>
+<span class="nt">skel_conv_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">131.6625</span><span class="w"> </span><span class="c1">#[133.1, 136.6, 133.2, 133.2, 133.2, 118.6, 133.4, 132.0])  # px / mm</span>
+<span class="c1"># skel_save_usnup_masks: data/derived/project_portable_flume/skeletons/automatic_skeletons/</span>
+
+<span class="c1"># supervised skeletonization</span>
+<span class="nt">skel_label_thickness</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="nt">skel_label_buffer_on_preds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">25</span>
+<span class="nt">skel_label_clip_with_mask</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"> </span><span class="c1"># We need same set data (blobs and skeletonization training set are not the same filenames)</span>
+</pre></div>
+</div>
+</section>
+<section id="the-taxonomy-file">
+<h2>The taxonomy file<a class="headerlink" href="#the-taxonomy-file" title="Permalink to this heading"></a></h2>
+<p>This file contains information about the taxonomy of each class (e.g. species, genus, or other taxa) in the dataset. The first column should be named <code class="docutils literal notranslate"><span class="pre">query</span></code> and should contain the name of the class; all the other columns should correspond to a taxonomic rank, and should contain the pertinent taxon for that class.</p>
+<p>This should be saved as CSV file in an appropriate location (for instance, <code class="docutils literal notranslate"><span class="pre">/data/MZB_taxonomy.csv</span></code>), structured like so:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>query</p></th>
+<th class="head"><p>kingdom</p></th>
+<th class="head"><p>phylum</p></th>
+<th class="head"><p>class</p></th>
+<th class="head"><p>subclass</p></th>
+<th class="head"><p>order</p></th>
+<th class="head"><p>suborder</p></th>
+<th class="head"><p>family</p></th>
+<th class="head"><p>genus</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ephemeroptera</p></td>
+<td><p>Metazoa</p></td>
+<td><p>Arthropoda</p></td>
+<td><p>Insecta</p></td>
+<td><p>Pterygota</p></td>
+<td><p>Ephemeroptera</p></td>
+<td><p>NA</p></td>
+<td><p>NA</p></td>
+<td><p>NA</p></td>
+</tr>
+<tr class="row-odd"><td><p>heptageniidae</p></td>
+<td><p>Metazoa</p></td>
+<td><p>Arthropoda</p></td>
+<td><p>Insecta</p></td>
+<td><p>Pterygota</p></td>
+<td><p>Ephemeroptera</p></td>
+<td><p>Setisura</p></td>
+<td><p>Heptageniidae</p></td>
+<td><p>NA</p></td>
+</tr>
+<tr class="row-even"><td><p>isoperla</p></td>
+<td><p>Metazoa</p></td>
+<td><p>Arthropoda</p></td>
+<td><p>Insecta</p></td>
+<td><p>Pterygota</p></td>
+<td><p>Plecoptera</p></td>
+<td><p>NA</p></td>
+<td><p>Perlodidae</p></td>
+<td><p>Isoperla</p></td>
+</tr>
+</tbody>
+</table>
+<p>Such a taxonomy file can be easily generated from a list of classes using utilities like the <a class="reference external" href="https://github.com/ropensci/taxize">R package taxize or others</a>.</p>
+<p>Please note that the taxonomic rank selection can be different (for instance, it could be <code class="docutils literal notranslate"><span class="pre">class,</span> <span class="pre">family,</span> <span class="pre">genus,</span> <span class="pre">species</span></code>), the only constrain is that the requested taxonomic cutoff rank (parameter <cite>lset_class_cut`</cite>) must also exist in the taxonomy file. If for some classes the requested taxonomic cutoff has no value or is NA (due to the fact that that level is not available or the query is at a higher taxonomic rank), then that class is dropped.</p>
+<p>So, if our taxonomy file looks like the table above, if we requested taxonomic cutoff <code class="docutils literal notranslate"><span class="pre">order</span></code>, we would obtain 2 classes (Ephemeroptera, line 1+2; Plecoptera, line 3); if we requested taxonomic cutoff <code class="docutils literal notranslate"><span class="pre">family</span></code>, we would obtain 2 classes (Hpetageniidae, line 2; Perlodidae, line 3); if we requested taxonomic cutoff <code class="docutils literal notranslate"><span class="pre">suborder</span></code>, we would obtain 1 class (Setisura, line 2).</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="workflow_models.html" class="btn btn-neutral float-left" title="Workflow and Models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="examples/segmentation.html" class="btn btn-neutral float-right" title="Image segmentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023-08-01 Michele Volpi, Luca Pegoraro, Blake Matthews, Catherine Graham.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mzbsuite module &mdash; mzbsuite 0.0.1 alpha documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Other scripts" href="../scripts/diverse_preprocessing.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            mzbsuite
+              <img src="../../_static/mzbsuite_logo_v2.1.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Project Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow_models.html">Workflow and Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configuration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../examples/segmentation.html">Image segmentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/skeletonization_unsupervised.html">Skeletonization unsupervised</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/skeletonization_supervised_inference.html">Skeletonization: supervised, inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/classification_inference.html">Classification: inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/classification_finetune.html">Classification: finetune</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Processing scripts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/processing_scripts.html">Processing scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/diverse_preprocessing.html">Other scripts</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">mzb-suite Modules</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">mzbsuite</span></code> module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#functions-and-docstrings">Functions and docstrings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-mzbsuite.classification.mzb_classification_dataloader"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mzb_classification_dataloader</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mzbsuite.classification.mzb_classification_dataloader.Denormalize"><code class="docutils literal notranslate"><span class="pre">Denormalize</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mzbsuite.classification.mzb_classification_dataloader.MZBLoader"><code class="docutils literal notranslate"><span class="pre">MZBLoader</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mzbsuite.classification.mzb_classification_pilmodel"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mzb_classification_pilmodel</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mzbsuite.classification.mzb_classification_pilmodel.MZBModel"><code class="docutils literal notranslate"><span class="pre">MZBModel</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mzbsuite.skeletons.mzb_skeletons_dataloader"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mzb_skeletons_dataloader</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mzbsuite.skeletons.mzb_skeletons_dataloader.MZBLoader_skels"><code class="docutils literal notranslate"><span class="pre">MZBLoader_skels</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mzbsuite.skeletons.mzb_skeletons_pilmodel"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mzb_skeletons_pilmodel</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels"><code class="docutils literal notranslate"><span class="pre">MZBModel_skels</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mzbsuite.skeletons.mzb_skeletons_helpers"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mzb_skeletons_helpers</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mzbsuite.skeletons.mzb_skeletons_helpers.Denormalize"><code class="docutils literal notranslate"><span class="pre">Denormalize</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mzbsuite.skeletons.mzb_skeletons_helpers.get_endpoints"><code class="docutils literal notranslate"><span class="pre">get_endpoints()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mzbsuite.skeletons.mzb_skeletons_helpers.get_intersections"><code class="docutils literal notranslate"><span class="pre">get_intersections()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mzbsuite.skeletons.mzb_skeletons_helpers.neighbours"><code class="docutils literal notranslate"><span class="pre">neighbours()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mzbsuite.skeletons.mzb_skeletons_helpers.paint_image"><code class="docutils literal notranslate"><span class="pre">paint_image()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mzbsuite.skeletons.mzb_skeletons_helpers.paint_image_tensor"><code class="docutils literal notranslate"><span class="pre">paint_image_tensor()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mzbsuite.skeletons.mzb_skeletons_helpers.segment_skel"><code class="docutils literal notranslate"><span class="pre">segment_skel()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mzbsuite.skeletons.mzb_skeletons_helpers.traverse_graph"><code class="docutils literal notranslate"><span class="pre">traverse_graph()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mzbsuite.utils"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mzbsuite.utils</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mzbsuite.utils.SaveLogCallback"><code class="docutils literal notranslate"><span class="pre">SaveLogCallback</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mzbsuite.utils.cfg_to_arguments"><code class="docutils literal notranslate"><span class="pre">cfg_to_arguments</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mzbsuite.utils.find_checkpoints"><code class="docutils literal notranslate"><span class="pre">find_checkpoints()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mzbsuite.utils.noneparse"><code class="docutils literal notranslate"><span class="pre">noneparse()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mzbsuite.utils.read_pretrained_model"><code class="docutils literal notranslate"><span class="pre">read_pretrained_model()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mzbsuite.utils.regression_report"><code class="docutils literal notranslate"><span class="pre">regression_report()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">mzbsuite</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">mzbsuite</span></code> module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/files/modules/mzbsuite.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mzbsuite-module">
+<h1><code class="docutils literal notranslate"><span class="pre">mzbsuite</span></code> module<a class="headerlink" href="#mzbsuite-module" title="Permalink to this heading"></a></h1>
+<ul class="simple">
+<li><p>install it</p></li>
+<li><p>main modules</p></li>
+</ul>
+</section>
+<section id="functions-and-docstrings">
+<h1>Functions and docstrings<a class="headerlink" href="#functions-and-docstrings" title="Permalink to this heading"></a></h1>
+<section id="module-mzbsuite.classification.mzb_classification_dataloader">
+<span id="mzb-classification-dataloader"></span><h2><code class="xref py py-mod docutils literal notranslate"><span class="pre">mzb_classification_dataloader</span></code><a class="headerlink" href="#module-mzbsuite.classification.mzb_classification_dataloader" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="mzbsuite.classification.mzb_classification_dataloader.Denormalize">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mzbsuite.classification.mzb_classification_dataloader.</span></span><span class="sig-name descname"><span class="pre">Denormalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mzbsuite/classification/mzb_classification_dataloader.html#Denormalize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.classification.mzb_classification_dataloader.Denormalize" title="Permalink to this definition"></a></dt>
+<dd><p>De-normalizes an image given its mean and standard deviation.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mzbsuite.classification.mzb_classification_dataloader.MZBLoader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mzbsuite.classification.mzb_classification_dataloader.</span></span><span class="sig-name descname"><span class="pre">MZBLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ls_inds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learning_set</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'all'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transforms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">glob_pattern</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'*_rgb.*'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mzbsuite/classification/mzb_classification_dataloader.html#MZBLoader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.classification.mzb_classification_dataloader.MZBLoader" title="Permalink to this definition"></a></dt>
+<dd><p>Class definition for the dataloader for the macrozoobenthos dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dir_dict</strong> (<em>dict</em>) – dictionary containing the paths to the folders of the dataset</p></li>
+<li><p><strong>ls_inds</strong> (<em>list</em>) – indices of images to be used for the learning set, optional</p></li>
+<li><p><strong>learning_set</strong> (<em>str</em>) – type of learning set to be used, optional, default: ‘all’</p></li>
+<li><p><strong>transforms</strong> (<em>torchvision.transforms</em>) – list of transformations to apply to blobs. Optional, default: None</p></li>
+<li><p><strong>glob_pattern</strong> (<em>str</em>) – glob pattern to use for finding images. Optional, default: ‘<em>_rgb.</em>’</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="mzbsuite.classification.mzb_classification_dataloader.MZBLoader.prepare_data">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">prepare_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ls_inds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">glob_pattern</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'*_rgb.*'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="../../_modules/mzbsuite/classification/mzb_classification_dataloader.html#MZBLoader.prepare_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.classification.mzb_classification_dataloader.MZBLoader.prepare_data" title="Permalink to this definition"></a></dt>
+<dd><p>Prepare data for training and testing, returns image paths, labels and indices</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dir_dict</strong> (<em>dict</em>) – dictionary with keys as class names and values as paths to images</p></li>
+<li><p><strong>ls_inds</strong> (<em>list</em>) – list of indices to be used for training or testing</p></li>
+<li><p><strong>glob_pattern</strong> (<em>str</em>) – glob pattern to use for finding images</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>img_paths</strong> – list of paths to images</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-mzbsuite.classification.mzb_classification_pilmodel">
+<span id="mzb-classification-pilmodel"></span><h2><code class="xref py py-mod docutils literal notranslate"><span class="pre">mzb_classification_pilmodel</span></code><a class="headerlink" href="#module-mzbsuite.classification.mzb_classification_pilmodel" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="mzbsuite.classification.mzb_classification_pilmodel.MZBModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mzbsuite.classification.mzb_classification_pilmodel.</span></span><span class="sig-name descname"><span class="pre">MZBModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'data/learning_sets/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pretrained_network</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'resnet50'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learning_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">32</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight_decay</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-08</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_workers_loader</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_size_decay</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_classes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mzbsuite/classification/mzb_classification_pilmodel.html#MZBModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.classification.mzb_classification_pilmodel.MZBModel" title="Permalink to this definition"></a></dt>
+<dd><p>pytorch lightning class definition and model setup</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_dir</strong> (<em>str</em>) – path to the directory containing the training and validation sets</p></li>
+<li><p><strong>pretrained_network</strong> (<em>str</em>) – name of the pretrained network to use</p></li>
+<li><p><strong>learning_rate</strong> (<em>float</em>) – learning rate for the optimizer</p></li>
+<li><p><strong>batch_size</strong> (<em>int</em>) – batch size for the training and validation dataloaders</p></li>
+<li><p><strong>weight_decay</strong> (<em>float</em>) – weight decay for the optimizer</p></li>
+<li><p><strong>num_workers_loader</strong> (<em>int</em>) – number of workers for the dataloaders</p></li>
+<li><p><strong>step_size_decay</strong> (<em>int</em>) – number of epochs after which the learning rate is decayed</p></li>
+<li><p><strong>num_classes</strong> (<em>int</em>) – number of classes to classify</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="mzbsuite.classification.mzb_classification_pilmodel.MZBModel.configure_optimizers">
+<span class="sig-name descname"><span class="pre">configure_optimizers</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mzbsuite/classification/mzb_classification_pilmodel.html#MZBModel.configure_optimizers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.classification.mzb_classification_pilmodel.MZBModel.configure_optimizers" title="Permalink to this definition"></a></dt>
+<dd><p>optimiser config plus lr scheduler callback</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mzbsuite.classification.mzb_classification_pilmodel.MZBModel.external_dataloader">
+<span class="sig-name descname"><span class="pre">external_dataloader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">glob_pattern</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'*_rgb.*'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mzbsuite/classification/mzb_classification_pilmodel.html#MZBModel.external_dataloader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.classification.mzb_classification_pilmodel.MZBModel.external_dataloader" title="Permalink to this definition"></a></dt>
+<dd><p>external data loader</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mzbsuite.classification.mzb_classification_pilmodel.MZBModel.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mzbsuite/classification/mzb_classification_pilmodel.html#MZBModel.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.classification.mzb_classification_pilmodel.MZBModel.forward" title="Permalink to this definition"></a></dt>
+<dd><p>forward pass return unnormalised logits, normalise when needed</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mzbsuite.classification.mzb_classification_pilmodel.MZBModel.predict_step">
+<span class="sig-name descname"><span class="pre">predict_step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataloader_idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mzbsuite/classification/mzb_classification_pilmodel.html#MZBModel.predict_step"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.classification.mzb_classification_pilmodel.MZBModel.predict_step" title="Permalink to this definition"></a></dt>
+<dd><p>Step function called during <code class="xref py py-meth docutils literal notranslate"><span class="pre">predict()</span></code>. By default, it
+calls <code class="xref py py-meth docutils literal notranslate"><span class="pre">forward()</span></code>. Override to add any processing logic.</p>
+<p>The <code class="xref py py-meth docutils literal notranslate"><span class="pre">predict_step()</span></code> is used
+to scale inference on multi-devices.</p>
+<p>To prevent an OOM error, it is possible to use <code class="xref py py-class docutils literal notranslate"><span class="pre">BasePredictionWriter</span></code>
+callback to write the predictions to disk or database after each batch or on epoch end.</p>
+<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">BasePredictionWriter</span></code> should be used while using a spawn
+based accelerator. This happens for <code class="docutils literal notranslate"><span class="pre">Trainer(strategy=&quot;ddp_spawn&quot;)</span></code>
+or training on 8 TPU cores with <code class="docutils literal notranslate"><span class="pre">Trainer(accelerator=&quot;tpu&quot;,</span> <span class="pre">devices=8)</span></code> as predictions won’t be returned.</p>
+<p>Example</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyModel</span><span class="p">(</span><span class="n">LightningModule</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">predict_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">,</span> <span class="n">batch_idx</span><span class="p">,</span> <span class="n">dataloader_idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span>
+
+<span class="n">dm</span> <span class="o">=</span> <span class="o">...</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">MyModel</span><span class="p">()</span>
+<span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span><span class="n">accelerator</span><span class="o">=</span><span class="s2">&quot;gpu&quot;</span><span class="p">,</span> <span class="n">devices</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">predictions</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">dm</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>batch</strong> – Current batch.</p></li>
+<li><p><strong>batch_idx</strong> – Index of current batch.</p></li>
+<li><p><strong>dataloader_idx</strong> – Index of the current dataloader.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Predicted output</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mzbsuite.classification.mzb_classification_pilmodel.MZBModel.test_step">
+<span class="sig-name descname"><span class="pre">test_step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_log</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'tst'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mzbsuite/classification/mzb_classification_pilmodel.html#MZBModel.test_step"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.classification.mzb_classification_pilmodel.MZBModel.test_step" title="Permalink to this definition"></a></dt>
+<dd><p>Test iteration, per batch. return validation function call</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mzbsuite.classification.mzb_classification_pilmodel.MZBModel.train_dataloader">
+<span class="sig-name descname"><span class="pre">train_dataloader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shuffle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mzbsuite/classification/mzb_classification_pilmodel.html#MZBModel.train_dataloader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.classification.mzb_classification_pilmodel.MZBModel.train_dataloader" title="Permalink to this definition"></a></dt>
+<dd><p>training data loader</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mzbsuite.classification.mzb_classification_pilmodel.MZBModel.training_step">
+<span class="sig-name descname"><span class="pre">training_step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_idx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mzbsuite/classification/mzb_classification_pilmodel.html#MZBModel.training_step"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.classification.mzb_classification_pilmodel.MZBModel.training_step" title="Permalink to this definition"></a></dt>
+<dd><p>training iteration, per batch</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mzbsuite.classification.mzb_classification_pilmodel.MZBModel.val_dataloader">
+<span class="sig-name descname"><span class="pre">val_dataloader</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mzbsuite/classification/mzb_classification_pilmodel.html#MZBModel.val_dataloader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.classification.mzb_classification_pilmodel.MZBModel.val_dataloader" title="Permalink to this definition"></a></dt>
+<dd><p>validation data loader</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mzbsuite.classification.mzb_classification_pilmodel.MZBModel.validation_step">
+<span class="sig-name descname"><span class="pre">validation_step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_log</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'val'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mzbsuite/classification/mzb_classification_pilmodel.html#MZBModel.validation_step"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.classification.mzb_classification_pilmodel.MZBModel.validation_step" title="Permalink to this definition"></a></dt>
+<dd><p>validation iteration, per batch</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-mzbsuite.skeletons.mzb_skeletons_dataloader">
+<span id="mzb-skeletons-dataloader"></span><h2><code class="xref py py-mod docutils literal notranslate"><span class="pre">mzb_skeletons_dataloader</span></code><a class="headerlink" href="#module-mzbsuite.skeletons.mzb_skeletons_dataloader" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="mzbsuite.skeletons.mzb_skeletons_dataloader.MZBLoader_skels">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mzbsuite.skeletons.mzb_skeletons_dataloader.</span></span><span class="sig-name descname"><span class="pre">MZBLoader_skels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">im_folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bo_folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">he_folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ls_inds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learning_set</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'all'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transforms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mzbsuite/skeletons/mzb_skeletons_dataloader.html#MZBLoader_skels"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.skeletons.mzb_skeletons_dataloader.MZBLoader_skels" title="Permalink to this definition"></a></dt>
+<dd><p>Class definition for the dataloader for the macrozoobenthos skeletons dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>im_folder</strong> (<em>Path</em>) – folder path of input images</p></li>
+<li><p><strong>bo_folder</strong> (<em>Path</em>) – folder path of body length skeleton masks</p></li>
+<li><p><strong>he_folder</strong> (<em>Path</em>) – folder path of head length skeleton masks</p></li>
+<li><p><strong>ls_inds</strong> (<em>list</em>) – indices of images to be used for the learning set, optional</p></li>
+<li><p><strong>learning_set</strong> (<em>str</em>) – type of learning set to be used, optional, default: ‘all’</p></li>
+<li><p><strong>transforms</strong> (<em>torchvision.transforms</em>) – optional, default: None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="mzbsuite.skeletons.mzb_skeletons_dataloader.MZBLoader_skels.prepare_data">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">prepare_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">im_folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bo_folder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">he_folder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ls_inds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mzbsuite/skeletons/mzb_skeletons_dataloader.html#MZBLoader_skels.prepare_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.skeletons.mzb_skeletons_dataloader.MZBLoader_skels.prepare_data" title="Permalink to this definition"></a></dt>
+<dd><p>Prepares the data for the dataloader, loads it and returns it as numpy arrays.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-mzbsuite.skeletons.mzb_skeletons_pilmodel">
+<span id="mzb-skeletons-pilmodel"></span><h2><code class="xref py py-mod docutils literal notranslate"><span class="pre">mzb_skeletons_pilmodel</span></code><a class="headerlink" href="#module-mzbsuite.skeletons.mzb_skeletons_pilmodel" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mzbsuite.skeletons.mzb_skeletons_pilmodel.</span></span><span class="sig-name descname"><span class="pre">MZBModel_skels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'data/skel_segm/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pretrained_network</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'efficientnet-b2'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learning_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">32</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight_decay</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-08</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_workers_loader</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_size_decay</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_classes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mzbsuite/skeletons/mzb_skeletons_pilmodel.html#MZBModel_skels"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels" title="Permalink to this definition"></a></dt>
+<dd><p>Pytorch Lightning Module for training the skeleton segmentation model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_dir</strong> (<em>str</em>) – Path to the directory where the data is stored.</p></li>
+<li><p><strong>pretrained_network</strong> (<em>str</em>) – Name of the pretrained network to use.</p></li>
+<li><p><strong>learning_rate</strong> (<em>float</em>) – Learning rate for the optimizer.</p></li>
+<li><p><strong>batch_size</strong> (<em>int</em>) – Batch size for the dataloader.</p></li>
+<li><p><strong>weight_decay</strong> (<em>float</em>) – Weight decay for the optimizer.</p></li>
+<li><p><strong>num_workers_loader</strong> (<em>int</em>) – Number of workers for the dataloader.</p></li>
+<li><p><strong>step_size_decay</strong> (<em>int</em>) – Number of epochs after which the learning rate is decayed.</p></li>
+<li><p><strong>num_classes</strong> (<em>int</em>) – Number of classes to predict.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels.configure_optimizers">
+<span class="sig-name descname"><span class="pre">configure_optimizers</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mzbsuite/skeletons/mzb_skeletons_pilmodel.html#MZBModel_skels.configure_optimizers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels.configure_optimizers" title="Permalink to this definition"></a></dt>
+<dd><p>define the optimizer and the learning rate scheduler</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels.external_dataloader">
+<span class="sig-name descname"><span class="pre">external_dataloader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mzbsuite/skeletons/mzb_skeletons_pilmodel.html#MZBModel_skels.external_dataloader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels.external_dataloader" title="Permalink to this definition"></a></dt>
+<dd><p>def of custom test dataloader</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mzbsuite/skeletons/mzb_skeletons_pilmodel.html#MZBModel_skels.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels.forward" title="Permalink to this definition"></a></dt>
+<dd><p>forward pass of the model, returning logits</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels.predict_step">
+<span class="sig-name descname"><span class="pre">predict_step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataloader_idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mzbsuite/skeletons/mzb_skeletons_pilmodel.html#MZBModel_skels.predict_step"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels.predict_step" title="Permalink to this definition"></a></dt>
+<dd><p>custom predict iteration per batch, returning probabilities and labels</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels.set_learning_splits">
+<span class="sig-name descname"><span class="pre">set_learning_splits</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mzbsuite/skeletons/mzb_skeletons_pilmodel.html#MZBModel_skels.set_learning_splits"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels.set_learning_splits" title="Permalink to this definition"></a></dt>
+<dd><p>set the learning splits for training and validation</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels.test_step">
+<span class="sig-name descname"><span class="pre">test_step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_log</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'tst'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mzbsuite/skeletons/mzb_skeletons_pilmodel.html#MZBModel_skels.test_step"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels.test_step" title="Permalink to this definition"></a></dt>
+<dd><p>test iteration per batch</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels.train_dataloader">
+<span class="sig-name descname"><span class="pre">train_dataloader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shuffle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mzbsuite/skeletons/mzb_skeletons_pilmodel.html#MZBModel_skels.train_dataloader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels.train_dataloader" title="Permalink to this definition"></a></dt>
+<dd><p>definition of train dataloader</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels.train_ts_augm_dataloader">
+<span class="sig-name descname"><span class="pre">train_ts_augm_dataloader</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mzbsuite/skeletons/mzb_skeletons_pilmodel.html#MZBModel_skels.train_ts_augm_dataloader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels.train_ts_augm_dataloader" title="Permalink to this definition"></a></dt>
+<dd><p>def of a dataloader for training data using test-time data augmentation</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels.training_step">
+<span class="sig-name descname"><span class="pre">training_step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_idx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mzbsuite/skeletons/mzb_skeletons_pilmodel.html#MZBModel_skels.training_step"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels.training_step" title="Permalink to this definition"></a></dt>
+<dd><p>training iteration per batch</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels.tst_dataloader">
+<span class="sig-name descname"><span class="pre">tst_dataloader</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mzbsuite/skeletons/mzb_skeletons_pilmodel.html#MZBModel_skels.tst_dataloader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels.tst_dataloader" title="Permalink to this definition"></a></dt>
+<dd><p>def of custom test dataloader</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels.val_dataloader">
+<span class="sig-name descname"><span class="pre">val_dataloader</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mzbsuite/skeletons/mzb_skeletons_pilmodel.html#MZBModel_skels.val_dataloader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels.val_dataloader" title="Permalink to this definition"></a></dt>
+<dd><p>”
+definition of custom val dataloader</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels.validation_step">
+<span class="sig-name descname"><span class="pre">validation_step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_idx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mzbsuite/skeletons/mzb_skeletons_pilmodel.html#MZBModel_skels.validation_step"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.skeletons.mzb_skeletons_pilmodel.MZBModel_skels.validation_step" title="Permalink to this definition"></a></dt>
+<dd><p>validation iteration per batch</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-mzbsuite.skeletons.mzb_skeletons_helpers">
+<span id="mzb-skeletons-helpers"></span><h2><code class="xref py py-mod docutils literal notranslate"><span class="pre">mzb_skeletons_helpers</span></code><a class="headerlink" href="#module-mzbsuite.skeletons.mzb_skeletons_helpers" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="mzbsuite.skeletons.mzb_skeletons_helpers.Denormalize">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mzbsuite.skeletons.mzb_skeletons_helpers.</span></span><span class="sig-name descname"><span class="pre">Denormalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mzbsuite/skeletons/mzb_skeletons_helpers.html#Denormalize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.skeletons.mzb_skeletons_helpers.Denormalize" title="Permalink to this definition"></a></dt>
+<dd><p>Denormalize a tensor image with mean and standard deviation, for plotting purposes.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mzbsuite.skeletons.mzb_skeletons_helpers.get_endpoints">
+<span class="sig-prename descclassname"><span class="pre">mzbsuite.skeletons.mzb_skeletons_helpers.</span></span><span class="sig-name descname"><span class="pre">get_endpoints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">skeleton</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/mzbsuite/skeletons/mzb_skeletons_helpers.html#get_endpoints"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.skeletons.mzb_skeletons_helpers.get_endpoints" title="Permalink to this definition"></a></dt>
+<dd><p>Given a skeletonised image, it will give the coordinates of the endpoints of the skeleton.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>skeleton</strong> (<em>numpy.ndarray</em>) – The skeletonised image to detect the endpoints of</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>endpoints</strong> – List of 2-tuples (x,y) containing the intersection coordinates</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mzbsuite.skeletons.mzb_skeletons_helpers.get_intersections">
+<span class="sig-prename descclassname"><span class="pre">mzbsuite.skeletons.mzb_skeletons_helpers.</span></span><span class="sig-name descname"><span class="pre">get_intersections</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">skeleton</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/mzbsuite/skeletons/mzb_skeletons_helpers.html#get_intersections"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.skeletons.mzb_skeletons_helpers.get_intersections" title="Permalink to this definition"></a></dt>
+<dd><p>Given a skeletonised image, it will give the coordinates of the intersections of the skeleton.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>skeleton</strong> (<em>np.ndarray</em>) – Binary image of the skeleton</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>intersections</strong> – List of 2-tuples (x,y) containing the intersection coordinates</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mzbsuite.skeletons.mzb_skeletons_helpers.neighbours">
+<span class="sig-prename descclassname"><span class="pre">mzbsuite.skeletons.mzb_skeletons_helpers.</span></span><span class="sig-name descname"><span class="pre">neighbours</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mzbsuite/skeletons/mzb_skeletons_helpers.html#neighbours"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.skeletons.mzb_skeletons_helpers.neighbours" title="Permalink to this definition"></a></dt>
+<dd><p>Return 8-neighbours of image point P1(x,y), in a clockwise order</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>int</em>) – x-coordinate of the point</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – y-coordinate of the point</p></li>
+<li><p><strong>image</strong> (<em>numpy.ndarray</em>) – The image to find the neighbours of</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>_</strong> – List of 8-neighbours of the point in the image</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mzbsuite.skeletons.mzb_skeletons_helpers.paint_image">
+<span class="sig-prename descclassname"><span class="pre">mzbsuite.skeletons.mzb_skeletons_helpers.</span></span><span class="sig-name descname"><span class="pre">paint_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="../../_modules/mzbsuite/skeletons/mzb_skeletons_helpers.html#paint_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.skeletons.mzb_skeletons_helpers.paint_image" title="Permalink to this definition"></a></dt>
+<dd><p>Given an input image, a binary mask indicating where to paint, and a color to use,
+returns a new image where the pixels within the mask are colored with the specified color.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>(</strong><strong>np.ndarray</strong><strong>)</strong> (<em>image</em>) – </p></li>
+<li><p><strong>(</strong><strong>np.array</strong><strong>)</strong> (<em>mask</em>) – </p></li>
+<li><p><strong>(</strong><strong>List</strong><strong>[</strong><strong>float</strong><strong>]</strong><strong>)</strong> (<em>color</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>rgb_fi (np.ndarray)</strong></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>New image with painted-in mask.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mzbsuite.skeletons.mzb_skeletons_helpers.paint_image_tensor">
+<span class="sig-prename descclassname"><span class="pre">mzbsuite.skeletons.mzb_skeletons_helpers.</span></span><span class="sig-name descname"><span class="pre">paint_image_tensor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">masks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="../../_modules/mzbsuite/skeletons/mzb_skeletons_helpers.html#paint_image_tensor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.skeletons.mzb_skeletons_helpers.paint_image_tensor" title="Permalink to this definition"></a></dt>
+<dd><p>Given an input image, a binary mask indicating where to paint, and a color to use,
+returns a new image where the pixels within the mask are colored with the specified color.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> (<em>torch.Tensor</em>) – Input image to paint.</p></li>
+<li><p><strong>mask</strong> (<em>torch.Tensor</em>) – Binary mask indicating where to paint.</p></li>
+<li><p><strong>color</strong> (<em>List</em><em>[</em><em>float</em><em>]</em>) – List of 3 floats representing the RGB color to use.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>rgb_body</strong> – New image with painted pixels.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mzbsuite.skeletons.mzb_skeletons_helpers.segment_skel">
+<span class="sig-prename descclassname"><span class="pre">mzbsuite.skeletons.mzb_skeletons_helpers.</span></span><span class="sig-name descname"><span class="pre">segment_skel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">skeleton</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mzbsuite/skeletons/mzb_skeletons_helpers.html#segment_skel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.skeletons.mzb_skeletons_helpers.segment_skel" title="Permalink to this definition"></a></dt>
+<dd><p>Custom function to segment a skeletonised image into individual branches. Each branch gets a unique ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>skeleton</strong> (<em>numpy.ndarray</em>) – The skeletonised image to segment</p></li>
+<li><p><strong>inter</strong> (<em>list</em>) – List of 2-tuples (x,y) containing the intersection coordinates, as returned by the function find_intersections</p></li>
+<li><p><strong>conn</strong> (<em>int</em>) – Connectivity of the skeleton. 1 for 4-connectivity, 2 for 8-connectivity</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>skel_labels</strong> (<em>numpy.ndarray</em>) – The labelled skeleton image</p></li>
+<li><p><strong>edge_attributes</strong> (<em>dict</em>) – Dictionary containing the attributes of each edge (branch) (for now, its size in pixels)</p></li>
+<li><p><strong>skprops</strong> (<em>dict</em>) – Dictionary containing the skimage.regionprops of each branch</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mzbsuite.skeletons.mzb_skeletons_helpers.traverse_graph">
+<span class="sig-prename descclassname"><span class="pre">mzbsuite.skeletons.mzb_skeletons_helpers.</span></span><span class="sig-name descname"><span class="pre">traverse_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_nodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/mzbsuite/skeletons/mzb_skeletons_helpers.html#traverse_graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.skeletons.mzb_skeletons_helpers.traverse_graph" title="Permalink to this definition"></a></dt>
+<dd><p>Function to traverse a graph from a starting node to a list of end nodes, and return all possible paths as a list of lists.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<em>dict</em>) – The graph to traverse</p></li>
+<li><p><strong>init</strong> (<em>int</em>) – The starting node ID</p></li>
+<li><p><strong>end_nodes</strong> (<em>list</em>) – List of end nodes</p></li>
+<li><p><strong>debug</strong> (<em>bool</em>) – Whether to print debug information</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>all_paths</strong> (<em>list</em>) – List of lists containing all possible paths from init to end_nodes</p></li>
+<li><p><em>TODO</em></p></li>
+<li><p><em>Maybe.</em></p></li>
+<li><p><em>* Make it work for graphs with multiple paths between nodes and ensure that a subset of paths can be visited multiple times</em></p></li>
+<li><p><em>* Make a test for it</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-mzbsuite.utils">
+<span id="mzbsuite-utils"></span><h2><a class="reference internal" href="#module-mzbsuite.utils" title="mzbsuite.utils"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mzbsuite.utils</span></code></a><a class="headerlink" href="#module-mzbsuite.utils" title="Permalink to this heading"></a></h2>
+<p>Module containing utility functions for mzbsuite
+C 2023, M. Volpi, Swiss Data Science Center</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="mzbsuite.utils.SaveLogCallback">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mzbsuite.utils.</span></span><span class="sig-name descname"><span class="pre">SaveLogCallback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_folder</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mzbsuite/utils.html#SaveLogCallback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.utils.SaveLogCallback" title="Permalink to this definition"></a></dt>
+<dd><p>Callback to save the log of the training</p>
+<p>TODO: will need to be updated to save the log of the training in more detail and in a more
+structured way</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mzbsuite.utils.SaveLogCallback.on_train_end">
+<span class="sig-name descname"><span class="pre">on_train_end</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trainer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pl_module</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mzbsuite/utils.html#SaveLogCallback.on_train_end"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.utils.SaveLogCallback.on_train_end" title="Permalink to this definition"></a></dt>
+<dd><p>Save the end date of the training</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mzbsuite.utils.cfg_to_arguments">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mzbsuite.utils.</span></span><span class="sig-name descname"><span class="pre">cfg_to_arguments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mzbsuite/utils.html#cfg_to_arguments"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.utils.cfg_to_arguments" title="Permalink to this definition"></a></dt>
+<dd><p>This class is used to convert a dictionary to an object and extend the argparser.
+In the __init__ method, we iterate over the dictionary and add each key as an attribute to the object.
+Input is a dictionary, output is an object, that mimicks the argparse object.</p>
+<p class="rubric">Example</p>
+<p>cfg = {‘a’: 1, ‘b’: 2}</p>
+<p>args = cfg_to_arguments(cfg)
+print(args.a) # 1
+print(args.b) # 2</p>
+<p>cfg can be from configs stored in YAML file, a JSON file, or a dictionary, whatever you prefer.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mzbsuite.utils.find_checkpoints">
+<span class="sig-prename descclassname"><span class="pre">mzbsuite.utils.</span></span><span class="sig-name descname"><span class="pre">find_checkpoints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dirs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">PosixPath('lightning_logs')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'val'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mzbsuite/utils.html#find_checkpoints"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.utils.find_checkpoints" title="Permalink to this definition"></a></dt>
+<dd><p>Find the checkpoints for a given log</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dirs</strong> (<em>Path</em><em>  (</em><em>default: Path</em><em>(</em><em>&quot;lightning_logs&quot;</em><em>)</em><em>)</em>) – path to the lightning_logs folder</p></li>
+<li><p><strong>version</strong> (<em>str</em><em> (</em><em>default: None</em><em>)</em>) – version of the log to use</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>chkp</strong> – list of paths to checkpoints</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mzbsuite.utils.noneparse">
+<span class="sig-prename descclassname"><span class="pre">mzbsuite.utils.</span></span><span class="sig-name descname"><span class="pre">noneparse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mzbsuite/utils.html#noneparse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.utils.noneparse" title="Permalink to this definition"></a></dt>
+<dd><p>Helper function to parse None values from YAML files</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>string</em>) – string to be parsed</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>value</strong> – parsed string</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mzbsuite.utils.read_pretrained_model">
+<span class="sig-prename descclassname"><span class="pre">mzbsuite.utils.</span></span><span class="sig-name descname"><span class="pre">read_pretrained_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">architecture</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_class</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mzbsuite/utils.html#read_pretrained_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.utils.read_pretrained_model" title="Permalink to this definition"></a></dt>
+<dd><p>Helper script to load models compactly from pytorch model zoo and prepare them for Hummingbird finetuning</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>architecture</strong> (<em>str</em>) – name of the model to load</p></li>
+<li><p><strong>n_class</strong> (<em>int</em>) – number of classes to finetune the model for</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>model</strong> – model with last layer replaced with a linear layer with n_class outputs</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pytorch model</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mzbsuite.utils.regression_report">
+<span class="sig-prename descclassname"><span class="pre">mzbsuite.utils.</span></span><span class="sig-name descname"><span class="pre">regression_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">PRINT</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/mzbsuite/utils.html#regression_report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mzbsuite.utils.regression_report" title="Permalink to this definition"></a></dt>
+<dd><p>Helper function to print regression metrics. Taken and adapted from
+<a class="reference external" href="https://github.com/scikit-learn/scikit-learn/issues/18454#issue-708338254">https://github.com/scikit-learn/scikit-learn/issues/18454#issue-708338254</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y_true</strong> (<em>np.array</em>) – ground truth values</p></li>
+<li><p><strong>y_pred</strong> (<em>np.array</em>) – predicted values</p></li>
+<li><p><strong>PRINT</strong> (<em>bool</em>) – whether to print the metrics or not</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>metrics</strong> – list of tuples with the name of the metric and its value</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../scripts/diverse_preprocessing.html" class="btn btn-neutral float-left" title="Other scripts" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023-08-01 Michele Volpi, Luca Pegoraro, Blake Matthews, Catherine Graham.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

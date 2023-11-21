@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Classification: inference &mdash; mzbsuite 0.0.1 alpha documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/nbsphinx-code-cells.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Classification: finetune" href="classification_finetune.html" />
+    <link rel="prev" title="Skeletonization: supervised, inference" href="skeletonization_supervised_inference.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            mzbsuite
+              <img src="../../_static/mzbsuite_logo_v2.1.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Project Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow_models.html">Workflow and Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configuration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="segmentation.html">Image segmentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="skeletonization_unsupervised.html">Skeletonization unsupervised</a></li>
+<li class="toctree-l1"><a class="reference internal" href="skeletonization_supervised_inference.html">Skeletonization: supervised, inference</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Classification: inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification_finetune.html">Classification: finetune</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Processing scripts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/processing_scripts.html">Processing scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/diverse_preprocessing.html">Other scripts</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">mzb-suite Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mzbsuite.html"><code class="docutils literal notranslate"><span class="pre">mzbsuite</span></code> module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mzbsuite.html#functions-and-docstrings">Functions and docstrings</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">mzbsuite</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Classification: inference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/files/examples/classification_inference.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Classification:-inference">
+<h1>Classification: inference<a class="headerlink" href="#Classification:-inference" title="Permalink to this heading"></a></h1>
+<p>In this notebook we demonstrate how to use the script <code class="docutils literal notranslate"><span class="pre">scripts/classification/main_classification_inference.py</span></code> to identify organisms in clips to taxonomic groups.</p>
+<p>We first import the necessary packages, and specify the path where our <code class="docutils literal notranslate"><span class="pre">main</span></code> scripts are found:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">yaml</span>
+
+<span class="kn">from</span> <span class="nn">mzbsuite.utils</span> <span class="kn">import</span> <span class="n">cfg_to_arguments</span>
+<span class="c1"># !pip install -e ../</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;../scripts/&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>The most important function in this task is <code class="docutils literal notranslate"><span class="pre">inference_classifier</span></code>, and we specifically import it here for ease:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># from classification.main_classification_finetune import main as finetune_classifier</span>
+<span class="kn">from</span> <span class="nn">classification.main_classification_inference</span> <span class="kn">import</span> <span class="n">main</span> <span class="k">as</span> <span class="n">inference_classifier</span>
+<span class="o">?</span>inference_classifier
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">Signature:</span> inference_classifier<span class="ansi-blue-fg">(</span>args<span class="ansi-blue-fg">,</span> cfg<span class="ansi-blue-fg">)</span>
+<span class="ansi-red-fg">Docstring:</span>
+Function to run inference on macrozoobenthos images clips, using a trained model.
+
+Parameters
+----------
+args : argparse.Namespace
+    Namespace containing the arguments passed to the script. Notably:
+
+        - input_dir: path to the directory containing the images to be classified
+        - input_model: path to the directory containing the model to be used for inference
+        - output_dir: path to the directory where the results will be saved
+        - config_file: path to the config file with train / inference parameters
+
+cfg : dict
+    Dictionary containing the configuration parameters.
+
+Returns
+-------
+None. Saves the results in the specified folder.
+<span class="ansi-red-fg">File:</span>      /data/users/luca/mzb-workflow/scripts/classification/main_classification_inference.py
+<span class="ansi-red-fg">Type:</span>      function
+</pre></div></div>
+</div>
+<p>Next we declare the running parameters, telling the script where to find the input data, the model and where to put the outputs. In this notebook, we pass these as a Python dictionary, but a shell (<code class="docutils literal notranslate"><span class="pre">.sh</span></code>) achieving the same result can be found in <code class="docutils literal notranslate"><span class="pre">workflows/run_pipeline.sh</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ROOT_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ROOT_DIR</span><span class="p">)</span>
+<span class="n">MODEL</span> <span class="o">=</span> <span class="s2">&quot;efficientnet-b2-v0&quot;</span>
+
+<span class="n">arguments</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;config_file&quot;</span><span class="p">:</span> <span class="n">ROOT_DIR</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">absolute</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;configs/configuration_flume_datasets.yaml&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;input_dir&quot;</span><span class="p">:</span> <span class="n">ROOT_DIR</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">absolute</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;data/mzb_example_data/training_dataset/val_set/&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;input_model&quot;</span><span class="p">:</span> <span class="n">ROOT_DIR</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">absolute</span><span class="p">()</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;models/mzb-classification-models/</span><span class="si">{</span><span class="n">MODEL</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;output_dir&quot;</span><span class="p">:</span> <span class="n">ROOT_DIR</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">absolute</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;results/mzb_example_data/classification&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">arguments</span><span class="p">[</span><span class="s2">&quot;config_file&quot;</span><span class="p">]),</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">cfg</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">Loader</span><span class="o">=</span><span class="n">yaml</span><span class="o">.</span><span class="n">FullLoader</span><span class="p">)</span>
+
+<span class="n">cfg</span><span class="p">[</span><span class="s2">&quot;trcl_gpu_ids&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">cfg</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+/data/users/luca/mzb-workflow/notebooks
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;glob_random_seed&#39;: 222,
+ &#39;glob_root_folder&#39;: &#39;/data/users/luca/mzb-workflow/mzb-workflow/&#39;,
+ &#39;glob_blobs_folder&#39;: &#39;/data/users/luca/mzb-workflow/mzb-workflow/data/derived/blobs/&#39;,
+ &#39;glob_local_format&#39;: &#39;pdf&#39;,
+ &#39;model_logger&#39;: &#39;wandb&#39;,
+ &#39;impa_image_format&#39;: &#39;jpg&#39;,
+ &#39;impa_clip_areas&#39;: [2750, 4900],
+ &#39;impa_area_threshold&#39;: 5000,
+ &#39;impa_gaussian_blur&#39;: [21, 21],
+ &#39;impa_gaussian_blur_passes&#39;: 3,
+ &#39;impa_adaptive_threshold_block_size&#39;: 351,
+ &#39;impa_mask_postprocess_kernel&#39;: [11, 11],
+ &#39;impa_mask_postprocess_passes&#39;: 5,
+ &#39;impa_bounding_box_buffer&#39;: 200,
+ &#39;impa_save_clips_plus_features&#39;: True,
+ &#39;lset_class_cut&#39;: &#39;order&#39;,
+ &#39;lset_val_size&#39;: 0.1,
+ &#39;lset_taxonomy&#39;: &#39;/data/users/luca/mzb-workflow/data/MZB_taxonomy.csv&#39;,
+ &#39;trcl_learning_rate&#39;: 0.001,
+ &#39;trcl_batch_size&#39;: 16,
+ &#39;trcl_weight_decay&#39;: 0,
+ &#39;trcl_step_size_decay&#39;: 5,
+ &#39;trcl_number_epochs&#39;: 10,
+ &#39;trcl_save_topk&#39;: 1,
+ &#39;trcl_num_classes&#39;: 8,
+ &#39;trcl_model_pretrarch&#39;: &#39;efficientnet-b2&#39;,
+ &#39;trcl_num_workers&#39;: 16,
+ &#39;trcl_wandb_project_name&#39;: &#39;mzb-classifiers&#39;,
+ &#39;trcl_logger&#39;: &#39;wandb&#39;,
+ &#39;trsk_learning_rate&#39;: 0.001,
+ &#39;trsk_batch_size&#39;: 32,
+ &#39;trsk_weight_decay&#39;: 0,
+ &#39;trsk_step_size_decay&#39;: 25,
+ &#39;trsk_number_epochs&#39;: 400,
+ &#39;trsk_save_topk&#39;: 1,
+ &#39;trsk_num_classes&#39;: 2,
+ &#39;trsk_model_pretrarch&#39;: &#39;mit_b2&#39;,
+ &#39;trsk_num_workers&#39;: 16,
+ &#39;trsk_wandb_project_name&#39;: &#39;mzb-skeletons&#39;,
+ &#39;trsk_logger&#39;: &#39;wandb&#39;,
+ &#39;infe_model_ckpt&#39;: &#39;last&#39;,
+ &#39;infe_num_classes&#39;: 8,
+ &#39;infe_image_glob&#39;: &#39;*_rgb.jpg&#39;,
+ &#39;skel_class_exclude&#39;: &#39;errors&#39;,
+ &#39;skel_conv_rate&#39;: 131.6625,
+ &#39;skel_label_thickness&#39;: 3,
+ &#39;skel_label_buffer_on_preds&#39;: 25,
+ &#39;skel_label_clip_with_mask&#39;: False,
+ &#39;trcl_gpu_ids&#39;: None}
+</pre></div></div>
+</div>
+<p>We now need to transform parameters in the configuration file in a format that Python can understand (a dictionary in this case), we can use the provided helper function <code class="docutils literal notranslate"><span class="pre">cfg_to_arguments</span></code>:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Transforms configurations dicts to argparse arguments</span>
+<span class="n">args_p</span> <span class="o">=</span> <span class="n">cfg_to_arguments</span><span class="p">(</span><span class="n">arguments</span><span class="p">)</span>
+<span class="n">cfg_p</span> <span class="o">=</span> <span class="n">cfg_to_arguments</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">cfg_p</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;glob_random_seed&#39;: 222, &#39;glob_root_folder&#39;: &#39;/data/users/luca/mzb-workflow/mzb-workflow/&#39;, &#39;glob_blobs_folder&#39;: &#39;/data/users/luca/mzb-workflow/mzb-workflow/data/derived/blobs/&#39;, &#39;glob_local_format&#39;: &#39;pdf&#39;, &#39;model_logger&#39;: &#39;wandb&#39;, &#39;impa_image_format&#39;: &#39;jpg&#39;, &#39;impa_clip_areas&#39;: [2750, 4900], &#39;impa_area_threshold&#39;: 5000, &#39;impa_gaussian_blur&#39;: [21, 21], &#39;impa_gaussian_blur_passes&#39;: 3, &#39;impa_adaptive_threshold_block_size&#39;: 351, &#39;impa_mask_postprocess_kernel&#39;: [11, 11], &#39;impa_mask_postprocess_passes&#39;: 5, &#39;impa_bounding_box_buffer&#39;: 200, &#39;impa_save_clips_plus_features&#39;: True, &#39;lset_class_cut&#39;: &#39;order&#39;, &#39;lset_val_size&#39;: 0.1, &#39;lset_taxonomy&#39;: &#39;/data/users/luca/mzb-workflow/data/MZB_taxonomy.csv&#39;, &#39;trcl_learning_rate&#39;: 0.001, &#39;trcl_batch_size&#39;: 16, &#39;trcl_weight_decay&#39;: 0, &#39;trcl_step_size_decay&#39;: 5, &#39;trcl_number_epochs&#39;: 10, &#39;trcl_save_topk&#39;: 1, &#39;trcl_num_classes&#39;: 8, &#39;trcl_model_pretrarch&#39;: &#39;efficientnet-b2&#39;, &#39;trcl_num_workers&#39;: 16, &#39;trcl_wandb_project_name&#39;: &#39;mzb-classifiers&#39;, &#39;trcl_logger&#39;: &#39;wandb&#39;, &#39;trsk_learning_rate&#39;: 0.001, &#39;trsk_batch_size&#39;: 32, &#39;trsk_weight_decay&#39;: 0, &#39;trsk_step_size_decay&#39;: 25, &#39;trsk_number_epochs&#39;: 400, &#39;trsk_save_topk&#39;: 1, &#39;trsk_num_classes&#39;: 2, &#39;trsk_model_pretrarch&#39;: &#39;mit_b2&#39;, &#39;trsk_num_workers&#39;: 16, &#39;trsk_wandb_project_name&#39;: &#39;mzb-skeletons&#39;, &#39;trsk_logger&#39;: &#39;wandb&#39;, &#39;infe_model_ckpt&#39;: &#39;last&#39;, &#39;infe_num_classes&#39;: 8, &#39;infe_image_glob&#39;: &#39;*_rgb.jpg&#39;, &#39;skel_class_exclude&#39;: &#39;errors&#39;, &#39;skel_conv_rate&#39;: 131.6625, &#39;skel_label_thickness&#39;: 3, &#39;skel_label_buffer_on_preds&#39;: 25, &#39;skel_label_clip_with_mask&#39;: False, &#39;trcl_gpu_ids&#39;: None}
+</pre></div></div>
+</div>
+<p>Once we have all set up, we can simply call the <code class="docutils literal notranslate"><span class="pre">inference_classifier</span></code> function, which will use the provided parameters to produce predictions and a summary of classification accuracy (against a <code class="docutils literal notranslate"><span class="pre">val</span></code> set if it is provided).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inference_classifier</span><span class="p">(</span><span class="n">args_p</span><span class="p">,</span> <span class="n">cfg_p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0,1]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Predicting DataLoader 0: 100%|██████████| 4/4 [00:00&lt;00:00,  9.33it/s]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/files_examples_classification_inference_9_2.png" src="../../_images/files_examples_classification_inference_9_2.png" />
+</div>
+</div>
+<p>The produced confusion matrix show how many predictions the model made that corresponded to the real identity of the organism (on the diagonal), and also when the model was wrong what it guessed instead (off diagonal).</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="skeletonization_supervised_inference.html" class="btn btn-neutral float-left" title="Skeletonization: supervised, inference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="classification_finetune.html" class="btn btn-neutral float-right" title="Classification: finetune" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023-08-01 Michele Volpi, Luca Pegoraro, Blake Matthews, Catherine Graham.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

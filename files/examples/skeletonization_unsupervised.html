@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skeletonization unsupervised &mdash; mzbsuite 0.0.1 alpha documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/nbsphinx-code-cells.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Skeletonization: supervised, inference" href="skeletonization_supervised_inference.html" />
+    <link rel="prev" title="Image segmentation" href="segmentation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            mzbsuite
+              <img src="../../_static/mzbsuite_logo_v2.1.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Project Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow_models.html">Workflow and Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configuration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="segmentation.html">Image segmentation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Skeletonization unsupervised</a></li>
+<li class="toctree-l1"><a class="reference internal" href="skeletonization_supervised_inference.html">Skeletonization: supervised, inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification_inference.html">Classification: inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification_finetune.html">Classification: finetune</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Processing scripts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/processing_scripts.html">Processing scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/diverse_preprocessing.html">Other scripts</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">mzb-suite Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mzbsuite.html"><code class="docutils literal notranslate"><span class="pre">mzbsuite</span></code> module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/mzbsuite.html#functions-and-docstrings">Functions and docstrings</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">mzbsuite</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Skeletonization unsupervised</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/files/examples/skeletonization_unsupervised.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Skeletonization-unsupervised">
+<h1>Skeletonization unsupervised<a class="headerlink" href="#Skeletonization-unsupervised" title="Permalink to this heading"></a></h1>
+<p>In this notebook we use the script <code class="docutils literal notranslate"><span class="pre">skeletons/main_unsupervised_skeleton_estimation.py</span></code> to automatically extract the length of the organisms from clips.</p>
+<p>First, import the necessary libraries:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">import</span> <span class="nn">yaml</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.spatial</span> <span class="kn">import</span> <span class="n">distance_matrix</span>
+<span class="kn">from</span> <span class="nn">skimage.measure</span> <span class="kn">import</span> <span class="n">label</span><span class="p">,</span> <span class="n">regionprops</span>
+<span class="kn">from</span> <span class="nn">skimage.morphology</span> <span class="kn">import</span> <span class="n">dilation</span><span class="p">,</span> <span class="n">disk</span><span class="p">,</span> <span class="n">medial_axis</span><span class="p">,</span> <span class="n">thin</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="kn">from</span> <span class="nn">mzbsuite.skeletons.mzb_skeletons_helpers</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">get_endpoints</span><span class="p">,</span>
+    <span class="n">get_intersections</span><span class="p">,</span>
+    <span class="n">paint_image</span><span class="p">,</span>
+    <span class="n">segment_skel</span><span class="p">,</span>
+    <span class="n">traverse_graph</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">mzbsuite.utils</span> <span class="kn">import</span> <span class="n">cfg_to_arguments</span><span class="c1">#, noneparse</span>
+</pre></div>
+</div>
+</div>
+<p>Then we set up some running parameters for the scipt to know where to find input images and where to write outputs.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ROOT_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/data/shared/mzb-workflow/docs&quot;</span><span class="p">)</span>
+
+<span class="n">arguments</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;config_file&quot;</span><span class="p">:</span> <span class="n">ROOT_DIR</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">absolute</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;configs/configuration_flume_datasets.yaml&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;input_dir&quot;</span><span class="p">:</span> <span class="n">ROOT_DIR</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">absolute</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;data/derived/mzb_example_data/&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;output_dir&quot;</span><span class="p">:</span> <span class="n">ROOT_DIR</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">absolute</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;results/mzb_example_data/skeletons/skeletons_unsupervised/&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;save_masks&quot;</span><span class="p">:</span> <span class="n">ROOT_DIR</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">absolute</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;data/derived/mzb_example_data/skeletons/skeletons_unsupervised&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;list_of_files&quot;</span><span class="p">:</span> <span class="kc">None</span>
+    <span class="p">}</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">arguments</span><span class="p">[</span><span class="s2">&quot;config_file&quot;</span><span class="p">]),</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">cfg</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">Loader</span><span class="o">=</span><span class="n">yaml</span><span class="o">.</span><span class="n">FullLoader</span><span class="p">)</span>
+
+<span class="n">cfg</span><span class="p">[</span><span class="s2">&quot;trcl_gpu_ids&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># this sets the number of available GPUs to zero, since this script doesn&#39;t benefit from GPU compute.</span>
+<span class="n">cfg</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">FileNotFoundError</span>                         Traceback (most recent call last)
+<span class="ansi-green-intense-fg ansi-bold">/data/shared/mzb-workflow/docs/source/files/examples/skeletonization_unsupervised.ipynb Cell 4</span> line <span class="ansi-cyan-fg">1
+</span><span class="ansi-green-intense-fg ansi-bold">      &lt;a href=&#39;vscode-notebook-cell://ssh-remote%2Bbiodetectgpu.datascience.ch/data/shared/mzb-workflow/docs/source/files/examples/skeletonization_unsupervised.ipynb#W3sdnNjb2RlLXJlbW90ZQ%3D%3D?line=0&#39;&gt;1&lt;/a&gt;</span> ROOT_DIR = Path(&#34;/data/shared/mzb-workflow&#34;)
+<span class="ansi-green-intense-fg ansi-bold">      &lt;a href=&#39;vscode-notebook-cell://ssh-remote%2Bbiodetectgpu.datascience.ch/data/shared/mzb-workflow/docs/source/files/examples/skeletonization_unsupervised.ipynb#W3sdnNjb2RlLXJlbW90ZQ%3D%3D?line=2&#39;&gt;3&lt;/a&gt;</span> arguments = {
+<span class="ansi-green-intense-fg ansi-bold">      &lt;a href=&#39;vscode-notebook-cell://ssh-remote%2Bbiodetectgpu.datascience.ch/data/shared/mzb-workflow/docs/source/files/examples/skeletonization_unsupervised.ipynb#W3sdnNjb2RlLXJlbW90ZQ%3D%3D?line=3&#39;&gt;4&lt;/a&gt;</span>     &#34;config_file&#34;: ROOT_DIR.parent.absolute() / &#34;configs/configuration_flume_datasets.yaml&#34;,
+<span class="ansi-green-intense-fg ansi-bold">      &lt;a href=&#39;vscode-notebook-cell://ssh-remote%2Bbiodetectgpu.datascience.ch/data/shared/mzb-workflow/docs/source/files/examples/skeletonization_unsupervised.ipynb#W3sdnNjb2RlLXJlbW90ZQ%3D%3D?line=4&#39;&gt;5&lt;/a&gt;</span>     &#34;input_dir&#34;: ROOT_DIR.parent.absolute() / &#34;data/derived/mzb_example_data/&#34;,
+<span class="ansi-green-fg">   (...)</span>
+<span class="ansi-green-intense-fg ansi-bold">      &lt;a href=&#39;vscode-notebook-cell://ssh-remote%2Bbiodetectgpu.datascience.ch/data/shared/mzb-workflow/docs/source/files/examples/skeletonization_unsupervised.ipynb#W3sdnNjb2RlLXJlbW90ZQ%3D%3D?line=7&#39;&gt;8&lt;/a&gt;</span>     &#34;list_of_files&#34;: None
+<span class="ansi-green-intense-fg ansi-bold">      &lt;a href=&#39;vscode-notebook-cell://ssh-remote%2Bbiodetectgpu.datascience.ch/data/shared/mzb-workflow/docs/source/files/examples/skeletonization_unsupervised.ipynb#W3sdnNjb2RlLXJlbW90ZQ%3D%3D?line=8&#39;&gt;9&lt;/a&gt;</span>     }
+<span class="ansi-green-fg">---&gt; &lt;a href=&#39;vscode-notebook-cell://ssh-remote%2Bbiodetectgpu.datascience.ch/data/shared/mzb-workflow/docs/source/files/examples/skeletonization_unsupervised.ipynb#W3sdnNjb2RlLXJlbW90ZQ%3D%3D?line=10&#39;&gt;11&lt;/a&gt;</span> with open(str(arguments[&#34;config_file&#34;]), &#34;r&#34;) as f:
+<span class="ansi-green-intense-fg ansi-bold">     &lt;a href=&#39;vscode-notebook-cell://ssh-remote%2Bbiodetectgpu.datascience.ch/data/shared/mzb-workflow/docs/source/files/examples/skeletonization_unsupervised.ipynb#W3sdnNjb2RlLXJlbW90ZQ%3D%3D?line=11&#39;&gt;12&lt;/a&gt;</span>     cfg = yaml.load(f, Loader=yaml.FullLoader)
+<span class="ansi-green-intense-fg ansi-bold">     &lt;a href=&#39;vscode-notebook-cell://ssh-remote%2Bbiodetectgpu.datascience.ch/data/shared/mzb-workflow/docs/source/files/examples/skeletonization_unsupervised.ipynb#W3sdnNjb2RlLXJlbW90ZQ%3D%3D?line=13&#39;&gt;14&lt;/a&gt;</span> cfg[&#34;trcl_gpu_ids&#34;] = None # this sets the number of available GPUs to zero, since this script doesn&#39;t benefit from GPU compute.
+
+File <span class="ansi-green-fg">~/mambaforge/envs/mzbsuite/lib/python3.10/site-packages/IPython/core/interactiveshell.py:284</span>, in <span class="ansi-cyan-fg">_modified_open</span><span class="ansi-blue-fg">(file, *args, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    277</span> if file in {0, 1, 2}:
+<span class="ansi-green-intense-fg ansi-bold">    278</span>     raise ValueError(
+<span class="ansi-green-intense-fg ansi-bold">    279</span>         f&#34;IPython won&#39;t let you open fd={file} by default &#34;
+<span class="ansi-green-intense-fg ansi-bold">    280</span>         &#34;as it is likely to crash IPython. If you know what you are doing, &#34;
+<span class="ansi-green-intense-fg ansi-bold">    281</span>         &#34;you can use builtins&#39; open.&#34;
+<span class="ansi-green-intense-fg ansi-bold">    282</span>     )
+<span class="ansi-green-fg">--&gt; 284</span> return io_open(file, *args, **kwargs)
+
+<span class="ansi-red-fg">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;/data/shared/configs/configuration_flume_datasets.yaml&#39;
+</pre></div></div>
+</div>
+<p>Convert to dictionary for Python:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Transforms configurations dicts to argparse arguments</span>
+<span class="n">args</span> <span class="o">=</span> <span class="n">cfg_to_arguments</span><span class="p">(</span><span class="n">arguments</span><span class="p">)</span>
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">cfg_to_arguments</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">cfg</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<p>With the toggle <code class="docutils literal notranslate"><span class="pre">PLOTS</span></code> we can make the script produce graphical output as it processes the clips (if <code class="docutils literal notranslate"><span class="pre">PLOTS</span> <span class="pre">=</span> <span class="pre">True</span></code>) or not; this is useful to debug potential issues with parametrization.</p>
+<p>We also check whether the output folders exist already, otherwise create them.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">PLOTS</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">save_masks</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">args</span><span class="o">.</span><span class="n">save_masks</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">save_masks</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">args</span><span class="o">.</span><span class="n">save_masks</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>We define some area bins to differentiate morphological operations downstream:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># setup some area-specific parameters for filtering</span>
+<span class="n">area_class</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">0</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;area&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10000</span><span class="p">],</span> <span class="s2">&quot;thinning&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;lmode&quot;</span><span class="p">:</span> <span class="s2">&quot;skeleton&quot;</span><span class="p">},</span>
+    <span class="mi">2</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;area&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">15000</span><span class="p">],</span> <span class="s2">&quot;thinning&quot;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span> <span class="s2">&quot;lmode&quot;</span><span class="p">:</span> <span class="s2">&quot;skeleton&quot;</span><span class="p">},</span>
+    <span class="mi">3</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;area&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">15000</span><span class="p">,</span> <span class="mi">20000</span><span class="p">],</span> <span class="s2">&quot;thinning&quot;</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span> <span class="s2">&quot;lmode&quot;</span><span class="p">:</span> <span class="s2">&quot;skeleton&quot;</span><span class="p">},</span>
+    <span class="mi">4</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;area&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">20000</span><span class="p">,</span> <span class="mi">50000</span><span class="p">],</span> <span class="s2">&quot;thinning&quot;</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span> <span class="s2">&quot;lmode&quot;</span><span class="p">:</span> <span class="s2">&quot;skeleton&quot;</span><span class="p">},</span>
+    <span class="mi">5</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;area&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">50000</span><span class="p">,</span> <span class="mi">100000</span><span class="p">],</span> <span class="s2">&quot;thinning&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span> <span class="s2">&quot;lmode&quot;</span><span class="p">:</span> <span class="s2">&quot;skeleton&quot;</span><span class="p">},</span>
+    <span class="mi">6</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;area&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">100000</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">],</span> <span class="s2">&quot;thinning&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span> <span class="s2">&quot;lmode&quot;</span><span class="p">:</span> <span class="s2">&quot;skeleton&quot;</span><span class="p">},</span>
+<span class="p">}</span>
+<br/></pre></div>
+</div>
+</div>
+<p>Load in clips, excluding those predicted to be <code class="docutils literal notranslate"><span class="pre">error</span></code> by the DL model.</p>
+<blockquote>
+<div><p>⚠️ the path to the folder with the clips classified as error is currently hardcoded in the script!</p>
+</div></blockquote>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><br/><span></span><span class="c1"># Load in all masks in the input directory</span>
+<span class="n">mask_list</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span>
+    <span class="nb">list</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">input_dir</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;*_mask.</span><span class="si">{</span><span class="n">cfg</span><span class="o">.</span><span class="n">impa_image_format</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span>
+<span class="p">)</span>
+
+<span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">list_of_files</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="c1"># select all files that are not predicted as &quot;error&quot; by the classification model</span>
+    <span class="n">predictions</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">list_of_files</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;file&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;file&quot;</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">exclude</span> <span class="o">=</span> <span class="n">predictions</span><span class="p">[</span>
+        <span class="n">predictions</span><span class="p">[</span><span class="n">cfg</span><span class="o">.</span><span class="n">skel_class_exclude</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">cfg</span><span class="o">.</span><span class="n">infe_num_classes</span>
+    <span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+    <span class="n">exclude</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;_mask.</span><span class="si">{</span><span class="n">cfg</span><span class="o">.</span><span class="n">impa_image_format</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">exclude</span>
+    <span class="p">]</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">exclude</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># load in file names that are classified as error by our CNN</span>
+<span class="n">err_filenames</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span>
+    <span class="nb">list</span><span class="p">(</span>
+        <span class="n">Path</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cfg</span><span class="o">.</span><span class="n">glob_root_folder</span><span class="si">}</span><span class="s2">/data/learning_sets/project_portable_flume/curated_learning_sets/errors&quot;</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*.png&quot;</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+<span class="n">exclude</span> <span class="o">+=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;_mask.</span><span class="si">{</span><span class="n">cfg</span><span class="o">.</span><span class="n">impa_image_format</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">err_filenames</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<p>Set up output directories and files:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><br/><span></span><span class="n">files_to_skel</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">mask_list</span> <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">exclude</span><span class="p">]</span>
+
+<span class="c1"># %%</span>
+<span class="n">out_dir</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">args</span><span class="o">.</span><span class="n">output_dir</span>
+    <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">input_dir</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">_unsupervised_</span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">_%H%M&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="p">)</span>
+<span class="n">out_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># %%</span>
+<span class="n">growing_df</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1"># Load the image</span>
+<span class="c1"># PLOTS = True</span>
+<br/></pre></div>
+</div>
+</div>
+<p>The following code block is the implementation of the skeletonization algorithm. Please refer to the documentation for details of the functioning.</p>
+<p>In a nutshell, it sues the configuration parameters provided before to apply a series of morphological operations on the binary mask of each organism’s clip, subsequently thinning it into segment(s), eventually connecting and calculating the longest path through them, thus producing the skeleton, which should approximate well the length of the organism.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><br/><span></span><span class="n">iterator</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">files_to_skel</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">files_to_skel</span><span class="p">))</span>
+<span class="c1"># iterator = tqdm([args.input_dir / &quot;1_ob_mixed_difficutly_clip_32_mask.jpg&quot;])</span>
+<span class="k">for</span> <span class="n">fo</span> <span class="ow">in</span> <span class="n">iterator</span><span class="p">:</span>
+    <span class="n">iterator</span><span class="o">.</span><span class="n">set_description</span><span class="p">(</span><span class="n">fo</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="c1"># read in mask and rgb, rgb only for plotting</span>
+    <span class="n">mask_</span> <span class="o">=</span> <span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">fo</span><span class="p">))[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">255</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+
+    <span class="c1"># Get needed filter size based on area</span>
+    <span class="k">for</span> <span class="n">aa</span> <span class="ow">in</span> <span class="n">area_class</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">area_class</span><span class="p">[</span><span class="n">aa</span><span class="p">][</span><span class="s2">&quot;area&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">mask_</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">area_class</span><span class="p">[</span><span class="n">aa</span><span class="p">][</span><span class="s2">&quot;area&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">dpar</span> <span class="o">=</span> <span class="n">area_class</span><span class="p">[</span><span class="n">aa</span><span class="p">][</span><span class="s2">&quot;thinning&quot;</span><span class="p">]</span>
+
+    <span class="c1"># Find the medial axis, threshold it and clean if multiple regions, keep largest</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">distance</span> <span class="o">=</span> <span class="n">medial_axis</span><span class="p">(</span><span class="n">mask_</span><span class="p">,</span> <span class="n">return_distance</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">mask_dist</span> <span class="o">=</span> <span class="n">distance</span> <span class="o">&gt;</span> <span class="n">dpar</span>
+    <span class="n">regs</span> <span class="o">=</span> <span class="n">label</span><span class="p">(</span><span class="n">mask_dist</span><span class="p">)</span>
+    <span class="n">props</span> <span class="o">=</span> <span class="n">regionprops</span><span class="p">(</span><span class="n">regs</span><span class="p">)</span>
+
+    <span class="c1"># keep only the largest region of the eroded mask</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">regs</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">([</span><span class="n">p</span><span class="o">.</span><span class="n">area</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">props</span> <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">label</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span>
+
+    <span class="c1"># compute general skeleton by thinning the masks</span>
+    <span class="n">skeleton</span> <span class="o">=</span> <span class="n">thin</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">max_num_iter</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+    <span class="c1"># get coordinates of point that intersect or are ends of the skeleton segments</span>
+    <span class="n">inter</span> <span class="o">=</span> <span class="n">get_intersections</span><span class="p">(</span><span class="n">skeleton</span><span class="o">=</span><span class="n">skeleton</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">))</span>
+    <span class="n">endpo</span> <span class="o">=</span> <span class="n">get_endpoints</span><span class="p">(</span><span class="n">skeleton</span><span class="o">=</span><span class="n">skeleton</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">save_masks</span><span class="p">:</span>
+        <span class="c1"># save the skeletonized mask</span>
+        <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span>
+            <span class="nb">str</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">save_masks</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">fo</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="si">}</span><span class="s2">_skel.jpg&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="mi">255</span> <span class="o">*</span> <span class="n">skeleton</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">skeleton</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">),</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">PLOTS</span><span class="p">:</span>
+        <span class="n">rgb_</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">fo</span><span class="p">)[:</span><span class="o">-</span><span class="mi">8</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;rgb.jpg&quot;</span><span class="p">)[:,</span> <span class="p">:,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">uint8</span>
+        <span class="p">)</span>
+        <span class="n">rgb_fi</span> <span class="o">=</span> <span class="n">paint_image</span><span class="p">(</span><span class="n">rgb_</span><span class="p">,</span> <span class="n">skeleton</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+        <span class="n">rgb_ma</span> <span class="o">=</span> <span class="n">paint_image</span><span class="p">(</span><span class="n">rgb_</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="n">inter</span><span class="p">:</span>
+        <span class="c1"># then, deduplicate the intersections</span>
+        <span class="n">skel_labels</span><span class="p">,</span> <span class="n">edge_attributes</span><span class="p">,</span> <span class="n">skprop</span> <span class="o">=</span> <span class="n">segment_skel</span><span class="p">(</span><span class="n">skeleton</span><span class="p">,</span> <span class="n">inter</span><span class="p">,</span> <span class="n">conn</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">ds</span> <span class="o">=</span> <span class="n">distance_matrix</span><span class="p">(</span><span class="n">inter</span><span class="p">,</span> <span class="n">inter</span><span class="p">)</span> <span class="o">+</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">inter</span><span class="p">))</span>
+        <span class="n">duplicates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">ds</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">inter</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">inter</span> <span class="k">if</span> <span class="n">a</span> <span class="o">!=</span> <span class="n">inter</span><span class="p">[</span><span class="n">duplicates</span><span class="p">[</span><span class="mi">0</span><span class="p">]]]</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">skel_labels</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># case for which there are no segments (ie, only one)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">skel_labels</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">sub_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+            <span class="n">data</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;clip_filename&quot;</span><span class="p">:</span> <span class="n">fo</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                <span class="s2">&quot;conv_rate_mm_px&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">cfg</span><span class="o">.</span><span class="n">skel_conv_rate</span><span class="p">],</span>
+                <span class="s2">&quot;skel_length&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">skeleton</span><span class="p">)],</span>
+                <span class="s2">&quot;skel_length_mm&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">skeleton</span><span class="p">)</span> <span class="o">/</span> <span class="n">cfg</span><span class="o">.</span><span class="n">skel_conv_rate</span><span class="p">],</span>
+                <span class="s2">&quot;segms&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]],</span>
+                <span class="s2">&quot;area&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">mask_</span><span class="p">),</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+        <span class="n">growing_df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sub_df</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">PLOTS</span><span class="p">:</span>
+            <span class="n">f</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rgb_fi</span><span class="p">)</span>
+            <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rgb_ma</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Area: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">mask_</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># remove nodes that are too close (less than 3px) and treat them as only one node</span>
+        <span class="c1"># skel_labels, edge_attributes, skprop = segment_skel(skeleton, inter, conn=1)</span>
+        <span class="c1"># ds = distance_matrix(inter, inter) + 100 * np.eye(len(inter))</span>
+        <span class="c1"># duplicates = np.where(ds &lt; 3)[0]</span>
+        <span class="c1"># try:</span>
+        <span class="c1">#     inter = [a for a in inter if a != inter[duplicates[0]]]</span>
+        <span class="c1"># except:</span>
+        <span class="c1">#     pass</span>
+
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">save_masks</span><span class="p">:</span>
+            <span class="n">skel_masks_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">save_masks</span><span class="p">)</span>
+            <span class="n">skel_masks_path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="c1"># save the skeletonized mask</span>
+            <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span>
+                <span class="nb">str</span><span class="p">(</span>
+                    <span class="n">args</span><span class="o">.</span><span class="n">save_masks</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">fo</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="si">}</span><span class="s2">_skel.jpg&quot;</span>
+                <span class="p">),</span>
+                <span class="p">(</span><span class="mi">255</span> <span class="o">*</span> <span class="n">skel_labels</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">skel_labels</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">),</span>
+            <span class="p">)</span>
+
+        <span class="c1"># get the segments that touch each intersection, and make them neighbors</span>
+        <span class="n">intersection_nodes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">coord</span> <span class="ow">in</span> <span class="n">inter</span><span class="p">:</span>
+            <span class="n">local_cut</span> <span class="o">=</span> <span class="n">skel_labels</span><span class="p">[</span>
+                <span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">4</span><span class="p">)</span> <span class="p">:</span> <span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">4</span><span class="p">)</span> <span class="p">:</span> <span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span>
+            <span class="p">]</span>
+            <span class="n">nodes_touch</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">local_cut</span><span class="p">[</span><span class="n">local_cut</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">])</span>
+            <span class="n">intersection_nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">nodes_touch</span><span class="p">))</span>
+
+        <span class="c1"># remove duplicates</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">intersection_nodes</span><span class="p">)</span>
+        <span class="n">dedup</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">k</span><span class="p">))</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">k</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">k</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]]</span>
+        <span class="n">intersection_nodes</span> <span class="o">=</span> <span class="n">dedup</span>
+
+        <span class="c1"># get the segments that touch each endpoint</span>
+        <span class="n">dead_ends</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">coord</span> <span class="ow">in</span> <span class="n">endpo</span><span class="p">:</span>
+            <span class="n">ends</span> <span class="o">=</span> <span class="n">skel_labels</span><span class="p">[</span>
+                <span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">4</span><span class="p">)</span> <span class="p">:</span> <span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">4</span><span class="p">)</span> <span class="p">:</span> <span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span>
+            <span class="p">]</span>
+            <span class="n">end_node</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">ends</span><span class="p">[</span><span class="n">ends</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">])</span>
+            <span class="n">dead_ends</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">end_node</span><span class="p">))</span>
+        <span class="n">dead_ends</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">dead_ends</span><span class="p">)</span>
+
+        <span class="c1"># build the graph of segments of the skeleton</span>
+        <span class="n">graph</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">nod</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">skel_labels</span><span class="p">[</span><span class="n">skel_labels</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]):</span>
+            <span class="n">nei</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">intersection_nodes</span> <span class="k">if</span> <span class="n">nod</span> <span class="ow">in</span> <span class="n">a</span><span class="p">]</span>
+            <span class="n">nei</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">nei</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">sublist</span><span class="p">]</span>
+            <span class="n">graph</span><span class="p">[</span><span class="n">nod</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">nei</span><span class="p">)</span><span class="o">.</span><span class="n">difference</span><span class="p">([</span><span class="n">nod</span><span class="p">]))</span>
+
+        <span class="n">end_nodes</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">dead_ends</span><span class="p">)</span>
+
+        <span class="c1"># tf is this</span>
+        <span class="n">end_nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">end_nodes</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">a</span><span class="p">]</span>
+        <span class="n">all_paths</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># traverse the graph for all end_nodes and get paths, append them to all_paths</span>
+        <span class="k">for</span> <span class="n">init</span> <span class="ow">in</span> <span class="n">end_nodes</span><span class="p">[:</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">p_i</span> <span class="o">=</span> <span class="n">traverse_graph</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">init</span><span class="p">,</span> <span class="n">end_nodes</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">all_paths</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">p_i</span><span class="p">)</span>
+
+        <span class="c1"># remove doubles</span>
+        <span class="n">skel_cand</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">sk</span> <span class="ow">in</span> <span class="n">all_paths</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">sk</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">skel_cand</span><span class="p">:</span>
+                <span class="n">skel_cand</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">sk</span><span class="p">))</span>
+
+        <span class="c1"># measure path lengths and keep max one, that is the skel for you</span>
+        <span class="n">sk_l</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">sk</span> <span class="ow">in</span> <span class="n">skel_cand</span><span class="p">:</span>
+            <span class="n">cus</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sk</span><span class="p">:</span>
+                <span class="n">cus</span> <span class="o">+=</span> <span class="n">edge_attributes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">sk_l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cus</span><span class="p">)</span>
+
+        <span class="c1"># append to dataframe, some properties</span>
+        <span class="n">sub_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+            <span class="n">data</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;clip_filename&quot;</span><span class="p">:</span> <span class="n">fo</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                <span class="s2">&quot;conv_rate_mm_px&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">cfg</span><span class="o">.</span><span class="n">skel_conv_rate</span><span class="p">],</span>
+                <span class="s2">&quot;skel_length&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">sk_l</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">sk_l</span><span class="p">)]],</span>
+                <span class="s2">&quot;skel_length_mm&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">sk_l</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">sk_l</span><span class="p">)]</span> <span class="o">/</span> <span class="n">cfg</span><span class="o">.</span><span class="n">skel_conv_rate</span><span class="p">],</span>
+                <span class="s2">&quot;segms&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">skel_cand</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">sk_l</span><span class="p">)]],</span>
+                <span class="s2">&quot;area&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">mask_</span><span class="p">),</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+        <span class="n">growing_df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sub_df</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">PLOTS</span><span class="p">:</span>
+            <span class="n">f</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+            <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span>
+                <span class="n">paint_image</span><span class="p">(</span>
+                    <span class="n">skel_labels</span> <span class="o">*</span> <span class="mi">255</span><span class="p">,</span>
+                    <span class="n">dilation</span><span class="p">(</span><span class="n">skel_labels</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">disk</span><span class="p">(</span><span class="mi">3</span><span class="p">)),</span>
+                    <span class="p">[</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">],</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+
+            <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">inter</span><span class="p">)[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">inter</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">])</span>
+            <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">endpo</span><span class="p">)[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">endpo</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;s&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">skel_labels</span><span class="p">[</span><span class="n">skel_labels</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]):</span>
+                <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+                    <span class="n">x</span><span class="o">=</span><span class="n">skprop</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">centroid</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                    <span class="n">y</span><span class="o">=</span><span class="n">skprop</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">centroid</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                    <span class="n">s</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span>
+                <span class="p">)</span>
+
+            <span class="n">sel_skel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">skel_labels</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">skel_labels</span><span class="p">[</span><span class="n">skel_labels</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]):</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">skel_cand</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">sk_l</span><span class="p">)]:</span>
+                    <span class="n">sel_skel</span> <span class="o">+=</span> <span class="n">dilation</span><span class="p">(</span><span class="n">skel_labels</span> <span class="o">==</span> <span class="n">i</span><span class="p">,</span> <span class="n">disk</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+            <span class="n">sel_skel</span> <span class="o">=</span> <span class="n">sel_skel</span> <span class="o">&gt;</span> <span class="mi">0</span>
+
+            <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">paint_image</span><span class="p">(</span><span class="n">rgb_fi</span><span class="p">,</span> <span class="n">sel_skel</span><span class="p">,</span> <span class="p">[</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]))</span>
+            <span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rgb_ma</span><span class="p">)</span>
+
+            <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Area: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">mask_</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sel Segm: </span><span class="si">{</span><span class="n">skel_cand</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">sk_l</span><span class="p">)]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Skel_lenght_px </span><span class="si">{</span><span class="n">sk_l</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">sk_l</span><span class="p">)]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<p>Finally, save the <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><br/><span></span><span class="n">full_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">growing_df</span><span class="p">)</span>
+<span class="n">full_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">out_dir</span> <span class="o">/</span> <span class="s2">&quot;skeleton_attributes.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="segmentation.html" class="btn btn-neutral float-left" title="Image segmentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="skeletonization_supervised_inference.html" class="btn btn-neutral float-right" title="Skeletonization: supervised, inference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023-08-01 Michele Volpi, Luca Pegoraro, Blake Matthews, Catherine Graham.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
