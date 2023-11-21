@@ -25,11 +25,11 @@ The MZB project
 Examples
 ========
 
-:doc:`files/examples/ex_intro`
-    Overview of data processing abilities and limitations
+.. :doc:`files/examples/ex_intro`
+..     Overview of data processing abilities and limitations
 
-:doc:`files/examples/ex_preprocessing`
-    Example of data
+.. :doc:`files/examples/ex_preprocessing`
+..     Example of data
 
 :doc:`files/examples/segmentation`
     Example of extracting clips from large images
